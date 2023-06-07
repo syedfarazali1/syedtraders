@@ -1,0 +1,59 @@
+﻿@model IEnumerable<POSApplication.App_Classes.purchaseReporthelperclass>
+
+@{
+    ViewBag.Title = "Invoice";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+
+<div class="container-fluid float-right">
+    <h3>PoNumber = @ViewBag.PoNum</h3>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-dark table-hover">
+        <tr>
+            <td>PoNumber</td>
+            <td>ProductName</td>
+            <td>Quantity</td>
+            <td>UnitPrice</td>
+            <td>Amount</td>
+            <td>PoDate</td>
+            <td>PoReference</td>
+            <td>SupplierName</td>
+            <td>PaymentMethodName</td>
+           
+
+        </tr>
+        @if (ViewBag.list != null)
+        {
+
+            foreach (var item in ViewBag.list)
+            {
+                <tr>
+                    <td>@item.PoNumber</td>
+                    <td>@item.ProductName</td>
+                    <td>@item.Quantity</td>
+                    <td>@item.UnitPrice</td>
+                    <td>@item.Amount</td>
+                    <td>@item.PoDate</td>
+                    <td>@item.PoReference</td>
+                    <td>@item.SupplierName</td>
+                    <td>@item.PaymentMethodName</td>
+                    
+                </tr>
+            }
+        }
+
+    </table>
+</div>
+<h3>TotalAmount = @ViewBag.TotalAmount</h3>
+<h3>TaxAmount = @ViewBag.TaxAmount</h3>
+<h3>
+    GrandTotal = @ViewBag.GrandTotal
+</h3>
+<h3>PayableAmount = @ViewBag.PayableAmount</h3>
+
+
+
+<h3>Balance = @ViewBag.TotalBance</h3>

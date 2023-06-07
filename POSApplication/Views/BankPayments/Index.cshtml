@@ -1,0 +1,59 @@
+﻿@model IEnumerable<POSApplication.Models.BankPayment>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalesID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BankID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CheqNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PdcDate)
+        </th>
+
+        <th>Action</th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.CustomerID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalesID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BankID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheqNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PdcDate)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BankPaymentID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BankPaymentID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BankPaymentID })
+        </td>
+    </tr>
+}
+
+</table>

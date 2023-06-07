@@ -1,0 +1,503 @@
+﻿@*@model IEnumerable<POSApplication.Models.User>*@
+
+@{
+    ViewBag.Title = "UserIndex";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="mt-1 font-weight-bold text-primary" style="float: left;">Users Registration</h6>
+
+        </div>
+        <form id="Data" method="post" enctype="multipart/form-data">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div class="col-md-12 pull-left">
+
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <input type="hidden" id="userid" value="" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-12">
+                                        Full Name:
+                                    </label>
+                                    <div class="col-md-12">
+
+                                        <input class="form-control" type="text" name="FullName" id="fullname" required value="" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-12">
+                                        Branch
+                                    </label>
+                                    <div class="col-md-12">
+
+                                        <select class="form-control" id="branch" name="BranchID" required></select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-12">
+                                        Date of Birth:
+                                    </label>
+                                    <div class="col-md-12">
+
+                                        <input type="date" class="form-control" name="DOB" id="DOB" required value="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-12">
+                                        Date of Joining:
+                                    </label>
+                                    <div class="col-md-12">
+
+                                        <input type="date" class="form-control" id="DOJ" name="DOJ" required value="" />
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-12">
+                                        CNIC:
+                                    </label>
+                                    <div class="col-md-12">
+
+                                        <input type="number" class="form-control" name="CNIC" id="CNIC" required value="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-12">
+                                        Basic Salary:
+                                    </label>
+                                    <div class="col-md-12">
+
+                                        <input type="number" id="salary" value="" name="BasicSalary" required class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-12">
+                                        Telephone / Cell #:
+                                    </label>
+                                    <div class="col-md-12">
+
+                                        <input type="number" id="contact" value="" name="ContactNumber" required class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-12">
+                                        Commision:
+                                    </label>
+                                    <div class="col-md-12">
+
+                                        <input type="number" id="com" name="CommissionAmount" required maxlength="2" value="" class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12">
+                                        Login ID:
+                                    </label>
+                                    <div class="col-md-12">
+
+                                        <input class="form-control" name="UserName" type="email" id="email" required value="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12">
+                                        Password:
+                                    </label>
+                                    <div class="col-md-12">
+
+                                        <input type="password" id="pass" name="Password" value="" required class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12">
+                                        Image
+                                    </label>
+                                    <div class="col-md-12">
+                                        <img src="" width="50px" height="50px" id="Showimg" alt="Alternate Text" />
+                                        <input type="file" data-id="" id="fimg" name="UserImage" value="" required class="form-control" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+                            <div class="col-md-12">
+
+                                <div class="col-md-12 text-right">
+                                    <input type="button" onclick="Save()" Class="btn btn-primary add" value="Registration" />
+                                    <input type="button" Class="btn btn-warning update" onclick="Update()" value="Update" />
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="mt-1 font-weight-bold text-primary" style="float: left;">Users List</h6>
+
+
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <tr>
+                        <th>
+                            FullName
+                        </th>
+
+                        <th>
+                            DOJ
+                        </th>
+                        <th>
+                            CNIC
+                        </th>
+                        <th>
+                            ContactNumber
+                        </th>
+                        <th>
+                            BasicSalary
+                        </th>
+                        <th>
+                            CommissionAmount
+                        </th>
+                        <th>
+                            UserName
+                        </th>
+                        <th>
+                            Password
+                        </th>
+                        <th>
+                            User Image
+                        </th>
+
+                        <th></th>
+                    </tr>
+
+                    <tbody id="tablebody">
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+<script>
+    $(document).ready(function () {
+        $(".add").css("display", "Inline-Block");
+        $(".update").css("display", "none");
+        $("#Showimg").hide();
+        loadusers();
+        LoadBranches();
+
+    })
+    function LoadBranches() {
+
+        $(".update").css("display", "none");
+        $.ajax({
+            url: "/Accounts/LoadBranches",
+            type: "Get",
+            success: function (logs) {
+                var s = '<option value="-1">Please Select a Branch</option>';
+                for (var i = 0; i < logs.length; i++) {
+                    s += '<option value="' + logs[i].BranchID + '">' + logs[i].BranchName + '</option>';
+
+                }
+                $("#branch").html(s);
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
+            }
+        });
+    };
+
+
+    function loadusers() {
+        $.ajax({
+            url: "/Registration/FillUsers",
+            type: "Get",
+            success: function (users) {
+
+                var s = '';
+                for (var i = 0; i < users.length; i++) {
+                    s += '<tr><td>' + users[i].FullName + '</td>'
+                        + '<td>' + users[i].DOJ + '</td>'
+                        + '<td>' + users[i].CNIC + '</td>'
+                        + '<td>' + users[i].ContactNumber + '</td>'
+                        + '<td>' + users[i].BasicSalary + '</td>'
+                        + '<td>' + users[i].CommissionAmount + '</td>'
+                        + '<td>' + users[i].UserName + '</td>'
+                        + '<td>' + /*users[i].Password*/"*******" + '</td>'
+                        + '<td>' +
+                        '<img src="../assets/img/UserImages/' + users[i].UserImage + '" width="50px" height="50px" alt="" /></td>'
+
+                        + '<td>' + '<i style="cursor: pointer;" class="fas fa-edit" onclick="Edit(' + users[i].UserID + ')"></i>' + '<i style="cursor: pointer;" class="fas fa-trash" onclick="Delete(' + users[i].UserID + ')"></i>' + '</td></tr>';
+
+                }
+                $("#tablebody").html(s);
+
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
+            }
+        });
+
+    }
+
+
+
+
+
+    function Edit(UserID) {
+        var user = {
+
+            UserID: UserID,
+        };
+        $.ajax({
+            url: "/Registration/Edit",
+            type: "POST",
+            data: user,
+            success: function (response) {
+                var img = "../assets/img/UserImages/" + response.UserImage;
+                $("#fullname").val(response.FullName),
+                    $("#Showimg").show(),
+                    $("#userid").val(response.UserID),
+
+                    $("#DOB").val(response.DOB),
+                    $("#DOJ").val(response.DOJ),
+                    $("#CNIC").val(response.CNIC),
+                    $("#salary").val(response.BasicSalary),
+                    $("#contact").val(response.ContactNumber),
+                    $("#com").val(response.CommissionAmount),
+                    $("#email").val(response.UserName),
+                    $("#pass").val(response.Password),
+
+                    $("#Showimg").attr("src", img);
+                $("#branch").val(response.BranchID)
+                $(".update").css("display", "Inline-Block");
+                $(".add").css("display", "none");
+                $("#email").attr('disabled', true);
+                $("#pass").attr('disabled', true);
+            },
+            error: function (err) {
+                console.error(err);
+            }
+        });
+
+
+
+    }
+    function Update() {
+
+        var UserID = $("#userid").val();
+        var UserImage = $('input[type="file"]')[0].files[0]
+        var FullName = $("#fullname").val();
+        var BranchID = $("#branch").val();
+        var DOB = $("#DOB").val();
+        var DOJ = $("#DOJ").val();
+        var CNIC = $("#CNIC").val();
+        var BasicSalary = $("#salary").val();
+        var ContactNumber = $("#contact").val();
+        var CommissionAmount = $("#com").val();
+        var UserName = $("#email").val();
+        var Password = $("#pass").val();
+        var IsActive = 0;
+        var IsDeleted = 0;
+        var formData = new FormData();
+        formData.append('IsDeleted', IsDeleted);
+        formData.append('IsActive', IsActive);
+        formData.append('Password', Password);
+        formData.append('UserImage', UserImage);
+        formData.append('UserName', UserName);
+        formData.append('CommissionAmount', CommissionAmount);
+        formData.append('ContactNumber', ContactNumber);
+        formData.append('BasicSalary', BasicSalary);
+        formData.append('CNIC', CNIC);
+        formData.append('DOB', DOB);
+        formData.append('DOJ', DOJ);
+        formData.append('FullName', FullName);
+        formData.append('BranchID', BranchID);
+        formData.append('UserID', UserID);
+
+
+
+        $.ajax({
+            url: "/Registration/UpdateUser",
+            type: "POST",
+            data: formData,
+            processData: false,
+            contentType: false,
+            success: function (response) {
+                $("#fimg").attr("src", '');
+                
+                loadusers();
+                $(".update").css("display", "none");
+                $(".add").css("display", "Inline-Block");
+
+                $("#email").attr('disabled', false);
+                $("#pass").attr('disabled', false);
+                clear();
+                LoadBranches();
+                alert("Update Successfull");
+            },
+            error: function (err) {
+                console.error(err);
+            }
+        });
+    }
+
+
+
+        function Save(e) {
+
+
+
+
+            var UserImage = $('input[type="file"]')[0].files[0]
+            var FullName = $("#fullname").val();
+            var BranchID = $("#branch").val();
+            var DOB = $("#DOB").val();
+            var DOJ = $("#DOJ").val();
+            var CNIC = $("#CNIC").val();
+            var BasicSalary = $("#salary").val();
+            var ContactNumber = $("#contact").val();
+            var CommissionAmount = $("#com").val();
+            var UserName = $("#email").val();
+            var Password = $("#pass").val();
+            var IsActive = 0;
+            var IsDeleted = 0;
+            var formData = new FormData();
+            formData.append('IsDeleted', IsDeleted);
+            formData.append('IsActive', IsActive);
+            formData.append('Password', Password);
+            formData.append('UserImage', UserImage);
+            formData.append('UserName', UserName);
+            formData.append('CommissionAmount', CommissionAmount);
+            formData.append('ContactNumber', ContactNumber);
+            formData.append('BasicSalary', BasicSalary);
+            formData.append('CNIC', CNIC);
+            formData.append('DOB', DOB);
+            formData.append('DOJ', DOJ);
+            formData.append('FullName', FullName);
+            formData.append('BranchID', BranchID);
+
+            $.ajax({
+                url: "/Registration/AddUser",
+                type: "POST",
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+                    if (response == "Inject") {
+                        alert("Please Don't use Special Character In login and Password");
+                    }
+                    else {
+                        loadusers();
+                        clear();
+                        LoadBranches();
+                    }
+                },
+                error: function (err) {
+                    console.error(err);
+                }
+            });
+
+
+        };
+
+        function clear() {
+            $("#fullname").val(''),
+                $("#userid").val(''),
+                $("#DOB").val(''),
+                $("#DOJ").val(''),
+                $("#CNIC").val(''),
+                $("#salary").val(''),
+                $("#contact").val(''),
+                $("#com").val(''),
+                $("#email").val(''),
+                $("#pass").val(''),
+                $("#Showimg").val(''),
+                $("#Showimg").hide(),
+                $("#branch").val(''),
+                $("#fimg").val('')
+        }
+        function Delete(UserID) {
+            var result = confirm("Want to delete?");
+
+            if (result) {
+
+                var user = {
+
+                    UserID: UserID,
+                };
+                $.ajax({
+                    url: "/Registration/Delete",
+                    type: "POST",
+                    data: user,
+                    success: function (response) {
+                        loadusers();
+                        LoadBranches();
+                    },
+                    error: function (err) {
+                        console.error(err);
+                    }
+                });
+            }
+        }
+</script>

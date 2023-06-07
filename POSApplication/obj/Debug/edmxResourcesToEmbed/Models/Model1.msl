@@ -1,0 +1,712 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PosintofsaleModelStoreContainer" CdmEntityContainer="PosintofsaleEntities">
+    <EntitySetMapping Name="BankAccounts">
+      <EntityTypeMapping TypeName="PosintofsaleModel.BankAccount">
+        <MappingFragment StoreEntitySet="BankAccounts">
+          <ScalarProperty Name="BankAccountID" ColumnName="BankAccountID" />
+          <ScalarProperty Name="BrancID" ColumnName="BrancID" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="AccountTitle" ColumnName="AccountTitle" />
+          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <ScalarProperty Name="IBANNumber" ColumnName="IBANNumber" />
+          <ScalarProperty Name="BankBranch" ColumnName="BankBranch" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="BankPayments">
+      <EntityTypeMapping TypeName="PosintofsaleModel.BankPayment">
+        <MappingFragment StoreEntitySet="BankPayments">
+          <ScalarProperty Name="BankPaymentID" ColumnName="BankPaymentID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="BankAccountID" ColumnName="BankAccountID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="SalesID" ColumnName="SalesID" />
+          <ScalarProperty Name="BankID" ColumnName="BankID" />
+          <ScalarProperty Name="CheqNumber" ColumnName="CheqNumber" />
+          <ScalarProperty Name="PdcDate" ColumnName="PdcDate" />
+          <ScalarProperty Name="IsClear" ColumnName="IsClear" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Banks">
+      <EntityTypeMapping TypeName="PosintofsaleModel.Bank">
+        <MappingFragment StoreEntitySet="Banks">
+          <ScalarProperty Name="BankID" ColumnName="BankID" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Branches">
+      <EntityTypeMapping TypeName="PosintofsaleModel.Branch">
+        <MappingFragment StoreEntitySet="Branches">
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="BranchName" ColumnName="BranchName" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Brands">
+      <EntityTypeMapping TypeName="PosintofsaleModel.Brand">
+        <MappingFragment StoreEntitySet="Brands">
+          <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+          <ScalarProperty Name="BrandName" ColumnName="BrandName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Commissions">
+      <EntityTypeMapping TypeName="PosintofsaleModel.Commission">
+        <MappingFragment StoreEntitySet="Commission">
+          <ScalarProperty Name="CommissionID" ColumnName="CommissionID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="SalesID" ColumnName="SalesID" />
+          <ScalarProperty Name="SalesDate" ColumnName="SalesDate" />
+          <ScalarProperty Name="CommissionAmount" ColumnName="CommissionAmount" />
+          <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Customers">
+      <EntityTypeMapping TypeName="PosintofsaleModel.Customer">
+        <MappingFragment StoreEntitySet="Customers">
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+          <ScalarProperty Name="CustomerReference" ColumnName="CustomerReference" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeAdvances">
+      <EntityTypeMapping TypeName="PosintofsaleModel.EmployeeAdvance">
+        <MappingFragment StoreEntitySet="EmployeeAdvance">
+          <ScalarProperty Name="EmployeeAdvanceID" ColumnName="EmployeeAdvanceID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="AdvanceDate" ColumnName="AdvanceDate" />
+          <ScalarProperty Name="AdvanceAmount" ColumnName="AdvanceAmount" />
+          <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmployeeLoans">
+      <EntityTypeMapping TypeName="PosintofsaleModel.EmployeeLoan">
+        <MappingFragment StoreEntitySet="EmployeeLoan">
+          <ScalarProperty Name="EmployeeLoanID" ColumnName="EmployeeLoanID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="LoanDate" ColumnName="LoanDate" />
+          <ScalarProperty Name="LoanAmount" ColumnName="LoanAmount" />
+          <ScalarProperty Name="InstallmentAmount" ColumnName="InstallmentAmount" />
+          <ScalarProperty Name="PaidInstallment" ColumnName="PaidInstallment" />
+          <ScalarProperty Name="numberOfInstallment" ColumnName="numberOfInstallment" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Engineers">
+      <EntityTypeMapping TypeName="PosintofsaleModel.Engineer">
+        <MappingFragment StoreEntitySet="Engineers">
+          <ScalarProperty Name="EngineerID" ColumnName="EngineerID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="EngineerName" ColumnName="EngineerName" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Exchanges">
+      <EntityTypeMapping TypeName="PosintofsaleModel.Exchange">
+        <MappingFragment StoreEntitySet="Exchange">
+          <ScalarProperty Name="ExchangeID" ColumnName="ExchangeID" />
+          <ScalarProperty Name="PO" ColumnName="PO" />
+          <ScalarProperty Name="PoDate" ColumnName="PoDate" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="PayableAmount" ColumnName="PayableAmount" />
+          <ScalarProperty Name="IsPaid" ColumnName="IsPaid" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExchangeDetails">
+      <EntityTypeMapping TypeName="PosintofsaleModel.ExchangeDetail">
+        <MappingFragment StoreEntitySet="ExchangeDetails">
+          <ScalarProperty Name="ExchangeDetailID" ColumnName="ExchangeDetailID" />
+          <ScalarProperty Name="ExchangeID" ColumnName="ExchangeID" />
+          <ScalarProperty Name="CategoryID" ColumnName="CategoryID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="BrandID" ColumnName="BrandID" />
+          <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+          <ScalarProperty Name="Generation" ColumnName="Generation" />
+          <ScalarProperty Name="HardDiskID" ColumnName="HardDiskID" />
+          <ScalarProperty Name="HDDAvailable" ColumnName="HDDAvailable" />
+          <ScalarProperty Name="RamID" ColumnName="RamID" />
+          <ScalarProperty Name="RamAvailable" ColumnName="RamAvailable" />
+          <ScalarProperty Name="ProcessorID" ColumnName="ProcessorID" />
+          <ScalarProperty Name="Screen" ColumnName="Screen" />
+          <ScalarProperty Name="ScreenAvailable" ColumnName="ScreenAvailable" />
+          <ScalarProperty Name="Keboard" ColumnName="Keboard" />
+          <ScalarProperty Name="KeyboardAvailable" ColumnName="KeyboardAvailable" />
+          <ScalarProperty Name="Charger" ColumnName="Charger" />
+          <ScalarProperty Name="ChargerAvailable" ColumnName="ChargerAvailable" />
+          <ScalarProperty Name="Board" ColumnName="Board" />
+          <ScalarProperty Name="BoardAvailable" ColumnName="BoardAvailable" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Expenses">
+      <EntityTypeMapping TypeName="PosintofsaleModel.Expens">
+        <MappingFragment StoreEntitySet="Expenses">
+          <ScalarProperty Name="ExpensesID" ColumnName="ExpensesID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="ExpensesTypeID" ColumnName="ExpensesTypeID" />
+          <ScalarProperty Name="ExpensesDate" ColumnName="ExpensesDate" />
+          <ScalarProperty Name="Remarks" ColumnName="Remarks" />
+          <ScalarProperty Name="ExpensesByID" ColumnName="ExpensesByID" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="CreatedByUserID" ColumnName="CreatedByUserID" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="ExpensesAmount" ColumnName="ExpensesAmount" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ExpensesTypes">
+      <EntityTypeMapping TypeName="PosintofsaleModel.ExpensesType">
+        <MappingFragment StoreEntitySet="ExpensesTypes">
+          <ScalarProperty Name="ExpensesTypeID" ColumnName="ExpensesTypeID" />
+          <ScalarProperty Name="ExpensesTypeName" ColumnName="ExpensesTypeName" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Generations">
+      <EntityTypeMapping TypeName="PosintofsaleModel.Generation">
+        <MappingFragment StoreEntitySet="Generations">
+          <ScalarProperty Name="GenerationID" ColumnName="GenerationID" />
+          <ScalarProperty Name="GenerationName" ColumnName="GenerationName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="HardDisks">
+      <EntityTypeMapping TypeName="PosintofsaleModel.HardDisk">
+        <MappingFragment StoreEntitySet="HardDisk">
+          <ScalarProperty Name="HardDiskID" ColumnName="HardDiskID" />
+          <ScalarProperty Name="HardDiskName" ColumnName="HardDiskName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Models">
+      <EntityTypeMapping TypeName="PosintofsaleModel.Model">
+        <MappingFragment StoreEntitySet="Models">
+          <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+          <ScalarProperty Name="ModelName" ColumnName="ModelName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentMethods">
+      <EntityTypeMapping TypeName="PosintofsaleModel.PaymentMethod">
+        <MappingFragment StoreEntitySet="PaymentMethod">
+          <ScalarProperty Name="PaymentMethodID" ColumnName="PaymentMethodID" />
+          <ScalarProperty Name="PaymentMethodName" ColumnName="PaymentMethodName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentModes">
+      <EntityTypeMapping TypeName="PosintofsaleModel.PaymentMode">
+        <MappingFragment StoreEntitySet="PaymentMode">
+          <ScalarProperty Name="PaymentModeID" ColumnName="PaymentModeID" />
+          <ScalarProperty Name="PaymentModeName" ColumnName="PaymentModeName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentVoucherCustomers">
+      <EntityTypeMapping TypeName="PosintofsaleModel.PaymentVoucherCustomer">
+        <MappingFragment StoreEntitySet="PaymentVoucherCustomers">
+          <ScalarProperty Name="PaymentVoucherCustomersID" ColumnName="PaymentVoucherCustomersID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="SalesID" ColumnName="SalesID" />
+          <ScalarProperty Name="PaymetMethodID" ColumnName="PaymetMethodID" />
+          <ScalarProperty Name="BankID" ColumnName="BankID" />
+          <ScalarProperty Name="ChequeNumber" ColumnName="ChequeNumber" />
+          <ScalarProperty Name="PayOrderNumber" ColumnName="PayOrderNumber" />
+          <ScalarProperty Name="IsPDC" ColumnName="IsPDC" />
+          <ScalarProperty Name="PDCDate" ColumnName="PDCDate" />
+          <ScalarProperty Name="IsPdcClear" ColumnName="IsPdcClear" />
+          <ScalarProperty Name="Debit" ColumnName="Debit" />
+          <ScalarProperty Name="Credit" ColumnName="Credit" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="Condition" ColumnName="Condition" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="CreatedByUserID" ColumnName="CreatedByUserID" />
+          <ScalarProperty Name="TransactionTypeID" ColumnName="TransactionTypeID" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PaymentVoucherSuppliers">
+      <EntityTypeMapping TypeName="PosintofsaleModel.PaymentVoucherSupplier">
+        <MappingFragment StoreEntitySet="PaymentVoucherSupplier">
+          <ScalarProperty Name="PaymentVoucherSupplierID" ColumnName="PaymentVoucherSupplierID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="PurchaseID" ColumnName="PurchaseID" />
+          <ScalarProperty Name="PaymetMethodID" ColumnName="PaymetMethodID" />
+          <ScalarProperty Name="BankID" ColumnName="BankID" />
+          <ScalarProperty Name="ChequeNumber" ColumnName="ChequeNumber" />
+          <ScalarProperty Name="PayOrderNumber" ColumnName="PayOrderNumber" />
+          <ScalarProperty Name="IsPDC" ColumnName="IsPDC" />
+          <ScalarProperty Name="PDCDate" ColumnName="PDCDate" />
+          <ScalarProperty Name="IsPdcClear" ColumnName="IsPdcClear" />
+          <ScalarProperty Name="Debit" ColumnName="Debit" />
+          <ScalarProperty Name="Credit" ColumnName="Credit" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+          <ScalarProperty Name="Condition" ColumnName="Condition" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="CreatedByUserID" ColumnName="CreatedByUserID" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Processors">
+      <EntityTypeMapping TypeName="PosintofsaleModel.Processor">
+        <MappingFragment StoreEntitySet="Processor">
+          <ScalarProperty Name="ProcessorID" ColumnName="ProcessorID" />
+          <ScalarProperty Name="ProcessorName" ColumnName="ProcessorName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductCategories">
+      <EntityTypeMapping TypeName="PosintofsaleModel.ProductCategory">
+        <MappingFragment StoreEntitySet="ProductCategory">
+          <ScalarProperty Name="ProductCategoryID" ColumnName="ProductCategoryID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Products">
+      <EntityTypeMapping TypeName="PosintofsaleModel.Product">
+        <MappingFragment StoreEntitySet="Products">
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="ProdcutCategoryID" ColumnName="ProdcutCategoryID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="BrandNameID" ColumnName="BrandNameID" />
+          <ScalarProperty Name="ModelID" ColumnName="ModelID" />
+          <ScalarProperty Name="GenerationID" ColumnName="GenerationID" />
+          <ScalarProperty Name="RamID" ColumnName="RamID" />
+          <ScalarProperty Name="HardDiskID" ColumnName="HardDiskID" />
+          <ScalarProperty Name="ProcessorID" ColumnName="ProcessorID" />
+          <ScalarProperty Name="ProductImage" ColumnName="ProductImage" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="BarCode" ColumnName="BarCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProfitAndLosses">
+      <EntityTypeMapping TypeName="PosintofsaleModel.ProfitAndLoss">
+        <MappingFragment StoreEntitySet="ProfitAndLoss">
+          <ScalarProperty Name="ProfitAndLossID" ColumnName="ProfitAndLossID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="PurchaseDetailID" ColumnName="PurchaseDetailID" />
+          <ScalarProperty Name="SalesID" ColumnName="SalesID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="PurchasePrice" ColumnName="PurchasePrice" />
+          <ScalarProperty Name="PurchaseAmount" ColumnName="PurchaseAmount" />
+          <ScalarProperty Name="SalesPrice" ColumnName="SalesPrice" />
+          <ScalarProperty Name="SalesAmount" ColumnName="SalesAmount" />
+          <ScalarProperty Name="Profit" ColumnName="Profit" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="CreatedByUserID" ColumnName="CreatedByUserID" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Purchases">
+      <EntityTypeMapping TypeName="PosintofsaleModel.Purchase">
+        <MappingFragment StoreEntitySet="Purchase">
+          <ScalarProperty Name="PurchaseID" ColumnName="PurchaseID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="IsTransferFromBranch" ColumnName="IsTransferFromBranch" />
+          <ScalarProperty Name="TransferFromBranchID" ColumnName="TransferFromBranchID" />
+          <ScalarProperty Name="PoNumber" ColumnName="PoNumber" />
+          <ScalarProperty Name="PoDate" ColumnName="PoDate" />
+          <ScalarProperty Name="PoReference" ColumnName="PoReference" />
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="TaxPer" ColumnName="TaxPer" />
+          <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+          <ScalarProperty Name="PayableAmount" ColumnName="PayableAmount" />
+          <ScalarProperty Name="isPaid" ColumnName="isPaid" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PurchaseDetails">
+      <EntityTypeMapping TypeName="PosintofsaleModel.PurchaseDetail">
+        <MappingFragment StoreEntitySet="PurchaseDetails">
+          <ScalarProperty Name="PurchaseDetailID" ColumnName="PurchaseDetailID" />
+          <ScalarProperty Name="PurchaseID" ColumnName="PurchaseID" />
+          <ScalarProperty Name="ProdcutCategoryID" ColumnName="ProdcutCategoryID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="StockQuantity" ColumnName="StockQuantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Rams">
+      <EntityTypeMapping TypeName="PosintofsaleModel.Ram">
+        <MappingFragment StoreEntitySet="Rams">
+          <ScalarProperty Name="RamID" ColumnName="RamID" />
+          <ScalarProperty Name="RamName" ColumnName="RamName" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Repairings">
+      <EntityTypeMapping TypeName="PosintofsaleModel.Repairing">
+        <MappingFragment StoreEntitySet="Repairing">
+          <ScalarProperty Name="RepairingID" ColumnName="RepairingID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="EngineerID" ColumnName="EngineerID" />
+          <ScalarProperty Name="AssignDate" ColumnName="AssignDate" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="ItemDescription" ColumnName="ItemDescription" />
+          <ScalarProperty Name="DefectDescription" ColumnName="DefectDescription" />
+          <ScalarProperty Name="AmountToBeCharge" ColumnName="AmountToBeCharge" />
+          <ScalarProperty Name="ReturnDate" ColumnName="ReturnDate" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="CreatedByUserID" ColumnName="CreatedByUserID" />
+          <ScalarProperty Name="IsReturn" ColumnName="IsReturn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Salaries">
+      <EntityTypeMapping TypeName="PosintofsaleModel.Salary">
+        <MappingFragment StoreEntitySet="Salary">
+          <ScalarProperty Name="SalaryID" ColumnName="SalaryID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="EmployeeID" ColumnName="EmployeeID" />
+          <ScalarProperty Name="BasicSalary" ColumnName="BasicSalary" />
+          <ScalarProperty Name="CommissionAmount" ColumnName="CommissionAmount" />
+          <ScalarProperty Name="AdvanceAmount" ColumnName="AdvanceAmount" />
+          <ScalarProperty Name="LoanAmount" ColumnName="LoanAmount" />
+          <ScalarProperty Name="NetSalary" ColumnName="NetSalary" />
+          <ScalarProperty Name="SalaryMonth" ColumnName="SalaryMonth" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="CreatedByUserID" ColumnName="CreatedByUserID" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Sales">
+      <EntityTypeMapping TypeName="PosintofsaleModel.Sale">
+        <MappingFragment StoreEntitySet="Sales">
+          <ScalarProperty Name="SalesID" ColumnName="SalesID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="CustomerID" ColumnName="CustomerID" />
+          <ScalarProperty Name="PaymentMode" ColumnName="PaymentMode" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="TaxPer" ColumnName="TaxPer" />
+          <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+          <ScalarProperty Name="PayableAmount" ColumnName="PayableAmount" />
+          <ScalarProperty Name="isPaid" ColumnName="isPaid" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="IsReturn" ColumnName="IsReturn" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SalesDetails">
+      <EntityTypeMapping TypeName="PosintofsaleModel.SalesDetail">
+        <MappingFragment StoreEntitySet="SalesDetails">
+          <ScalarProperty Name="SalesDetailID" ColumnName="SalesDetailID" />
+          <ScalarProperty Name="SalesID" ColumnName="SalesID" />
+          <ScalarProperty Name="ProdcutCategoryID" ColumnName="ProdcutCategoryID" />
+          <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="IsReturn" ColumnName="IsReturn" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Suppliers">
+      <EntityTypeMapping TypeName="PosintofsaleModel.Supplier">
+        <MappingFragment StoreEntitySet="Suppliers">
+          <ScalarProperty Name="SupplierID" ColumnName="SupplierID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+          <ScalarProperty Name="ContactPerson" ColumnName="ContactPerson" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Users">
+      <EntityTypeMapping TypeName="PosintofsaleModel.User">
+        <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="UserID" ColumnName="UserID" />
+          <ScalarProperty Name="BranchID" ColumnName="BranchID" />
+          <ScalarProperty Name="FullName" ColumnName="FullName" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="DOJ" ColumnName="DOJ" />
+          <ScalarProperty Name="CNIC" ColumnName="CNIC" />
+          <ScalarProperty Name="UserImage" ColumnName="UserImage" />
+          <ScalarProperty Name="ContactNumber" ColumnName="ContactNumber" />
+          <ScalarProperty Name="BasicSalary" ColumnName="BasicSalary" />
+          <ScalarProperty Name="CommissionAmount" ColumnName="CommissionAmount" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="IsDeleted" ColumnName="IsDeleted" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="ps_purchase" FunctionName="PosintofsaleModel.Store.ps_purchase">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PosintofsaleModel.ps_purchase_Result">
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="Quantity1" ColumnName="Quantity1" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PurchaseDetailID" ColumnName="PurchaseDetailID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="ps_sales" FunctionName="PosintofsaleModel.Store.ps_sales">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PosintofsaleModel.ps_sales_Result">
+          <ScalarProperty Name="SalesID" ColumnName="SalesID" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="usp_Add_BankAccounts" FunctionName="PosintofsaleModel.Store.usp_Add_BankAccounts" />
+    <FunctionImportMapping FunctionImportName="usp_Add_BankPayments" FunctionName="PosintofsaleModel.Store.usp_Add_BankPayments" />
+    <FunctionImportMapping FunctionImportName="usp_Add_Banks" FunctionName="PosintofsaleModel.Store.usp_Add_Banks" />
+    <FunctionImportMapping FunctionImportName="usp_Add_Branches" FunctionName="PosintofsaleModel.Store.usp_Add_Branches" />
+    <FunctionImportMapping FunctionImportName="usp_Add_Brands" FunctionName="PosintofsaleModel.Store.usp_Add_Brands" />
+    <FunctionImportMapping FunctionImportName="usp_Add_Commission" FunctionName="PosintofsaleModel.Store.usp_Add_Commission" />
+    <FunctionImportMapping FunctionImportName="usp_Add_Customers" FunctionName="PosintofsaleModel.Store.usp_Add_Customers" />
+    <FunctionImportMapping FunctionImportName="usp_Add_EmployeeAdvance" FunctionName="PosintofsaleModel.Store.usp_Add_EmployeeAdvance" />
+    <FunctionImportMapping FunctionImportName="usp_Add_EmployeeLoan" FunctionName="PosintofsaleModel.Store.usp_Add_EmployeeLoan" />
+    <FunctionImportMapping FunctionImportName="usp_Add_Engineers" FunctionName="PosintofsaleModel.Store.usp_Add_Engineers" />
+    <FunctionImportMapping FunctionImportName="usp_Add_Exchange" FunctionName="PosintofsaleModel.Store.usp_Add_Exchange" />
+    <FunctionImportMapping FunctionImportName="usp_Add_ExchangeDetails" FunctionName="PosintofsaleModel.Store.usp_Add_ExchangeDetails" />
+    <FunctionImportMapping FunctionImportName="usp_Add_Expenses" FunctionName="PosintofsaleModel.Store.usp_Add_Expenses" />
+    <FunctionImportMapping FunctionImportName="usp_Add_ExpensesTypes" FunctionName="PosintofsaleModel.Store.usp_Add_ExpensesTypes" />
+    <FunctionImportMapping FunctionImportName="usp_Add_Generations" FunctionName="PosintofsaleModel.Store.usp_Add_Generations" />
+    <FunctionImportMapping FunctionImportName="usp_Add_HardDisk" FunctionName="PosintofsaleModel.Store.usp_Add_HardDisk" />
+    <FunctionImportMapping FunctionImportName="usp_Add_Models" FunctionName="PosintofsaleModel.Store.usp_Add_Models" />
+    <FunctionImportMapping FunctionImportName="usp_Add_PaymentMethod" FunctionName="PosintofsaleModel.Store.usp_Add_PaymentMethod" />
+    <FunctionImportMapping FunctionImportName="usp_Add_PaymentMode" FunctionName="PosintofsaleModel.Store.usp_Add_PaymentMode" />
+    <FunctionImportMapping FunctionImportName="usp_Add_PaymentVoucherCustomers" FunctionName="PosintofsaleModel.Store.usp_Add_PaymentVoucherCustomers" />
+    <FunctionImportMapping FunctionImportName="usp_Add_PaymentVoucherSupplier" FunctionName="PosintofsaleModel.Store.usp_Add_PaymentVoucherSupplier" />
+    <FunctionImportMapping FunctionImportName="usp_Add_Processor" FunctionName="PosintofsaleModel.Store.usp_Add_Processor" />
+    <FunctionImportMapping FunctionImportName="usp_Add_ProductCategory" FunctionName="PosintofsaleModel.Store.usp_Add_ProductCategory" />
+    <FunctionImportMapping FunctionImportName="usp_Add_Products" FunctionName="PosintofsaleModel.Store.usp_Add_Products" />
+    <FunctionImportMapping FunctionImportName="usp_Add_ProfitAndLoss" FunctionName="PosintofsaleModel.Store.usp_Add_ProfitAndLoss" />
+    <FunctionImportMapping FunctionImportName="usp_Add_Purchase" FunctionName="PosintofsaleModel.Store.usp_Add_Purchase" />
+    <FunctionImportMapping FunctionImportName="usp_Add_PurchaseDetails" FunctionName="PosintofsaleModel.Store.usp_Add_PurchaseDetails" />
+    <FunctionImportMapping FunctionImportName="usp_Add_Rams" FunctionName="PosintofsaleModel.Store.usp_Add_Rams" />
+    <FunctionImportMapping FunctionImportName="usp_Add_Repairing" FunctionName="PosintofsaleModel.Store.usp_Add_Repairing" />
+    <FunctionImportMapping FunctionImportName="usp_Add_Salary" FunctionName="PosintofsaleModel.Store.usp_Add_Salary" />
+    <FunctionImportMapping FunctionImportName="usp_Add_Sales" FunctionName="PosintofsaleModel.Store.usp_Add_Sales" />
+    <FunctionImportMapping FunctionImportName="usp_Add_SalesDetails" FunctionName="PosintofsaleModel.Store.usp_Add_SalesDetails" />
+    <FunctionImportMapping FunctionImportName="usp_Add_Suppliers" FunctionName="PosintofsaleModel.Store.usp_Add_Suppliers" />
+    <FunctionImportMapping FunctionImportName="usp_Add_Users" FunctionName="PosintofsaleModel.Store.usp_Add_Users" />
+    <FunctionImportMapping FunctionImportName="usp_delete_BankAccounts" FunctionName="PosintofsaleModel.Store.usp_delete_BankAccounts" />
+    <FunctionImportMapping FunctionImportName="usp_delete_BankPayments" FunctionName="PosintofsaleModel.Store.usp_delete_BankPayments" />
+    <FunctionImportMapping FunctionImportName="usp_delete_Banks" FunctionName="PosintofsaleModel.Store.usp_delete_Banks" />
+    <FunctionImportMapping FunctionImportName="usp_delete_Branches" FunctionName="PosintofsaleModel.Store.usp_delete_Branches" />
+    <FunctionImportMapping FunctionImportName="usp_delete_Brands" FunctionName="PosintofsaleModel.Store.usp_delete_Brands" />
+    <FunctionImportMapping FunctionImportName="usp_delete_Commission" FunctionName="PosintofsaleModel.Store.usp_delete_Commission" />
+    <FunctionImportMapping FunctionImportName="usp_delete_Customers" FunctionName="PosintofsaleModel.Store.usp_delete_Customers" />
+    <FunctionImportMapping FunctionImportName="usp_delete_EmployeeAdvance" FunctionName="PosintofsaleModel.Store.usp_delete_EmployeeAdvance" />
+    <FunctionImportMapping FunctionImportName="usp_delete_EmployeeLoan" FunctionName="PosintofsaleModel.Store.usp_delete_EmployeeLoan" />
+    <FunctionImportMapping FunctionImportName="usp_delete_Engineers" FunctionName="PosintofsaleModel.Store.usp_delete_Engineers" />
+    <FunctionImportMapping FunctionImportName="usp_delete_Exchange" FunctionName="PosintofsaleModel.Store.usp_delete_Exchange" />
+    <FunctionImportMapping FunctionImportName="usp_delete_ExchangeDetails" FunctionName="PosintofsaleModel.Store.usp_delete_ExchangeDetails" />
+    <FunctionImportMapping FunctionImportName="usp_delete_Expenses" FunctionName="PosintofsaleModel.Store.usp_delete_Expenses" />
+    <FunctionImportMapping FunctionImportName="usp_delete_ExpensesTypes" FunctionName="PosintofsaleModel.Store.usp_delete_ExpensesTypes" />
+    <FunctionImportMapping FunctionImportName="usp_delete_Generations" FunctionName="PosintofsaleModel.Store.usp_delete_Generations" />
+    <FunctionImportMapping FunctionImportName="usp_delete_HardDisk" FunctionName="PosintofsaleModel.Store.usp_delete_HardDisk" />
+    <FunctionImportMapping FunctionImportName="usp_delete_Models" FunctionName="PosintofsaleModel.Store.usp_delete_Models" />
+    <FunctionImportMapping FunctionImportName="usp_delete_PaymentMethod" FunctionName="PosintofsaleModel.Store.usp_delete_PaymentMethod" />
+    <FunctionImportMapping FunctionImportName="usp_delete_PaymentMode" FunctionName="PosintofsaleModel.Store.usp_delete_PaymentMode" />
+    <FunctionImportMapping FunctionImportName="usp_delete_PaymentVoucherCustomers" FunctionName="PosintofsaleModel.Store.usp_delete_PaymentVoucherCustomers" />
+    <FunctionImportMapping FunctionImportName="usp_delete_PaymentVoucherSupplier" FunctionName="PosintofsaleModel.Store.usp_delete_PaymentVoucherSupplier" />
+    <FunctionImportMapping FunctionImportName="usp_delete_Processor" FunctionName="PosintofsaleModel.Store.usp_delete_Processor" />
+    <FunctionImportMapping FunctionImportName="usp_delete_ProductCategory" FunctionName="PosintofsaleModel.Store.usp_delete_ProductCategory" />
+    <FunctionImportMapping FunctionImportName="usp_delete_Products" FunctionName="PosintofsaleModel.Store.usp_delete_Products" />
+    <FunctionImportMapping FunctionImportName="usp_delete_ProfitAndLoss" FunctionName="PosintofsaleModel.Store.usp_delete_ProfitAndLoss" />
+    <FunctionImportMapping FunctionImportName="usp_delete_Purchase" FunctionName="PosintofsaleModel.Store.usp_delete_Purchase" />
+    <FunctionImportMapping FunctionImportName="usp_delete_PurchaseDetails" FunctionName="PosintofsaleModel.Store.usp_delete_PurchaseDetails" />
+    <FunctionImportMapping FunctionImportName="usp_delete_Rams" FunctionName="PosintofsaleModel.Store.usp_delete_Rams" />
+    <FunctionImportMapping FunctionImportName="usp_delete_Repairing" FunctionName="PosintofsaleModel.Store.usp_delete_Repairing" />
+    <FunctionImportMapping FunctionImportName="usp_delete_Salary" FunctionName="PosintofsaleModel.Store.usp_delete_Salary" />
+    <FunctionImportMapping FunctionImportName="usp_delete_Sales" FunctionName="PosintofsaleModel.Store.usp_delete_Sales" />
+    <FunctionImportMapping FunctionImportName="usp_delete_SalesDetails" FunctionName="PosintofsaleModel.Store.usp_delete_SalesDetails" />
+    <FunctionImportMapping FunctionImportName="usp_delete_Suppliers" FunctionName="PosintofsaleModel.Store.usp_delete_Suppliers" />
+    <FunctionImportMapping FunctionImportName="usp_delete_Users" FunctionName="PosintofsaleModel.Store.usp_delete_Users" />
+    <FunctionImportMapping FunctionImportName="usp_update_BankAccounts" FunctionName="PosintofsaleModel.Store.usp_update_BankAccounts" />
+    <FunctionImportMapping FunctionImportName="usp_update_BankPayments" FunctionName="PosintofsaleModel.Store.usp_update_BankPayments" />
+    <FunctionImportMapping FunctionImportName="usp_update_Banks" FunctionName="PosintofsaleModel.Store.usp_update_Banks" />
+    <FunctionImportMapping FunctionImportName="usp_update_Branches" FunctionName="PosintofsaleModel.Store.usp_update_Branches" />
+    <FunctionImportMapping FunctionImportName="usp_update_Brands" FunctionName="PosintofsaleModel.Store.usp_update_Brands" />
+    <FunctionImportMapping FunctionImportName="usp_update_Commission" FunctionName="PosintofsaleModel.Store.usp_update_Commission" />
+    <FunctionImportMapping FunctionImportName="usp_update_Customers" FunctionName="PosintofsaleModel.Store.usp_update_Customers" />
+    <FunctionImportMapping FunctionImportName="usp_update_EmployeeAdvance" FunctionName="PosintofsaleModel.Store.usp_update_EmployeeAdvance" />
+    <FunctionImportMapping FunctionImportName="usp_update_EmployeeLoan" FunctionName="PosintofsaleModel.Store.usp_update_EmployeeLoan" />
+    <FunctionImportMapping FunctionImportName="usp_update_Engineers" FunctionName="PosintofsaleModel.Store.usp_update_Engineers" />
+    <FunctionImportMapping FunctionImportName="usp_update_Exchange" FunctionName="PosintofsaleModel.Store.usp_update_Exchange" />
+    <FunctionImportMapping FunctionImportName="usp_update_ExchangeDetails" FunctionName="PosintofsaleModel.Store.usp_update_ExchangeDetails" />
+    <FunctionImportMapping FunctionImportName="usp_update_Expenses" FunctionName="PosintofsaleModel.Store.usp_update_Expenses" />
+    <FunctionImportMapping FunctionImportName="usp_update_ExpensesTypes" FunctionName="PosintofsaleModel.Store.usp_update_ExpensesTypes" />
+    <FunctionImportMapping FunctionImportName="usp_update_Generations" FunctionName="PosintofsaleModel.Store.usp_update_Generations" />
+    <FunctionImportMapping FunctionImportName="usp_update_HardDisk" FunctionName="PosintofsaleModel.Store.usp_update_HardDisk" />
+    <FunctionImportMapping FunctionImportName="usp_update_Models" FunctionName="PosintofsaleModel.Store.usp_update_Models" />
+    <FunctionImportMapping FunctionImportName="usp_update_PaymentMethod" FunctionName="PosintofsaleModel.Store.usp_update_PaymentMethod" />
+    <FunctionImportMapping FunctionImportName="usp_update_PaymentMode" FunctionName="PosintofsaleModel.Store.usp_update_PaymentMode" />
+    <FunctionImportMapping FunctionImportName="usp_update_PaymentVoucherCustomers" FunctionName="PosintofsaleModel.Store.usp_update_PaymentVoucherCustomers" />
+    <FunctionImportMapping FunctionImportName="usp_update_PaymentVoucherSupplier" FunctionName="PosintofsaleModel.Store.usp_update_PaymentVoucherSupplier" />
+    <FunctionImportMapping FunctionImportName="usp_update_Processor" FunctionName="PosintofsaleModel.Store.usp_update_Processor" />
+    <FunctionImportMapping FunctionImportName="usp_update_ProductCategory" FunctionName="PosintofsaleModel.Store.usp_update_ProductCategory" />
+    <FunctionImportMapping FunctionImportName="usp_update_Products" FunctionName="PosintofsaleModel.Store.usp_update_Products" />
+    <FunctionImportMapping FunctionImportName="usp_update_ProfitAndLoss" FunctionName="PosintofsaleModel.Store.usp_update_ProfitAndLoss" />
+    <FunctionImportMapping FunctionImportName="usp_update_Purchase" FunctionName="PosintofsaleModel.Store.usp_update_Purchase" />
+    <FunctionImportMapping FunctionImportName="usp_update_PurchaseDetails" FunctionName="PosintofsaleModel.Store.usp_update_PurchaseDetails" />
+    <FunctionImportMapping FunctionImportName="usp_update_Rams" FunctionName="PosintofsaleModel.Store.usp_update_Rams" />
+    <FunctionImportMapping FunctionImportName="usp_update_Repairing" FunctionName="PosintofsaleModel.Store.usp_update_Repairing" />
+    <FunctionImportMapping FunctionImportName="usp_update_Salary" FunctionName="PosintofsaleModel.Store.usp_update_Salary" />
+    <FunctionImportMapping FunctionImportName="usp_update_Sales" FunctionName="PosintofsaleModel.Store.usp_update_Sales" />
+    <FunctionImportMapping FunctionImportName="usp_update_SalesDetails" FunctionName="PosintofsaleModel.Store.usp_update_SalesDetails" />
+    <FunctionImportMapping FunctionImportName="usp_update_Suppliers" FunctionName="PosintofsaleModel.Store.usp_update_Suppliers" />
+    <FunctionImportMapping FunctionImportName="usp_update_Users" FunctionName="PosintofsaleModel.Store.usp_update_Users" />
+    <FunctionImportMapping FunctionImportName="GetPurchaseReport" FunctionName="PosintofsaleModel.Store.GetPurchaseReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PosintofsaleModel.GetPurchaseReport_Result">
+          <ScalarProperty Name="PurchaseID" ColumnName="PurchaseID" />
+          <ScalarProperty Name="PoNumber" ColumnName="PoNumber" />
+          <ScalarProperty Name="PoReference" ColumnName="PoReference" />
+          <ScalarProperty Name="PoDate" ColumnName="PoDate" />
+          <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+          <ScalarProperty Name="PaymentMethodName" ColumnName="PaymentMethodName" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+          <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
+          <ScalarProperty Name="PayableAmount" ColumnName="PayableAmount" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetPurchaseReportDetails" FunctionName="PosintofsaleModel.Store.GetPurchaseReportDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PosintofsaleModel.GetPurchaseReportDetails_Result">
+          <ScalarProperty Name="PoNumber" ColumnName="PoNumber" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PoDate" ColumnName="PoDate" />
+          <ScalarProperty Name="PoReference" ColumnName="PoReference" />
+          <ScalarProperty Name="SupplierName" ColumnName="SupplierName" />
+          <ScalarProperty Name="PaymentMethodName" ColumnName="PaymentMethodName" />
+          <ScalarProperty Name="CreationDate" ColumnName="CreationDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetPurchaseReportDetailsTotalAmounts" FunctionName="PosintofsaleModel.Store.GetPurchaseReportDetailsTotalAmounts">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PosintofsaleModel.GetPurchaseReportDetailsTotalAmounts_Result">
+          <ScalarProperty Name="TotalQuntity" ColumnName="TotalQuntity" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+          <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
+          <ScalarProperty Name="PayableAmount" ColumnName="PayableAmount" />
+          <ScalarProperty Name="TotalBance" ColumnName="TotalBance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetSalesReport" FunctionName="PosintofsaleModel.Store.GetSalesReport">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PosintofsaleModel.GetSalesReport_Result">
+          <ScalarProperty Name="SalesID" ColumnName="SalesID" />
+          <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="PaymentMethodName" ColumnName="PaymentMethodName" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="TaxAmount" ColumnName="TaxAmount" />
+          <ScalarProperty Name="GrandTotal" ColumnName="GrandTotal" />
+          <ScalarProperty Name="PayableAmount" ColumnName="PayableAmount" />
+          <ScalarProperty Name="Balance" ColumnName="Balance" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="GetSalesReportDetails" FunctionName="PosintofsaleModel.Store.GetSalesReportDetails">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PosintofsaleModel.GetSalesReportDetails_Result">
+          <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+          <ScalarProperty Name="ProductName" ColumnName="ProductName" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+          <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+          <ScalarProperty Name="PaymentMethodName" ColumnName="PaymentMethodName" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="Roles">
+      <EntityTypeMapping TypeName="PosintofsaleModel.Role">
+        <MappingFragment StoreEntitySet="Roles">
+          <ScalarProperty Name="UserId" ColumnName="UserId" />
+          <ScalarProperty Name="Role_Tittle" ColumnName="Role_Tittle" />
+          <ScalarProperty Name="RoleID" ColumnName="RoleID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

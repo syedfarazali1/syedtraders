@@ -1,0 +1,36 @@
+﻿@model IEnumerable<POSApplication.Models.ExpensesType>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ExpensesTypeName)
+        </th>
+
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpensesTypeName)
+        </td>
+      
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ExpensesTypeID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ExpensesTypeID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ExpensesTypeID })
+        </td>
+    </tr>
+}
+
+</table>

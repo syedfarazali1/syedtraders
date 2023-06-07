@@ -1,0 +1,321 @@
+﻿
+@{
+    ViewBag.Title = "Customer";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="mt-1 font-weight-bold text-primary" style="float: left;">Customers Registration</h6>
+
+        </div>
+        <form id="Data" enctype="multipart/form-data">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div class="col-md-12 pull-left">
+
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <input type="hidden" id="CustomerID" value="" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-12">
+                                        Customer Name(Company):
+                                    </label>
+                                    <div class="col-md-12">
+
+                                        <input class="form-control" type="text" name="CustomerName" id="CustomerName" required value="" placeholder="" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-12">
+                                        Customer Reference:
+                                    </label>
+                                    <div class="col-md-12">
+
+                                        <input type="text" class="form-control" name="CustomerReference" id="CustomerReference" required value="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-12">
+                                        Telephone / Cell #:
+                                    </label>
+                                    <div class="col-md-12">
+
+                                        <input type="number" class="form-control" id="ContactNumber" name="ContactNumber" required value="" />
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12">
+                                        Address:
+                                    </label>
+                                    <div class="col-md-12">
+
+                                        <input class="form-control" name="Address" type="text" id="Address" required value="" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-12">
+
+                                <div class="col-md-12 text-right">
+                                    <input type="submit" Class="btn btn-primary add" value="Registration" />
+                                    <input type="button" Class="btn btn-warning update" onclick="Update()" value="Update" />
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="mt-1 font-weight-bold text-primary" style="float: left;">Customer List</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <tr>
+
+                        <th>Customer Name</th>
+                        <th>Contact Number</th>
+                        <th>Customer Refrence</th>
+                        <th>Address</th>
+                        <th>Creation Date</th>
+                        <th>Action</th>
+                    </tr>
+                    <tbody id="tablebody">
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".add").css("display", "Inline-Block");
+        $(".update").css("display", "none");
+
+        loadtable();
+
+
+    })
+
+
+    function loadtable() {
+        $.ajax({
+            url: "/Registration/loadCustomer",
+            type: "Get",
+            success: function (Customer) {
+                $("#tablebody").html();
+                var s = '';
+                for (var i = 0; i < Customer.length; i++) {
+                    s += '<tr><td>' + Customer[i].CustomerName + '</td>'
+                        + '<td>' + Customer[i].ContactNumber + '</td>'
+                        + '<td>' + Customer[i].CustomerReference + '</td>'
+                        + '<td>' + Customer[i].Address + '</td>'
+                        + '<td>' + Customer[i].CreationDate + '</td>'
+
+
+                        + '<td>' + '<i style="cursor: pointer;" class="fas fa-edit" onclick="Edit(' + Customer[i].CustomerID + ')"></i>' + '<i style="cursor: pointer;" class="fas fa-trash" onclick="Delete(' + Customer[i].CustomerID + ')"></i>' + '</td></tr>';
+
+                }
+                $("#tablebody").html(s);
+
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
+            }
+        });
+    }
+
+    function Update() {
+
+        var data = {
+
+            CustomerID: $("#CustomerID").val(),
+            CustomerName: $("#CustomerName").val(),
+            ContactNumber: $("#ContactNumber").val(),
+            CustomerReference: $("#CustomerReference").val(),
+            Address: $("#Address").val(),
+
+            IsActive: 0,
+            IsDeleted: 0,
+
+        };
+
+
+        $.ajax({
+            url: "/Registration/Updatecustomer",
+            type: "POST",
+            data: data,
+            success: function (response) {
+                loadtable();
+                clear();
+                $(".update").css("display", "none");
+                $(".add").css("display", "Inline-Block");
+
+            },
+            error: function (err) {
+                console.error(err);
+            }
+        });
+
+    }
+    $(document).ready(function () {
+        $("#Data").on("submit", function (e) {
+            var data = {
+
+                CustomerName: $("#CustomerName").val(),
+                ContactNumber: $("#ContactNumber").val(),
+                CustomerReference: $("#CustomerReference").val(),
+                Address: $("#Address").val(),
+
+                IsActive: 0,
+                IsDeleted: 0,
+
+            };
+            e.preventDefault();
+
+            $.ajax({
+                url: "/Registration/Customer",
+                type: "POST",
+                data: data,
+                success: function (response) {
+                    loadtable();
+                    clear();
+                },
+                error: function (err) {
+                    console.error(err);
+                }
+            });
+
+        });
+    });
+
+    function Edit(CustomerID) {
+
+        var Customer = {
+
+            CustomerID: CustomerID
+        };
+
+        $.ajax({
+            url: "/Registration/Editcustomer",
+            data: Customer,
+            type: "POST",
+            success: function (res) {
+                CustomerID: $("#CustomerID").val(res.CustomerID);
+                CustomerName: $("#CustomerName").val(res.CustomerName);
+                ContactPerson: $("#CustomerReference").val(res.CustomerReference);
+                ContactNumber: $("#ContactNumber").val(res.ContactNumber);
+                Address: $("#Address").val(res.Address);
+                $(".update").css("display", "Inline-Block");
+                $(".add").css("display", "none");
+
+            },
+            error: function (err) {
+                console.log(err)
+            },
+
+        });
+    }
+    function Delete(CustomerID) {
+        var result = confirm("Want to delete?");
+        if (result) {
+
+        
+        var Customer = {
+
+            CustomerID: CustomerID
+        };
+
+        $.ajax({
+            url: "/Registration/Deletecustomer",
+            data: Customer,
+            type: "POST",
+            success: function (res) {
+                loadtable();
+            },
+            error: function (err) {
+                console.log(err)
+            },
+
+        });
+        }
+    }
+
+
+    function clear() {
+        CustomerID: $("#CustomerID").val('');
+        CustomerName: $("#CustomerName").val('');
+        ContactNumber: $("#ContactNumber").val('');
+        CustomerReference: $("#CustomerReference").val('');
+        Address: $("#Address").val('');
+     
+    }
+
+    function Update() {
+        var data = {
+            CustomerID: $("#CustomerID").val(),
+            CustomerName: $("#CustomerName").val(),
+            ContactNumber: $("#ContactNumber").val(),
+            CustomerReference: $("#CustomerReference").val(),
+            Address: $("#Address").val(),
+
+            IsActive: 0,
+            IsDeleted: 0,
+
+        };
+        $.ajax({
+            url: "/Registration/UpdateCustomer",
+            type: "POST",
+            data: data,
+            success: function (response) {
+                loadtable();
+                clear();
+                $(".add").css("display", "Inline-Block");
+                $(".update").css("display", "none");
+
+            },
+            error: function (err) {
+                console.error(err);
+            }
+        });
+
+    };
+
+</script>

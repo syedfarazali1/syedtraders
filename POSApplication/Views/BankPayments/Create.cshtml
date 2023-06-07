@@ -1,0 +1,152 @@
+﻿@model POSApplication.Models.BankPayment
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>BankPayment</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BankAccountID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" name="BankAccountID">
+                    <option selected value="-1">Select Bank Account</option>
+
+                    @if (ViewBag.bankaccounts != null)
+                    {
+                        foreach (var item in ViewBag.bankaccounts)
+                        {
+                            <option value="@item.BankAccountID">@item.AccountTitle</option>
+
+
+                        }
+
+                    }
+                </select>
+
+                @Html.ValidationMessageFor(model => model.BankAccountID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CustomerID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="customer"  class="form-control" name="CustomerID">
+                    <option value="-1">Select Customer Name</option>
+
+                    @if (ViewBag.Customer != null)
+                    {
+                        foreach (var item in ViewBag.Customer)
+                        {
+                            <option value="@item.CustomerID">@item.CustomerName</option>
+
+
+                        }
+
+                    }
+                </select>
+
+                @Html.ValidationMessageFor(model => model.CustomerID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SalesID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select id="Sales" class="form-control" name="SalesID">
+                    <option value="-1">Select Sales</option>
+
+                </select>
+                @Html.ValidationMessageFor(model => model.SalesID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BankID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" name="BankID">
+                    <option value="-1">Select Bank Name</option>
+
+                    @if (ViewBag.Bank != null)
+                    {
+                        foreach (var item in ViewBag.Bank)
+                        {
+                            <option value="@item.BankID">@item.BankName</option>
+
+
+                        }
+
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.BankID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CheqNumber, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.CheqNumber, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CheqNumber, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PdcDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="date" name="PdcDate" value="" class="form-control" />
+                @Html.ValidationMessageFor(model => model.PdcDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.IsClear, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.IsClear, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.IsClear, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+           $("#Sales").prop("disabled", true);
+    })
+
+    $("#customer").change(function () {
+        $.get("/BankPayments/LoadSales", { ID: $("#customer").val() }, function (data) {
+            $("#Sales").empty();
+            $("#Sales").prop("disabled", false);
+            $.each(data, function (index, row) {
+                $("#Sales").append("<option value='" + row.SalesID + "'>" + row.InvoiceNumber + "</option>")
+            });
+        });
+    })
+
+      
+
+
+
+</script>

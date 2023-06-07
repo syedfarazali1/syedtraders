@@ -1,0 +1,91 @@
+﻿@model POSApplication.Models.Expens
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Expens</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BranchID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BranchID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpensesTypeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpensesTypeID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpensesDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpensesDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Remarks)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Remarks)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpensesByID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpensesByID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreatedByUserID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreatedByUserID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ExpensesAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ExpensesAmount)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ExpensesID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

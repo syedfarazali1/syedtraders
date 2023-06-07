@@ -1,0 +1,46 @@
+﻿@model IEnumerable<POSApplication.Models.EmployeeAdvance>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdvanceDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdvanceAmount)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdvanceDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdvanceAmount)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.EmployeeAdvanceID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.EmployeeAdvanceID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.EmployeeAdvanceID })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,58 @@
+﻿@model POSApplication.Models.ProductCategory
+
+@{
+    ViewBag.Title = "Edit";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="mt-1 font-weight-bold text-primary" style="float: left;">Product Category</h6>
+            <h6 class="mt-1 font-weight-bold text-primary" style="float: right;"><a href="~/ProductCategories/Index">Product List</a></h6>
+
+        </div>
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div class="col-md-12 pull-left">
+
+                        <div class="Row">
+                            <h4>ProductCategory</h4>
+                            <hr />
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                            @Html.HiddenFor(model => model.ProductCategoryID)
+
+
+
+                            <div class="form-group">
+                                @Html.LabelFor(model => model.CategoryName, htmlAttributes: new { @class = "control-label col-md-2" })
+                                <div class="col-md-10">
+                                    @Html.EditorFor(model => model.CategoryName, new { htmlAttributes = new { @class = "form-control" } })
+                                    @Html.ValidationMessageFor(model => model.CategoryName, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+
+
+                            <div class="form-group">
+                                <div class="col-md-offset-2 col-md-10">
+                                    <input type="submit" value="Update" class="btn btn-primary" />
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        }
+        <div>
+ 
+            <a  href="Index" class = "btn btn-primary m-5" >Go To List</a>
+        </div>
+    </div>
+</div>  

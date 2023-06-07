@@ -1,0 +1,80 @@
+﻿@model IEnumerable<POSApplication.App_Classes.purchaseReporthelperclass>
+
+@{
+    ViewBag.Title = "Invoice";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+<div class="container">
+    <form action="" method="post">
+        <div class="row">
+            <div class="col-6">
+                <input type="text" class="form-control" placeholder="PoNumber" name="PoNumber" value="" />
+
+            </div>
+            <div class="col-6">
+                <input type="text" class="form-control" placeholder="startDate" name="startDate" value="" />
+
+            </div>
+            <div class="col-6">
+                <input type="text" class="form-control" placeholder="endDate" name="endDate" value="" />
+
+            </div>
+            <div class="col-6">
+                <input type="text" class="form-control" placeholder="Supplier" name="supID" value="" />
+
+            </div>
+            <div class="col-6">
+                <input type="submit" value="submit" class="btn btn-primary" />
+
+            </div>
+        </div>
+    </form>
+</div>
+<div class="container-fluid float-right">
+    <h3>PoNumber = @ViewBag.PoNumber</h3>
+</div>
+
+<div class="table-responsive">
+    <table class="table table-dark table-hover">
+        <tr>
+            <td>PoNumber</td>
+            <td>PoReference</td>
+            <td>PoDate</td>
+            <td>SupplierName</td>
+            <td>PaymentMethodName</td>
+            <td>TotalAmount</td>
+            <td>TaxAmount</td>
+            <td>GrandTotal</td>
+            <td>PayableAmount</td>
+            <td>Balance</td>
+
+        </tr>
+        @if (ViewBag.list != null)
+        {
+
+            foreach (var item in ViewBag.list)
+            {
+    <tr>
+        <td>@item.PoNumber</td>
+        <td>@item.PoReference</td>
+        <td>@item.PoDate</td>
+        <td>@item.SupplierName</td>
+        <td>@item.PaymentMethodName</td>
+        <td>@item.TotalAmount</td>
+        <td>@item.TaxAmount</td>
+        <td>@item.GrandTotal</td>
+        <td>@item.PayableAmount</td>
+        <td>@item.Balance</td>
+        <td>
+           
+            <a href="@Url.Action("InvoiceDetails", "PurchaseReports", new { PoNum = item.PoNumber })"> <i class="fa fa-info-circle" aria-hidden="true"></i></a>
+            
+        </td>
+    </tr>
+            }
+        }
+
+    </table>
+    </div>
+    

@@ -1,0 +1,1259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PosintofsaleModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="BankAccounts">
+    <Key>
+      <PropertyRef Name="BankAccountID" />
+    </Key>
+    <Property Name="BankAccountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BrancID" Type="int" />
+    <Property Name="BankName" Type="varchar" MaxLength="50" />
+    <Property Name="AccountTitle" Type="varchar" MaxLength="50" />
+    <Property Name="AccountNumber" Type="varchar" MaxLength="50" />
+    <Property Name="IBANNumber" Type="varchar" MaxLength="50" />
+    <Property Name="BankBranch" Type="varchar" MaxLength="50" />
+    <Property Name="IsActive" Type="int" />
+    <Property Name="IsDeleted" Type="int" />
+  </EntityType>
+  <EntityType Name="BankPayments">
+    <Key>
+      <PropertyRef Name="BankPaymentID" />
+    </Key>
+    <Property Name="BankPaymentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="BankAccountID" Type="int" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="SalesID" Type="int" />
+    <Property Name="BankID" Type="int" />
+    <Property Name="CheqNumber" Type="varchar" MaxLength="50" />
+    <Property Name="PdcDate" Type="varchar" MaxLength="10" />
+    <Property Name="IsClear" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Banks">
+    <Key>
+      <PropertyRef Name="BankID" />
+    </Key>
+    <Property Name="BankID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BankName" Type="varchar" MaxLength="50" />
+    <Property Name="IsDeleted" Type="int" />
+  </EntityType>
+  <EntityType Name="Branches">
+    <Key>
+      <PropertyRef Name="BranchID" />
+    </Key>
+    <Property Name="BranchID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchName" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsActive" Type="int" />
+    <Property Name="IsDeleted" Type="int" />
+  </EntityType>
+  <EntityType Name="Brands">
+    <Key>
+      <PropertyRef Name="BrandID" />
+    </Key>
+    <Property Name="BrandID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BrandName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Commission">
+    <Key>
+      <PropertyRef Name="CommissionID" />
+    </Key>
+    <Property Name="CommissionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="EmployeeID" Type="int" />
+    <Property Name="SalesID" Type="int" />
+    <Property Name="SalesDate" Type="varchar" MaxLength="10" />
+    <Property Name="CommissionAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsPaid" Type="int" />
+  </EntityType>
+  <EntityType Name="Customers">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="CustomerName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContactNumber" Type="varchar" MaxLength="15" />
+    <Property Name="CustomerReference" Type="varchar" MaxLength="15" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="IsActive" Type="int" />
+    <Property Name="IsDeleted" Type="int" />
+  </EntityType>
+  <EntityType Name="EmployeeAdvance">
+    <Key>
+      <PropertyRef Name="EmployeeAdvanceID" />
+    </Key>
+    <Property Name="EmployeeAdvanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="EmployeeID" Type="int" />
+    <Property Name="AdvanceDate" Type="varchar" MaxLength="10" />
+    <Property Name="AdvanceAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsPaid" Type="int" />
+    <Property Name="IsDeleted" Type="int" />
+  </EntityType>
+  <EntityType Name="EmployeeLoan">
+    <Key>
+      <PropertyRef Name="EmployeeLoanID" />
+    </Key>
+    <Property Name="EmployeeLoanID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="EmployeeID" Type="int" />
+    <Property Name="LoanDate" Type="varchar" MaxLength="10" />
+    <Property Name="LoanAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="InstallmentAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="PaidInstallment" Type="int" />
+    <Property Name="numberOfInstallment" Type="int" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="IsPaid" Type="int" />
+  </EntityType>
+  <EntityType Name="Engineers">
+    <Key>
+      <PropertyRef Name="EngineerID" />
+    </Key>
+    <Property Name="EngineerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="EngineerName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContactPerson" Type="varchar" MaxLength="50" />
+    <Property Name="ContactNumber" Type="varchar" MaxLength="15" />
+    <Property Name="Address" Type="nvarchar(max)" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="IsActive" Type="int" />
+    <Property Name="IsDeleted" Type="int" />
+  </EntityType>
+  <EntityType Name="Exchange">
+    <Key>
+      <PropertyRef Name="ExchangeID" />
+    </Key>
+    <Property Name="ExchangeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PO" Type="nvarchar" MaxLength="10" />
+    <Property Name="PoDate" Type="nvarchar" MaxLength="10" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="PayableAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsPaid" Type="int" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="IsDeleted" Type="int" />
+  </EntityType>
+  <EntityType Name="ExchangeDetails">
+    <Key>
+      <PropertyRef Name="ExchangeDetailID" />
+    </Key>
+    <Property Name="ExchangeDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExchangeID" Type="int" />
+    <Property Name="CategoryID" Type="int" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="BrandID" Type="int" />
+    <Property Name="ModelID" Type="int" />
+    <Property Name="Generation" Type="int" />
+    <Property Name="HardDiskID" Type="int" />
+    <Property Name="HDDAvailable" Type="int" />
+    <Property Name="RamID" Type="int" />
+    <Property Name="RamAvailable" Type="int" />
+    <Property Name="ProcessorID" Type="int" />
+    <Property Name="Screen" Type="nvarchar" MaxLength="50" />
+    <Property Name="ScreenAvailable" Type="int" />
+    <Property Name="Keboard" Type="nvarchar" MaxLength="50" />
+    <Property Name="KeyboardAvailable" Type="int" />
+    <Property Name="Charger" Type="nvarchar" MaxLength="50" />
+    <Property Name="ChargerAvailable" Type="int" />
+    <Property Name="Board" Type="nvarchar" MaxLength="50" />
+    <Property Name="BoardAvailable" Type="int" />
+  </EntityType>
+  <EntityType Name="Expenses">
+    <Key>
+      <PropertyRef Name="ExpensesID" />
+    </Key>
+    <Property Name="ExpensesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="ExpensesTypeID" Type="int" />
+    <Property Name="ExpensesDate" Type="varchar" MaxLength="10" />
+    <Property Name="Remarks" Type="nvarchar(max)" />
+    <Property Name="ExpensesByID" Type="int" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="CreatedByUserID" Type="int" />
+    <Property Name="IsDeleted" Type="int" />
+    <Property Name="ExpensesAmount" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="ExpensesTypes">
+    <Key>
+      <PropertyRef Name="ExpensesTypeID" />
+    </Key>
+    <Property Name="ExpensesTypeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ExpensesTypeName" Type="nchar" MaxLength="10" />
+    <Property Name="IsDeleted" Type="nchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="Generations">
+    <Key>
+      <PropertyRef Name="GenerationID" />
+    </Key>
+    <Property Name="GenerationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="GenerationName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="HardDisk">
+    <Key>
+      <PropertyRef Name="HardDiskID" />
+    </Key>
+    <Property Name="HardDiskID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HardDiskName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Models">
+    <Key>
+      <PropertyRef Name="ModelID" />
+    </Key>
+    <Property Name="ModelID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ModelName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PaymentMethod">
+    <Key>
+      <PropertyRef Name="PaymentMethodID" />
+    </Key>
+    <Property Name="PaymentMethodID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PaymentMethodName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PaymentMode">
+    <Key>
+      <PropertyRef Name="PaymentModeID" />
+    </Key>
+    <Property Name="PaymentModeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PaymentModeName" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="PaymentVoucherCustomers">
+    <Key>
+      <PropertyRef Name="PaymentVoucherCustomersID" />
+    </Key>
+    <Property Name="PaymentVoucherCustomersID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="SalesID" Type="int" />
+    <Property Name="PaymetMethodID" Type="int" />
+    <Property Name="BankID" Type="int" />
+    <Property Name="ChequeNumber" Type="varchar" MaxLength="50" />
+    <Property Name="PayOrderNumber" Type="varchar" MaxLength="50" />
+    <Property Name="IsPDC" Type="int" />
+    <Property Name="PDCDate" Type="varchar" MaxLength="10" />
+    <Property Name="IsPdcClear" Type="int" />
+    <Property Name="Debit" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Credit" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Balance" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Condition" Type="int" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="CreatedByUserID" Type="int" />
+    <Property Name="TransactionTypeID" Type="int" />
+    <Property Name="IsDeleted" Type="int" />
+  </EntityType>
+  <EntityType Name="PaymentVoucherSupplier">
+    <Key>
+      <PropertyRef Name="PaymentVoucherSupplierID" />
+    </Key>
+    <Property Name="PaymentVoucherSupplierID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="SupplierID" Type="int" />
+    <Property Name="PurchaseID" Type="int" />
+    <Property Name="PaymetMethodID" Type="int" />
+    <Property Name="BankID" Type="int" />
+    <Property Name="ChequeNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="PayOrderNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="IsPDC" Type="int" />
+    <Property Name="PDCDate" Type="varchar" MaxLength="10" />
+    <Property Name="IsPdcClear" Type="int" />
+    <Property Name="Debit" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Credit" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Balance" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Condition" Type="int" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="CreatedByUserID" Type="int" />
+    <Property Name="IsDeleted" Type="int" />
+  </EntityType>
+  <EntityType Name="Processor">
+    <Key>
+      <PropertyRef Name="ProcessorID" />
+    </Key>
+    <Property Name="ProcessorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProcessorName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="ProductCategory">
+    <Key>
+      <PropertyRef Name="ProductCategoryID" />
+    </Key>
+    <Property Name="ProductCategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="CategoryName" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="IsDeleted" Type="int" />
+  </EntityType>
+  <EntityType Name="Products">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="ProdcutCategoryID" Type="int" Nullable="false" />
+    <Property Name="ProductName" Type="nvarchar" MaxLength="50" />
+    <Property Name="BrandNameID" Type="nvarchar" MaxLength="50" />
+    <Property Name="ModelID" Type="nvarchar" MaxLength="50" />
+    <Property Name="GenerationID" Type="nvarchar" MaxLength="50" />
+    <Property Name="RamID" Type="nvarchar" MaxLength="50" />
+    <Property Name="HardDiskID" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProcessorID" Type="nvarchar" MaxLength="50" />
+    <Property Name="ProductImage" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="IsDeleted" Type="int" />
+    <Property Name="BarCode" Type="varchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="ProfitAndLoss">
+    <Key>
+      <PropertyRef Name="ProfitAndLossID" />
+    </Key>
+    <Property Name="ProfitAndLossID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="PurchaseDetailID" Type="int" />
+    <Property Name="SalesID" Type="int" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="PurchasePrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="PurchaseAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SalesPrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SalesAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Profit" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="CreatedByUserID" Type="int" />
+    <Property Name="IsDeleted" Type="int" />
+  </EntityType>
+  <EntityType Name="Purchase">
+    <Key>
+      <PropertyRef Name="PurchaseID" />
+    </Key>
+    <Property Name="PurchaseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="IsTransferFromBranch" Type="int" />
+    <Property Name="TransferFromBranchID" Type="int" />
+    <Property Name="PoNumber" Type="nvarchar" MaxLength="50" />
+    <Property Name="PoDate" Type="varchar" MaxLength="10" />
+    <Property Name="PoReference" Type="varchar" MaxLength="10" />
+    <Property Name="SupplierID" Type="int" />
+    <Property Name="PaymentMode" Type="int" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TaxPer" Type="int" />
+    <Property Name="TaxAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="PayableAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="isPaid" Type="int" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="IsDeleted" Type="int" />
+    <Property Name="Balance" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="PurchaseDetails">
+    <Key>
+      <PropertyRef Name="PurchaseDetailID" />
+    </Key>
+    <Property Name="PurchaseDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PurchaseID" Type="int" />
+    <Property Name="ProdcutCategoryID" Type="int" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="StockQuantity" Type="int" />
+  </EntityType>
+  <EntityType Name="Rams">
+    <Key>
+      <PropertyRef Name="RamID" />
+    </Key>
+    <Property Name="RamID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="RamName" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="Repairing">
+    <Key>
+      <PropertyRef Name="RepairingID" />
+    </Key>
+    <Property Name="RepairingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="EngineerID" Type="int" />
+    <Property Name="AssignDate" Type="varchar" MaxLength="10" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="ItemDescription" Type="nvarchar(max)" />
+    <Property Name="DefectDescription" Type="nvarchar(max)" />
+    <Property Name="AmountToBeCharge" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="ReturnDate" Type="varchar" MaxLength="10" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="CreatedByUserID" Type="int" />
+    <Property Name="IsReturn" Type="int" />
+  </EntityType>
+  <EntityType Name="Roles">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Role_Tittle" Type="varchar" MaxLength="50" />
+    <Property Name="UserId" Type="int" />
+  </EntityType>
+  <EntityType Name="Salary">
+    <Key>
+      <PropertyRef Name="SalaryID" />
+    </Key>
+    <Property Name="SalaryID" Type="int" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="EmployeeID" Type="int" />
+    <Property Name="BasicSalary" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="CommissionAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="AdvanceAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="LoanAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="NetSalary" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="SalaryMonth" Type="varchar" MaxLength="10" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="CreatedByUserID" Type="int" />
+    <Property Name="IsDeleted" Type="int" />
+  </EntityType>
+  <EntityType Name="Sales">
+    <Key>
+      <PropertyRef Name="SalesID" />
+    </Key>
+    <Property Name="SalesID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="InvoiceNumber" Type="varchar" MaxLength="50" />
+    <Property Name="InvoiceDate" Type="varchar" MaxLength="10" />
+    <Property Name="CustomerID" Type="int" />
+    <Property Name="PaymentMode" Type="int" />
+    <Property Name="TotalAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="TaxPer" Type="int" />
+    <Property Name="TaxAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="PayableAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="isPaid" Type="int" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="CreatedBy" Type="int" />
+    <Property Name="IsReturn" Type="int" />
+    <Property Name="IsDeleted" Type="int" />
+    <Property Name="Balance" Type="decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="SalesDetails">
+    <Key>
+      <PropertyRef Name="SalesDetailID" />
+    </Key>
+    <Property Name="SalesDetailID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SalesID" Type="int" />
+    <Property Name="ProdcutCategoryID" Type="int" />
+    <Property Name="ProductID" Type="int" />
+    <Property Name="Quantity" Type="int" />
+    <Property Name="UnitPrice" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="IsReturn" Type="int" />
+  </EntityType>
+  <EntityType Name="Suppliers">
+    <Key>
+      <PropertyRef Name="SupplierID" />
+    </Key>
+    <Property Name="SupplierID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="SupplierName" Type="nvarchar" MaxLength="50" />
+    <Property Name="ContactPerson" Type="varchar" MaxLength="50" />
+    <Property Name="ContactNumber" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="IsActive" Type="int" />
+    <Property Name="IsDeleted" Type="int" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BranchID" Type="int" />
+    <Property Name="FullName" Type="nvarchar" MaxLength="50" />
+    <Property Name="DOB" Type="varchar" MaxLength="10" />
+    <Property Name="DOJ" Type="varchar" MaxLength="10" />
+    <Property Name="CNIC" Type="varchar" MaxLength="15" />
+    <Property Name="UserImage" Type="nvarchar(max)" />
+    <Property Name="ContactNumber" Type="varchar" MaxLength="15" />
+    <Property Name="BasicSalary" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="CommissionAmount" Type="decimal" Precision="18" Scale="2" />
+    <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" />
+    <Property Name="CreationDate" Type="datetime" />
+    <Property Name="IsActive" Type="int" />
+    <Property Name="IsDeleted" Type="int" />
+  </EntityType>
+  <Function Name="GetPurchaseReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PoNumber" Type="int" Mode="In" />
+    <Parameter Name="startDate" Type="date" Mode="In" />
+    <Parameter Name="endDate" Type="date" Mode="In" />
+    <Parameter Name="supID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetPurchaseReportDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PoNumber" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetPurchaseReportDetailsTotalAmounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PoNumber" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetSalesReport" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Invoice" Type="int" Mode="In" />
+    <Parameter Name="startDate" Type="date" Mode="In" />
+    <Parameter Name="endDate" Type="date" Mode="In" />
+    <Parameter Name="CustomerId" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetSalesReportDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Invoice" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ps_purchase" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PoNumber" Type="int" Mode="In" />
+    <Parameter Name="PoReference" Type="int" Mode="In" />
+  </Function>
+  <Function Name="ps_sales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="salesid" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_BankAccounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BrancID" Type="int" Mode="In" />
+    <Parameter Name="BankName" Type="varchar" Mode="In" />
+    <Parameter Name="AccountTitle" Type="varchar" Mode="In" />
+    <Parameter Name="AccountNumber" Type="varchar" Mode="In" />
+    <Parameter Name="IBANNumber" Type="varchar" Mode="In" />
+    <Parameter Name="BankBranch" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_BankPayments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="BankAccountID" Type="int" Mode="In" />
+    <Parameter Name="CustomerID" Type="int" Mode="In" />
+    <Parameter Name="SalesID" Type="int" Mode="In" />
+    <Parameter Name="BankID" Type="int" Mode="In" />
+    <Parameter Name="CheqNumber" Type="varchar" Mode="In" />
+    <Parameter Name="PdcDate" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_Banks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BankName" Type="varchar" Mode="In" />
+    <Parameter Name="IsDeleted" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_Branches" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchName" Type="nvarchar" Mode="In" />
+    <Parameter Name="IsActive" Type="int" Mode="In" />
+    <Parameter Name="IsDeleted" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_Brands" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BrandName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_Commission" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="SalesID" Type="int" Mode="In" />
+    <Parameter Name="SalesDate" Type="varchar" Mode="In" />
+    <Parameter Name="CommissionAmount" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_Customers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="CustomerName" Type="nvarchar" Mode="In" />
+    <Parameter Name="ContactNumber" Type="varchar" Mode="In" />
+    <Parameter Name="CustomerReference" Type="varchar" Mode="In" />
+    <Parameter Name="Address" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_EmployeeAdvance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="AdvanceDate" Type="varchar" Mode="In" />
+    <Parameter Name="AdvanceAmount" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_EmployeeLoan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="LoanDate" Type="varchar" Mode="In" />
+    <Parameter Name="LoanAmount" Type="decimal" Mode="In" />
+    <Parameter Name="InstallmentAmount" Type="decimal" Mode="In" />
+    <Parameter Name="PaidInstallment" Type="int" Mode="In" />
+    <Parameter Name="numberOfInstallment" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_Engineers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="EngineerName" Type="nvarchar" Mode="In" />
+    <Parameter Name="ContactPerson" Type="varchar" Mode="In" />
+    <Parameter Name="ContactNumber" Type="varchar" Mode="In" />
+    <Parameter Name="Address" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_Exchange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PO" Type="nvarchar" Mode="In" />
+    <Parameter Name="PoDate" Type="nvarchar" Mode="In" />
+    <Parameter Name="CustomerID" Type="int" Mode="In" />
+    <Parameter Name="TotalAmount" Type="decimal" Mode="In" />
+    <Parameter Name="PayableAmount" Type="decimal" Mode="In" />
+    <Parameter Name="IsPaid" Type="int" Mode="In" />
+    <Parameter Name="CreationDate" Type="datetime" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="IsDeleted" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_ExchangeDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ExchangeID" Type="int" Mode="In" />
+    <Parameter Name="CategoryID" Type="int" Mode="In" />
+    <Parameter Name="ProductID" Type="int" Mode="In" />
+    <Parameter Name="BrandID" Type="int" Mode="In" />
+    <Parameter Name="ModelID" Type="int" Mode="In" />
+    <Parameter Name="Generation" Type="int" Mode="In" />
+    <Parameter Name="HardDiskID" Type="int" Mode="In" />
+    <Parameter Name="HDDAvailable" Type="int" Mode="In" />
+    <Parameter Name="RamID" Type="int" Mode="In" />
+    <Parameter Name="RamAvailable" Type="int" Mode="In" />
+    <Parameter Name="ProcessorID" Type="int" Mode="In" />
+    <Parameter Name="Screen" Type="nvarchar" Mode="In" />
+    <Parameter Name="ScreenAvailable" Type="int" Mode="In" />
+    <Parameter Name="Keboard" Type="nvarchar" Mode="In" />
+    <Parameter Name="KeyboardAvailable" Type="int" Mode="In" />
+    <Parameter Name="Charger" Type="nvarchar" Mode="In" />
+    <Parameter Name="ChargerAvailable" Type="int" Mode="In" />
+    <Parameter Name="Board" Type="nvarchar" Mode="In" />
+    <Parameter Name="BoardAvailable" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_Expenses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="ExpensesTypeID" Type="int" Mode="In" />
+    <Parameter Name="ExpensesDate" Type="varchar" Mode="In" />
+    <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ExpensesByID" Type="int" Mode="In" />
+    <Parameter Name="CreatedByUserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_ExpensesTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ExpensesTypeName" Type="nchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_Generations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="GenerationName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_HardDisk" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="HardDiskName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_Models" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ModelName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_PaymentMethod" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaymentMethodName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_PaymentMode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaymentModeName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_PaymentVoucherCustomers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="CustomerID" Type="int" Mode="In" />
+    <Parameter Name="SalesID" Type="int" Mode="In" />
+    <Parameter Name="PaymetMethodID" Type="int" Mode="In" />
+    <Parameter Name="BankID" Type="int" Mode="In" />
+    <Parameter Name="ChequeNumber" Type="varchar" Mode="In" />
+    <Parameter Name="PayOrderNumber" Type="varchar" Mode="In" />
+    <Parameter Name="IsPDC" Type="int" Mode="In" />
+    <Parameter Name="PDCDate" Type="varchar" Mode="In" />
+    <Parameter Name="IsPdcClear" Type="int" Mode="In" />
+    <Parameter Name="Debit" Type="decimal" Mode="In" />
+    <Parameter Name="Credit" Type="decimal" Mode="In" />
+    <Parameter Name="Balance" Type="decimal" Mode="In" />
+    <Parameter Name="Condition" Type="int" Mode="In" />
+    <Parameter Name="CreatedByUserID" Type="int" Mode="In" />
+    <Parameter Name="TransactionTypeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_PaymentVoucherSupplier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="SupplierID" Type="int" Mode="In" />
+    <Parameter Name="PurchaseID" Type="int" Mode="In" />
+    <Parameter Name="PaymetMethodID" Type="int" Mode="In" />
+    <Parameter Name="BankID" Type="int" Mode="In" />
+    <Parameter Name="ChequeNumber" Type="nvarchar" Mode="In" />
+    <Parameter Name="PayOrderNumber" Type="nvarchar" Mode="In" />
+    <Parameter Name="IsPDC" Type="int" Mode="In" />
+    <Parameter Name="PDCDate" Type="varchar" Mode="In" />
+    <Parameter Name="IsPdcClear" Type="int" Mode="In" />
+    <Parameter Name="Debit" Type="decimal" Mode="In" />
+    <Parameter Name="Credit" Type="decimal" Mode="In" />
+    <Parameter Name="Balance" Type="decimal" Mode="In" />
+    <Parameter Name="Condition" Type="int" Mode="In" />
+    <Parameter Name="CreatedByUserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_Processor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProcessorName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_ProductCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="CategoryName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_Products" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="ProdcutCategoryID" Type="int" Mode="In" />
+    <Parameter Name="ProductName" Type="nvarchar" Mode="In" />
+    <Parameter Name="BrandNameID" Type="nvarchar" Mode="In" />
+    <Parameter Name="ModelID" Type="nvarchar" Mode="In" />
+    <Parameter Name="GenerationID" Type="nvarchar" Mode="In" />
+    <Parameter Name="RamID" Type="nvarchar" Mode="In" />
+    <Parameter Name="HardDiskID" Type="nvarchar" Mode="In" />
+    <Parameter Name="ProcessorID" Type="nvarchar" Mode="In" />
+    <Parameter Name="ProductImage" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_ProfitAndLoss" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="PurchaseDetailID" Type="int" Mode="In" />
+    <Parameter Name="SalesID" Type="int" Mode="In" />
+    <Parameter Name="ProductID" Type="int" Mode="In" />
+    <Parameter Name="Quantity" Type="int" Mode="In" />
+    <Parameter Name="PurchasePrice" Type="decimal" Mode="In" />
+    <Parameter Name="PurchaseAmount" Type="decimal" Mode="In" />
+    <Parameter Name="SalesPrice" Type="decimal" Mode="In" />
+    <Parameter Name="SalesAmount" Type="decimal" Mode="In" />
+    <Parameter Name="Profit" Type="decimal" Mode="In" />
+    <Parameter Name="CreationDate" Type="datetime" Mode="In" />
+    <Parameter Name="CreatedByUserID" Type="int" Mode="In" />
+    <Parameter Name="IsDeleted" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_Purchase" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="IsTransferFromBranch" Type="int" Mode="In" />
+    <Parameter Name="TransferFromBranchID" Type="int" Mode="In" />
+    <Parameter Name="PoNumber" Type="nvarchar" Mode="In" />
+    <Parameter Name="PoDate" Type="varchar" Mode="In" />
+    <Parameter Name="PoReference" Type="varchar" Mode="In" />
+    <Parameter Name="SupplierID" Type="int" Mode="In" />
+    <Parameter Name="PaymentMode" Type="int" Mode="In" />
+    <Parameter Name="TotalAmount" Type="decimal" Mode="In" />
+    <Parameter Name="TaxPer" Type="int" Mode="In" />
+    <Parameter Name="TaxAmount" Type="decimal" Mode="In" />
+    <Parameter Name="PayableAmount" Type="decimal" Mode="In" />
+    <Parameter Name="Balance" Type="decimal" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_PurchaseDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PurchaseID" Type="int" Mode="In" />
+    <Parameter Name="ProdcutCategoryID" Type="int" Mode="In" />
+    <Parameter Name="ProductID" Type="int" Mode="In" />
+    <Parameter Name="Quantity" Type="int" Mode="In" />
+    <Parameter Name="UnitPrice" Type="decimal" Mode="In" />
+    <Parameter Name="Amount" Type="decimal" Mode="In" />
+    <Parameter Name="StockQuantity" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_Rams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RamName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_Repairing" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="EngineerID" Type="int" Mode="In" />
+    <Parameter Name="AssignDate" Type="varchar" Mode="In" />
+    <Parameter Name="ProductID" Type="int" Mode="In" />
+    <Parameter Name="ItemDescription" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="DefectDescription" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="AmountToBeCharge" Type="decimal" Mode="In" />
+    <Parameter Name="ReturnDate" Type="varchar" Mode="In" />
+    <Parameter Name="CreationDate" Type="datetime" Mode="In" />
+    <Parameter Name="CreatedByUserID" Type="int" Mode="In" />
+    <Parameter Name="IsReturn" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_Salary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="BasicSalary" Type="decimal" Mode="In" />
+    <Parameter Name="CommissionAmount" Type="decimal" Mode="In" />
+    <Parameter Name="AdvanceAmount" Type="decimal" Mode="In" />
+    <Parameter Name="LoanAmount" Type="decimal" Mode="In" />
+    <Parameter Name="NetSalary" Type="decimal" Mode="In" />
+    <Parameter Name="SalaryMonth" Type="varchar" Mode="In" />
+    <Parameter Name="CreatedByUserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_Sales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="InvoiceNumber" Type="varchar" Mode="In" />
+    <Parameter Name="InvoiceDate" Type="varchar" Mode="In" />
+    <Parameter Name="CustomerID" Type="int" Mode="In" />
+    <Parameter Name="PaymentMode" Type="int" Mode="In" />
+    <Parameter Name="TotalAmount" Type="decimal" Mode="In" />
+    <Parameter Name="TaxPer" Type="int" Mode="In" />
+    <Parameter Name="TaxAmount" Type="decimal" Mode="In" />
+    <Parameter Name="PayableAmount" Type="decimal" Mode="In" />
+    <Parameter Name="Balance" Type="decimal" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_SalesDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SalesID" Type="int" Mode="In" />
+    <Parameter Name="ProdcutCategoryID" Type="int" Mode="In" />
+    <Parameter Name="ProductID" Type="int" Mode="In" />
+    <Parameter Name="Quantity" Type="int" Mode="In" />
+    <Parameter Name="UnitPrice" Type="decimal" Mode="In" />
+    <Parameter Name="Amount" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_Suppliers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="SupplierName" Type="nvarchar" Mode="In" />
+    <Parameter Name="ContactPerson" Type="varchar" Mode="In" />
+    <Parameter Name="ContactNumber" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_Add_Users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+    <Parameter Name="DOB" Type="varchar" Mode="In" />
+    <Parameter Name="DOJ" Type="varchar" Mode="In" />
+    <Parameter Name="CNIC" Type="varchar" Mode="In" />
+    <Parameter Name="ContactNumber" Type="varchar" Mode="In" />
+    <Parameter Name="BasicSalary" Type="decimal" Mode="In" />
+    <Parameter Name="CommissionAmount" Type="decimal" Mode="In" />
+    <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_BankAccounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BankAccountID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_BankPayments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BankPaymentID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_Banks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BankID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_Branches" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_Brands" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BrandID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_Commission" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CommissionID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_Customers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CustomerID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_EmployeeAdvance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeAdvanceID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_EmployeeLoan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeLoanID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_Engineers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EngineerID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_Exchange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ExchangeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_ExchangeDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ExchangeDetailID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_Expenses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ExpensesID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_ExpensesTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ExpensesTypeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_Generations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="GenerationID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_HardDisk" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="HardDiskID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_Models" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ModelID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_PaymentMethod" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaymentMethodID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_PaymentMode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaymentModeID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_PaymentVoucherCustomers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaymentVoucherCustomersID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_PaymentVoucherSupplier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaymentVoucherSupplierID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_Processor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProcessorID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_ProductCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProductCategoryID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_Products" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProductID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_ProfitAndLoss" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProfitAndLossID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_Purchase" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PurchaseID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_PurchaseDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PurchaseDetailID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_Rams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RamID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_Repairing" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RepairingID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_Salary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SalaryID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_Sales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SalesID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_SalesDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SalesDetailID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_Suppliers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SupplierID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_delete_Users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_update_BankAccounts" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BankAccountID" Type="int" Mode="In" />
+    <Parameter Name="BrancID" Type="int" Mode="In" />
+    <Parameter Name="BankName" Type="varchar" Mode="In" />
+    <Parameter Name="AccountTitle" Type="varchar" Mode="In" />
+    <Parameter Name="AccountNumber" Type="varchar" Mode="In" />
+    <Parameter Name="IBANNumber" Type="varchar" Mode="In" />
+    <Parameter Name="BankBranch" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="usp_update_BankPayments" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BankPaymentID" Type="int" Mode="In" />
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="BankAccountID" Type="int" Mode="In" />
+    <Parameter Name="CustomerID" Type="int" Mode="In" />
+    <Parameter Name="SalesID" Type="int" Mode="In" />
+    <Parameter Name="BankID" Type="int" Mode="In" />
+    <Parameter Name="CheqNumber" Type="varchar" Mode="In" />
+    <Parameter Name="PdcDate" Type="varchar" Mode="In" />
+    <Parameter Name="IsClear" Type="nchar" Mode="In" />
+  </Function>
+  <Function Name="usp_update_Banks" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BankID" Type="int" Mode="In" />
+    <Parameter Name="BankName" Type="varchar" Mode="In" />
+    <Parameter Name="IsDeleted" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_update_Branches" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="BranchName" Type="nvarchar" Mode="In" />
+    <Parameter Name="IsActive" Type="int" Mode="In" />
+    <Parameter Name="IsDeleted" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_update_Brands" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="BrandID" Type="int" Mode="In" />
+    <Parameter Name="BrandName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_update_Commission" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CommissionID" Type="int" Mode="In" />
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="SalesID" Type="int" Mode="In" />
+    <Parameter Name="SalesDate" Type="varchar" Mode="In" />
+    <Parameter Name="CommissionAmount" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="usp_update_Customers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="CustomerID" Type="int" Mode="In" />
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="CustomerName" Type="nvarchar" Mode="In" />
+    <Parameter Name="ContactNumber" Type="varchar" Mode="In" />
+    <Parameter Name="CustomerReference" Type="varchar" Mode="In" />
+    <Parameter Name="Address" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="usp_update_EmployeeAdvance" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeAdvanceID" Type="int" Mode="In" />
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="AdvanceDate" Type="varchar" Mode="In" />
+    <Parameter Name="AdvanceAmount" Type="decimal" Mode="In" />
+  </Function>
+  <Function Name="usp_update_EmployeeLoan" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmployeeLoanID" Type="int" Mode="In" />
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="LoanDate" Type="varchar" Mode="In" />
+    <Parameter Name="LoanAmount" Type="decimal" Mode="In" />
+    <Parameter Name="InstallmentAmount" Type="decimal" Mode="In" />
+    <Parameter Name="PaidInstallment" Type="int" Mode="In" />
+    <Parameter Name="numberOfInstallment" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_update_Engineers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EngineerID" Type="int" Mode="In" />
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="EngineerName" Type="nvarchar" Mode="In" />
+    <Parameter Name="ContactPerson" Type="varchar" Mode="In" />
+    <Parameter Name="ContactNumber" Type="varchar" Mode="In" />
+    <Parameter Name="Address" Type="nvarchar(max)" Mode="In" />
+  </Function>
+  <Function Name="usp_update_Exchange" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ExchangeID" Type="int" Mode="In" />
+    <Parameter Name="PO" Type="nvarchar" Mode="In" />
+    <Parameter Name="PoDate" Type="nvarchar" Mode="In" />
+    <Parameter Name="CustomerID" Type="int" Mode="In" />
+    <Parameter Name="TotalAmount" Type="decimal" Mode="In" />
+    <Parameter Name="PayableAmount" Type="decimal" Mode="In" />
+    <Parameter Name="IsPaid" Type="int" Mode="In" />
+    <Parameter Name="CreationDate" Type="datetime" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="IsDeleted" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_update_ExchangeDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ExchangeDetailID" Type="int" Mode="In" />
+    <Parameter Name="ExchangeID" Type="int" Mode="In" />
+    <Parameter Name="CategoryID" Type="int" Mode="In" />
+    <Parameter Name="ProductID" Type="int" Mode="In" />
+    <Parameter Name="BrandID" Type="int" Mode="In" />
+    <Parameter Name="ModelID" Type="int" Mode="In" />
+    <Parameter Name="Generation" Type="int" Mode="In" />
+    <Parameter Name="HardDiskID" Type="int" Mode="In" />
+    <Parameter Name="HDDAvailable" Type="int" Mode="In" />
+    <Parameter Name="RamID" Type="int" Mode="In" />
+    <Parameter Name="RamAvailable" Type="int" Mode="In" />
+    <Parameter Name="ProcessorID" Type="int" Mode="In" />
+    <Parameter Name="Screen" Type="nvarchar" Mode="In" />
+    <Parameter Name="ScreenAvailable" Type="int" Mode="In" />
+    <Parameter Name="Keboard" Type="nvarchar" Mode="In" />
+    <Parameter Name="KeyboardAvailable" Type="int" Mode="In" />
+    <Parameter Name="Charger" Type="nvarchar" Mode="In" />
+    <Parameter Name="ChargerAvailable" Type="int" Mode="In" />
+    <Parameter Name="Board" Type="nvarchar" Mode="In" />
+    <Parameter Name="BoardAvailable" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_update_Expenses" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ExpensesID" Type="int" Mode="In" />
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="ExpensesTypeID" Type="int" Mode="In" />
+    <Parameter Name="ExpensesDate" Type="varchar" Mode="In" />
+    <Parameter Name="Remarks" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="ExpensesByID" Type="int" Mode="In" />
+    <Parameter Name="CreationDate" Type="datetime" Mode="In" />
+    <Parameter Name="CreatedByUserID" Type="int" Mode="In" />
+    <Parameter Name="IsDeleted" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_update_ExpensesTypes" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ExpensesTypeID" Type="int" Mode="In" />
+    <Parameter Name="ExpensesTypeName" Type="nchar" Mode="In" />
+  </Function>
+  <Function Name="usp_update_Generations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="GenerationID" Type="int" Mode="In" />
+    <Parameter Name="GenerationName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_update_HardDisk" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="HardDiskID" Type="int" Mode="In" />
+    <Parameter Name="HardDiskName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_update_Models" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ModelID" Type="int" Mode="In" />
+    <Parameter Name="ModelName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_update_PaymentMethod" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaymentMethodID" Type="int" Mode="In" />
+    <Parameter Name="PaymentMethodName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="usp_update_PaymentMode" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaymentModeID" Type="int" Mode="In" />
+    <Parameter Name="PaymentModeName" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="usp_update_PaymentVoucherCustomers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaymentVoucherCustomersID" Type="int" Mode="In" />
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="CustomerID" Type="int" Mode="In" />
+    <Parameter Name="SalesID" Type="int" Mode="In" />
+    <Parameter Name="PaymetMethodID" Type="int" Mode="In" />
+    <Parameter Name="BankID" Type="int" Mode="In" />
+    <Parameter Name="ChequeNumber" Type="varchar" Mode="In" />
+    <Parameter Name="PayOrderNumber" Type="varchar" Mode="In" />
+    <Parameter Name="IsPDC" Type="int" Mode="In" />
+    <Parameter Name="PDCDate" Type="varchar" Mode="In" />
+    <Parameter Name="IsPdcClear" Type="int" Mode="In" />
+    <Parameter Name="Debit" Type="decimal" Mode="In" />
+    <Parameter Name="Credit" Type="decimal" Mode="In" />
+    <Parameter Name="Balance" Type="decimal" Mode="In" />
+    <Parameter Name="Condition" Type="int" Mode="In" />
+    <Parameter Name="CreationDate" Type="datetime" Mode="In" />
+    <Parameter Name="CreatedByUserID" Type="int" Mode="In" />
+    <Parameter Name="TransactionTypeID" Type="int" Mode="In" />
+    <Parameter Name="IsDeleted" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_update_PaymentVoucherSupplier" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PaymentVoucherSupplierID" Type="int" Mode="In" />
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="SupplierID" Type="int" Mode="In" />
+    <Parameter Name="PurchaseID" Type="int" Mode="In" />
+    <Parameter Name="PaymetMethodID" Type="int" Mode="In" />
+    <Parameter Name="BankID" Type="int" Mode="In" />
+    <Parameter Name="ChequeNumber" Type="nvarchar" Mode="In" />
+    <Parameter Name="PayOrderNumber" Type="nvarchar" Mode="In" />
+    <Parameter Name="IsPDC" Type="int" Mode="In" />
+    <Parameter Name="PDCDate" Type="varchar" Mode="In" />
+    <Parameter Name="IsPdcClear" Type="int" Mode="In" />
+    <Parameter Name="Debit" Type="decimal" Mode="In" />
+    <Parameter Name="Credit" Type="decimal" Mode="In" />
+    <Parameter Name="Balance" Type="decimal" Mode="In" />
+    <Parameter Name="Condition" Type="int" Mode="In" />
+    <Parameter Name="CreationDate" Type="datetime" Mode="In" />
+    <Parameter Name="CreatedByUserID" Type="int" Mode="In" />
+    <Parameter Name="IsDeleted" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_update_Processor" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProcessorID" Type="int" Mode="In" />
+    <Parameter Name="ProcessorName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_update_ProductCategory" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProductCategoryID" Type="int" Mode="In" />
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="CategoryName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_update_Products" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProductID" Type="int" Mode="In" />
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="ProdcutCategoryID" Type="int" Mode="In" />
+    <Parameter Name="ProductName" Type="nvarchar" Mode="In" />
+    <Parameter Name="BrandNameID" Type="nvarchar" Mode="In" />
+    <Parameter Name="ModelID" Type="nvarchar" Mode="In" />
+    <Parameter Name="GenerationID" Type="nvarchar" Mode="In" />
+    <Parameter Name="RamID" Type="nvarchar" Mode="In" />
+    <Parameter Name="HardDiskID" Type="nvarchar" Mode="In" />
+    <Parameter Name="ProcessorID" Type="nvarchar" Mode="In" />
+    <Parameter Name="ProductImage" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_update_ProfitAndLoss" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ProfitAndLossID" Type="int" Mode="In" />
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="PurchaseDetailID" Type="int" Mode="In" />
+    <Parameter Name="SalesID" Type="int" Mode="In" />
+    <Parameter Name="ProductID" Type="int" Mode="In" />
+    <Parameter Name="Quantity" Type="int" Mode="In" />
+    <Parameter Name="PurchasePrice" Type="decimal" Mode="In" />
+    <Parameter Name="PurchaseAmount" Type="decimal" Mode="In" />
+    <Parameter Name="SalesPrice" Type="decimal" Mode="In" />
+    <Parameter Name="SalesAmount" Type="decimal" Mode="In" />
+    <Parameter Name="Profit" Type="decimal" Mode="In" />
+    <Parameter Name="CreationDate" Type="datetime" Mode="In" />
+    <Parameter Name="CreatedByUserID" Type="int" Mode="In" />
+    <Parameter Name="IsDeleted" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_update_Purchase" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PurchaseID" Type="int" Mode="In" />
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="IsTransferFromBranch" Type="int" Mode="In" />
+    <Parameter Name="TransferFromBranchID" Type="int" Mode="In" />
+    <Parameter Name="PoNumber" Type="nvarchar" Mode="In" />
+    <Parameter Name="PoDate" Type="varchar" Mode="In" />
+    <Parameter Name="PoReference" Type="varchar" Mode="In" />
+    <Parameter Name="SupplierID" Type="int" Mode="In" />
+    <Parameter Name="PaymentMode" Type="int" Mode="In" />
+    <Parameter Name="TotalAmount" Type="decimal" Mode="In" />
+    <Parameter Name="TaxPer" Type="int" Mode="In" />
+    <Parameter Name="TaxAmount" Type="decimal" Mode="In" />
+    <Parameter Name="PayableAmount" Type="decimal" Mode="In" />
+    <Parameter Name="isPaid" Type="int" Mode="In" />
+    <Parameter Name="CreationDate" Type="datetime" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="IsDeleted" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_update_PurchaseDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PurchaseDetailID" Type="int" Mode="In" />
+    <Parameter Name="PurchaseID" Type="int" Mode="In" />
+    <Parameter Name="ProdcutCategoryID" Type="int" Mode="In" />
+    <Parameter Name="ProductID" Type="int" Mode="In" />
+    <Parameter Name="Quantity" Type="int" Mode="In" />
+    <Parameter Name="UnitPrice" Type="decimal" Mode="In" />
+    <Parameter Name="Amount" Type="decimal" Mode="In" />
+    <Parameter Name="StockQuantity" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_update_Rams" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RamID" Type="int" Mode="In" />
+    <Parameter Name="RamName" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_update_Repairing" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="RepairingID" Type="int" Mode="In" />
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="EngineerID" Type="int" Mode="In" />
+    <Parameter Name="AssignDate" Type="varchar" Mode="In" />
+    <Parameter Name="ProductID" Type="int" Mode="In" />
+    <Parameter Name="ItemDescription" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="DefectDescription" Type="nvarchar(max)" Mode="In" />
+    <Parameter Name="AmountToBeCharge" Type="decimal" Mode="In" />
+    <Parameter Name="ReturnDate" Type="varchar" Mode="In" />
+    <Parameter Name="CreationDate" Type="datetime" Mode="In" />
+    <Parameter Name="CreatedByUserID" Type="int" Mode="In" />
+    <Parameter Name="IsReturn" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_update_Salary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SalaryID" Type="int" Mode="In" />
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="EmployeeID" Type="int" Mode="In" />
+    <Parameter Name="BasicSalary" Type="decimal" Mode="In" />
+    <Parameter Name="CommissionAmount" Type="decimal" Mode="In" />
+    <Parameter Name="AdvanceAmount" Type="decimal" Mode="In" />
+    <Parameter Name="LoanAmount" Type="decimal" Mode="In" />
+    <Parameter Name="NetSalary" Type="decimal" Mode="In" />
+    <Parameter Name="SalaryMonth" Type="varchar" Mode="In" />
+    <Parameter Name="CreationDate" Type="datetime" Mode="In" />
+    <Parameter Name="CreatedByUserID" Type="int" Mode="In" />
+    <Parameter Name="IsDeleted" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_update_Sales" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SalesID" Type="int" Mode="In" />
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="InvoiceNumber" Type="varchar" Mode="In" />
+    <Parameter Name="InvoiceDate" Type="varchar" Mode="In" />
+    <Parameter Name="CustomerID" Type="int" Mode="In" />
+    <Parameter Name="PaymentMode" Type="int" Mode="In" />
+    <Parameter Name="TotalAmount" Type="decimal" Mode="In" />
+    <Parameter Name="TaxPer" Type="int" Mode="In" />
+    <Parameter Name="TaxAmount" Type="decimal" Mode="In" />
+    <Parameter Name="PayableAmount" Type="decimal" Mode="In" />
+    <Parameter Name="isPaid" Type="int" Mode="In" />
+    <Parameter Name="CreationDate" Type="datetime" Mode="In" />
+    <Parameter Name="CreatedBy" Type="int" Mode="In" />
+    <Parameter Name="IsReturn" Type="int" Mode="In" />
+    <Parameter Name="IsDeleted" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_update_SalesDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SalesDetailID" Type="int" Mode="In" />
+    <Parameter Name="SalesID" Type="int" Mode="In" />
+    <Parameter Name="ProdcutCategoryID" Type="int" Mode="In" />
+    <Parameter Name="ProductID" Type="int" Mode="In" />
+    <Parameter Name="Quantity" Type="int" Mode="In" />
+    <Parameter Name="UnitPrice" Type="decimal" Mode="In" />
+    <Parameter Name="Amount" Type="decimal" Mode="In" />
+    <Parameter Name="IsReturn" Type="int" Mode="In" />
+  </Function>
+  <Function Name="usp_update_Suppliers" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="SupplierID" Type="int" Mode="In" />
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="SupplierName" Type="nvarchar" Mode="In" />
+    <Parameter Name="ContactPerson" Type="varchar" Mode="In" />
+    <Parameter Name="ContactNumber" Type="varchar" Mode="In" />
+    <Parameter Name="Email" Type="nvarchar" Mode="In" />
+  </Function>
+  <Function Name="usp_update_Users" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="UserID" Type="int" Mode="In" />
+    <Parameter Name="BranchID" Type="int" Mode="In" />
+    <Parameter Name="FullName" Type="nvarchar" Mode="In" />
+    <Parameter Name="DOB" Type="varchar" Mode="In" />
+    <Parameter Name="DOJ" Type="varchar" Mode="In" />
+    <Parameter Name="CNIC" Type="varchar" Mode="In" />
+    <Parameter Name="ContactNumber" Type="varchar" Mode="In" />
+    <Parameter Name="BasicSalary" Type="decimal" Mode="In" />
+    <Parameter Name="CommissionAmount" Type="decimal" Mode="In" />
+    <Parameter Name="UserName" Type="nvarchar" Mode="In" />
+    <Parameter Name="Password" Type="nvarchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="PosintofsaleModelStoreContainer">
+    <EntitySet Name="BankAccounts" EntityType="Self.BankAccounts" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="BankPayments" EntityType="Self.BankPayments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Banks" EntityType="Self.Banks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Branches" EntityType="Self.Branches" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Brands" EntityType="Self.Brands" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Commission" EntityType="Self.Commission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Customers" EntityType="Self.Customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeAdvance" EntityType="Self.EmployeeAdvance" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="EmployeeLoan" EntityType="Self.EmployeeLoan" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Engineers" EntityType="Self.Engineers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Exchange" EntityType="Self.Exchange" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ExchangeDetails" EntityType="Self.ExchangeDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Expenses" EntityType="Self.Expenses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ExpensesTypes" EntityType="Self.ExpensesTypes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Generations" EntityType="Self.Generations" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="HardDisk" EntityType="Self.HardDisk" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Models" EntityType="Self.Models" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PaymentMethod" EntityType="Self.PaymentMethod" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PaymentMode" EntityType="Self.PaymentMode" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PaymentVoucherCustomers" EntityType="Self.PaymentVoucherCustomers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PaymentVoucherSupplier" EntityType="Self.PaymentVoucherSupplier" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Processor" EntityType="Self.Processor" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProductCategory" EntityType="Self.ProductCategory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Products" EntityType="Self.Products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="ProfitAndLoss" EntityType="Self.ProfitAndLoss" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Purchase" EntityType="Self.Purchase" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="PurchaseDetails" EntityType="Self.PurchaseDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Rams" EntityType="Self.Rams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Repairing" EntityType="Self.Repairing" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Roles" EntityType="Self.Roles" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Salary" EntityType="Self.Salary" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Sales" EntityType="Self.Sales" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="SalesDetails" EntityType="Self.SalesDetails" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Suppliers" EntityType="Self.Suppliers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

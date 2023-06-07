@@ -1,0 +1,171 @@
+﻿@model IEnumerable<POSApplication.Models.Product>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.ProdcutCategoryID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BrandNameID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModelID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.GenerationID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RamID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.HardDiskID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProcessorID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProductImage)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+
+            <td>
+                @if (ViewBag.cat != null)
+                {
+
+                    foreach (var items in ViewBag.cat)
+                    {
+                        if (items.ProductCategoryID == item.ProdcutCategoryID)
+                        {
+                            <p>@items.CategoryName</p>
+                        }
+                    }
+                }
+
+            </td>
+            <td>
+
+                @Html.DisplayFor(modelItem => item.ProductName)
+            </td>
+            <td>
+                @if (ViewBag.Brands != null)
+                {
+
+
+                    foreach (var items in ViewBag.Brands)
+                    {
+                        if (items.BrandID.ToString() == item.BrandNameID)
+                        {
+                            <p>@items.BrandName</p>
+                        }
+                    }
+                }
+            </td>
+            <td>
+                @if (ViewBag.Model != null)
+                {
+                    foreach (var items in ViewBag.Model)
+                    {
+                        if (items.ModelID.ToString() == item.ModelID)
+                        {
+                            <p>@items.ModelName</p>
+                        }
+                    }
+                }
+
+
+            </td>
+            <td>
+                @if (ViewBag.Generation != null)
+                {
+                    foreach (var items in ViewBag.Generation)
+                    {
+                        if (items.GenerationID.ToString() == item.GenerationID)
+                        {
+                            <p>@items.GenerationName</p>
+                        }
+                    }
+                }
+
+
+            </td>
+            <td>
+                @if (ViewBag.Ram != null) { 
+
+                    foreach (var items in ViewBag.Ram)
+                    {
+                        if (items.RamID.ToString() == item.RamID)
+                        {
+                            <p>@items.RamName</p>
+                        }
+                    }
+                }
+
+
+            </td>
+            <td>
+                @if (ViewBag.HardDisk != null)
+                {
+
+                    foreach (var items in ViewBag.HardDisk)
+                    {
+                        if (items.HardDiskID.ToString() == item.HardDiskID)
+                        {
+                            <p>@items.HardDiskName</p>
+                        }
+                    }
+                    }
+                </td>
+            <td>
+                @if (ViewBag.Processor != null)
+                {
+                    foreach (var items in ViewBag.Processor)
+                    {
+                        if (items.ProcessorID.ToString() == item.ProcessorID)
+                        {
+                            <p>@items.ProcessorName</p>
+                        }
+                    }
+                    }
+
+                </td>
+            <td>
+                <img src="~/assets/img/ProductImages/@Html.DisplayFor(modelItem => item.ProductImage)" width="20px" height="20px" alt="Alternate Text" />
+
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreationDate)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ProductID }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ProductID }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ProductID })
+            </td>
+        </tr>
+    }
+
+</table>

@@ -1,0 +1,94 @@
+﻿@model IEnumerable<POSApplication.Models.Salary>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BranchID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.EmployeeID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.BasicSalary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CommissionAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AdvanceAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.LoanAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.NetSalary)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SalaryMonth)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedByUserID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BranchID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EmployeeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BasicSalary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CommissionAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AdvanceAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LoanAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.NetSalary)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SalaryMonth)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedByUserID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDeleted)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.SalaryID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.SalaryID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.SalaryID })
+        </td>
+    </tr>
+}
+
+</table>

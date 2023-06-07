@@ -1,0 +1,27 @@
+﻿@model POSApplication.Models.Processor
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Processor</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ProcessorName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProcessorName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ProcessorID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

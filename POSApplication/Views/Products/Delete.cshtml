@@ -1,0 +1,121 @@
+﻿@model POSApplication.Models.Product
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BranchID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BranchID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProdcutCategoryID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProdcutCategoryID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BrandNameID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrandNameID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ModelID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ModelID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.GenerationID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GenerationID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RamID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RamID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.HardDiskID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.HardDiskID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProcessorID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProcessorID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProductImage)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProductImage)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.CreationDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

@@ -1,0 +1,215 @@
+﻿
+
+@model POSApplication.Models.Product
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+<h2>Create</h2>
+
+<form action="" method="post" enctype="multipart/form-data">
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Product</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BarCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @*<input type="text" id="barcode" name="BarCode" onblur="barcodeCheck()" class="form-control" value="" />*@
+                @Html.ValidationMessageFor(model => model.BarCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProdcutCategoryID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" name="ProdcutCategoryID">
+                    <option value="-1" selected>Select Category</option>
+                    @if (ViewBag.ProdcutCategory != null)
+                    {
+                        foreach (var item in ViewBag.ProdcutCategory)
+                        {
+                            <option value="@item.ProductCategoryID">@item.CategoryName</option>
+                        }
+
+
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.ProdcutCategoryID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BrandNameID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" name="BrandNameID">
+                    <option value="-1" selected>Select Brands</option>
+                    @if (ViewBag.brand != null)
+                    {
+                        foreach (var item in ViewBag.brand)
+                        {
+                            <option value="@item.BrandID">@item.BrandName</option>
+                        }
+
+
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.BrandNameID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ModelID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" name="ModelID">
+                    <option value="-1" selected>Select Model</option>
+                    @if (ViewBag.Model != null)
+                    {
+                        foreach (var item in ViewBag.Model)
+                        {
+                            <option value="@item.ModelID">@item.ModelName</option>
+                        }
+
+
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.ModelID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.GenerationID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" name="GenerationID">
+                    <option value="-1" selected>Select Generation</option>
+                    @if (ViewBag.Generation != null)
+                    {
+                        foreach (var item in ViewBag.Generation)
+                        {
+                            <option value="@item.GenerationID">@item.GenerationName</option>
+                        }
+
+
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.GenerationID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.RamID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" name="RamID">
+                    <option value="-1" selected>Select Ram</option>
+                    @if (ViewBag.Ram != null)
+                    {
+                        foreach (var item in ViewBag.Ram)
+                        {
+                            <option value="@item.RamID">@item.RamName</option>
+                        }
+
+
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.RamID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.HardDiskID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" name="HardDiskID">
+                    <option value="-1" selected>Select HardDisk</option>
+                    @if (ViewBag.HardDisk != null)
+                    {
+                        foreach (var item in ViewBag.HardDisk)
+                        {
+                            <option value="@item.HardDiskID">@item.HardDiskName</option>
+                        }
+
+
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.HardDiskID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProcessorID, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <select class="form-control" name="ProcessorID">
+                    <option value="-1" selected>Select Processor</option>
+                    @if (ViewBag.Processor != null)
+                    {
+                        foreach (var item in ViewBag.Processor)
+                        {
+                            <option value="@item.ProcessorID">@item.ProcessorName</option>
+                        }
+
+
+                    }
+                </select>
+                @Html.ValidationMessageFor(model => model.ProcessorID, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ProductImage, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                <input type="file" name="img" value="" />
+                <p>@ViewBag.error</p>
+                @Html.ValidationMessageFor(model => model.ProductImage, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+
+
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+</form>
+<script>
+    
+
+    function barcodeCheck() {
+        var code = {
+            BarCode: $('#barcode').val()
+        }
+
+        $.ajax({
+            url: "/Products/barcodeCheck",
+            type: "POST",
+            data: code,
+            success: function (cart) {
+                if (cart == "exist") {
+                    $('#barcode').val("");
+                    alert("Product Are Alrady Exist");
+                }
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
+            }
+
+        });
+    }
+</script>
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>

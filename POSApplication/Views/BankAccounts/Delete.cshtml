@@ -1,0 +1,89 @@
+﻿@model POSApplication.Models.BankAccount
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>BankAccount</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BrancID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BrancID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BankName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BankName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountTitle)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountTitle)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AccountNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AccountNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IBANNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IBANNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BankBranch)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BankBranch)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

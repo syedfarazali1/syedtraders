@@ -1,0 +1,291 @@
+﻿
+@{
+    ViewBag.Title = "Supplies";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="mt-1 font-weight-bold text-primary" style="float: left;">Supplies Registration</h6>
+
+        </div>
+        <form id="Data" enctype="multipart/form-data">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <div class="col-md-12 pull-left">
+
+                        <div class="row">
+                            <div class="col-md-10">
+                                <div class="form-group">
+                                    <input type="hidden" id="SupplierID" value="" />
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-12">
+                                        Supplier Name(Company):
+                                    </label>
+                                    <div class="col-md-12">
+
+                                        <input class="form-control" type="text" name="SupplierName" id="SupplierName" required value="" placeholder="" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-12">
+                                        Contact Person:
+                                    </label>
+                                    <div class="col-md-12">
+
+                                        <input type="text" class="form-control" name="ContactPerson" id="ContactPerson" required value="" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <div class="form-group">
+                                    <label class="col-md-12">
+                                        Telephone / Cell #:
+                                    </label>
+                                    <div class="col-md-12">
+
+                                        <input type="number" class="form-control" id="ContactNumber" name="ContactNumber" required value="" />
+
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label class="col-md-12">
+                                        Email ID:
+                                    </label>
+                                    <div class="col-md-12">
+
+                                        <input class="form-control" name="email" type="email" id="email" required value="" />
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+                            <div class="col-md-12">
+
+                                <div class="col-md-12 text-right">
+                                    <input type="submit" Class="btn btn-primary add" value="Registration" />
+                                    <input type="button" Class="btn btn-warning update" onclick="Update()" value="Update" />
+
+
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="mt-1 font-weight-bold text-primary" style="float: left;">supplier List</h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <tr>
+
+                        <th>Supplier Name</th>
+                        <th>Contact Person</th>
+                        <th>Contact Number</th>
+                        <th>Email</th>
+                        <th>Creation Date</th>
+                        <th>Action</th>
+                    </tr>
+                    <tbody id="tablebody">
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+    $(document).ready(function () {
+        $(".add").css("display", "Inline-Block");
+        $(".update").css("display", "none");
+
+        loadtable();
+
+
+    })
+
+
+
+    function Update() {
+
+        var data = {
+
+            SupplierID: $("#SupplierID").val(),
+            SupplierName: $("#SupplierName").val(),
+            ContactPerson: $("#ContactPerson").val(),
+            ContactNumber: $("#ContactNumber").val(),
+            email: $("#email").val(),
+
+            IsActive: 0,
+            IsDeleted: 0,
+
+        };
+
+
+        $.ajax({
+            url: "/Registration/Updatesupplier",
+            type: "POST",
+            data: data,
+            success: function (response) {
+                loadtable();
+                clear();
+                $(".update").css("display", "none");
+                $(".add").css("display", "Inline-Block");
+
+            },
+            error: function (err) {
+                console.error(err);
+            }
+        });
+
+    }
+    $(document).ready(function () {
+        $("#Data").on("submit", function (e) {
+            var data = {
+
+                SupplierName: $("#SupplierName").val(),
+                ContactPerson: $("#ContactPerson").val(),
+                ContactNumber: $("#ContactNumber").val(),
+                email: $("#email").val(),
+
+                IsActive: 0,
+                IsDeleted: 0,
+
+            };
+            e.preventDefault();
+
+            $.ajax({
+                url: "/Registration/Addsupplier",
+                type: "POST",
+                data: data,
+                success: function (response) {
+                    loadtable();
+                    clear();
+                },
+                error: function (err) {
+                    console.error(err);
+                }
+            });
+
+        });
+    });
+
+    function Edit(SupplierID) {
+
+        var Supplier = {
+
+            SupplierID: SupplierID
+        };
+
+        $.ajax({
+            url: "/Registration/Editsupplier",
+            data: Supplier,
+            type: "POST",
+            success: function (res) {
+                SupplierID: $("#SupplierID").val(res.SupplierID);
+                SupplierName: $("#SupplierName").val(res.SupplierName);
+                ContactPerson: $("#ContactPerson").val(res.ContactPerson);
+                ContactNumber: $("#ContactNumber").val(res.ContactNumber);
+                Email: $("#email").val(res.Email);
+                $(".update").css("display", "Inline-Block");
+                $(".add").css("display", "none");
+
+            },
+            error: function (err) {
+                console.log(err)
+            },
+
+        });
+    }
+    function Delete(SupplierID) {
+        var result = confirm("Want to Delete")
+        if (result) {
+
+
+            var Supplier = {
+
+                SupplierID: SupplierID
+            };
+
+            $.ajax({
+                url: "/Registration/Deletesupplier",
+                data: Supplier,
+                type: "POST",
+                success: function (res) {
+                    loadtable();
+                },
+                error: function (err) {
+                    console.log(err)
+                },
+
+            });
+        }
+    }
+
+    function loadtable() {
+        
+        $.ajax({
+            url: "/Registration/loadsupplier",
+            type: "Get",
+            success: function (supplier) {
+
+                var s = '';
+                for (var i = 0; i < supplier.length; i++) {
+                    s += '<tr><td>' + supplier[i].SupplierName + '</td>'
+                        + '<td>' + supplier[i].ContactPerson + '</td>'
+                        + '<td>' + supplier[i].ContactNumber + '</td>'
+                        + '<td>' + supplier[i].Email + '</td>'
+                        + '<td>' + supplier[i].CreationDate + '</td>'
+
+
+                        + '<td>' + '<i style="cursor: pointer;" class="fas fa-edit" onclick="Edit(' + supplier[i].SupplierID + ')"></i>' + '<i style="cursor: pointer;" class="fas fa-trash" onclick="Delete(' + supplier[i].SupplierID + ')"></i>' + '</td></tr>';
+
+                }
+                $("#tablebody").html(s);
+
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
+            }
+        });
+    }
+
+    function clear() {
+        SupplierID: $("#SupplierID").val('');
+        SupplierName: $("#SupplierName").val('');
+        ContactPerson: $("#ContactPerson").val('');
+        ContactNumber: $("#ContactNumber").val('');
+        Email: $("#email").val('');
+
+    }
+</script>

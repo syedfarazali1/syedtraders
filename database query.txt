@@ -1,0 +1,4008 @@
+USE [Posintofsale]
+GO
+/****** Object:  Table [dbo].[BankAccounts]    Script Date: 6/7/2023 8:13:50 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BankAccounts](
+	[BankAccountID] [int] IDENTITY(1,1) NOT NULL,
+	[BrancID] [int] NULL,
+	[BankName] [varchar](50) NULL,
+	[AccountTitle] [varchar](50) NULL,
+	[AccountNumber] [varchar](50) NULL,
+	[IBANNumber] [varchar](50) NULL,
+	[BankBranch] [varchar](50) NULL,
+	[IsActive] [int] NULL,
+	[IsDeleted] [int] NULL,
+ CONSTRAINT [PK_BankAccounts] PRIMARY KEY CLUSTERED 
+(
+	[BankAccountID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[BankPayments]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[BankPayments](
+	[BankPaymentID] [int] IDENTITY(1,1) NOT NULL,
+	[BranchID] [int] NULL,
+	[BankAccountID] [int] NULL,
+	[CustomerID] [int] NULL,
+	[SalesID] [int] NULL,
+	[BankID] [int] NULL,
+	[CheqNumber] [varchar](50) NULL,
+	[PdcDate] [varchar](10) NULL,
+	[IsClear] [nchar](10) NULL,
+ CONSTRAINT [PK_BankPayments] PRIMARY KEY CLUSTERED 
+(
+	[BankPaymentID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Banks]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Banks](
+	[BankID] [int] IDENTITY(1,1) NOT NULL,
+	[BankName] [varchar](50) NULL,
+	[IsDeleted] [int] NULL,
+ CONSTRAINT [PK_Banks] PRIMARY KEY CLUSTERED 
+(
+	[BankID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Branches]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Branches](
+	[BranchID] [int] IDENTITY(1,1) NOT NULL,
+	[BranchName] [nvarchar](50) NULL,
+	[IsActive] [int] NULL,
+	[IsDeleted] [int] NULL,
+ CONSTRAINT [PK_Branches] PRIMARY KEY CLUSTERED 
+(
+	[BranchID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Brands]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Brands](
+	[BrandID] [int] IDENTITY(1,1) NOT NULL,
+	[BrandName] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Brands] PRIMARY KEY CLUSTERED 
+(
+	[BrandID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Commission]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Commission](
+	[CommissionID] [int] IDENTITY(1,1) NOT NULL,
+	[BranchID] [int] NULL,
+	[EmployeeID] [int] NULL,
+	[SalesID] [int] NULL,
+	[SalesDate] [varchar](10) NULL,
+	[CommissionAmount] [decimal](18, 2) NULL,
+	[IsPaid] [int] NULL,
+ CONSTRAINT [PK_Commission] PRIMARY KEY CLUSTERED 
+(
+	[CommissionID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Customers]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Customers](
+	[CustomerID] [int] IDENTITY(1,1) NOT NULL,
+	[BranchID] [int] NULL,
+	[CustomerName] [nvarchar](50) NULL,
+	[ContactNumber] [varchar](15) NULL,
+	[CustomerReference] [varchar](15) NULL,
+	[Address] [nvarchar](max) NULL,
+	[CreationDate] [datetime] NULL,
+	[IsActive] [int] NULL,
+	[IsDeleted] [int] NULL,
+ CONSTRAINT [PK_Customers] PRIMARY KEY CLUSTERED 
+(
+	[CustomerID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[EmployeeAdvance]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[EmployeeAdvance](
+	[EmployeeAdvanceID] [int] IDENTITY(1,1) NOT NULL,
+	[BranchID] [int] NULL,
+	[EmployeeID] [int] NULL,
+	[AdvanceDate] [varchar](10) NULL,
+	[AdvanceAmount] [decimal](18, 2) NULL,
+	[IsPaid] [int] NULL,
+	[IsDeleted] [int] NULL,
+ CONSTRAINT [PK_EmployeeAdvance] PRIMARY KEY CLUSTERED 
+(
+	[EmployeeAdvanceID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[EmployeeLoan]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[EmployeeLoan](
+	[EmployeeLoanID] [int] IDENTITY(1,1) NOT NULL,
+	[BranchID] [int] NULL,
+	[EmployeeID] [int] NULL,
+	[LoanDate] [varchar](10) NULL,
+	[LoanAmount] [decimal](18, 2) NULL,
+	[InstallmentAmount] [decimal](18, 2) NULL,
+	[PaidInstallment] [int] NULL,
+	[numberOfInstallment] [int] NULL,
+	[CreationDate] [datetime] NULL,
+	[IsPaid] [int] NULL,
+ CONSTRAINT [PK_EmployeeLoan] PRIMARY KEY CLUSTERED 
+(
+	[EmployeeLoanID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Engineers]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Engineers](
+	[EngineerID] [int] IDENTITY(1,1) NOT NULL,
+	[BranchID] [int] NULL,
+	[EngineerName] [nvarchar](50) NULL,
+	[ContactPerson] [varchar](50) NULL,
+	[ContactNumber] [varchar](15) NULL,
+	[Address] [nvarchar](max) NULL,
+	[CreationDate] [datetime] NULL,
+	[IsActive] [int] NULL,
+	[IsDeleted] [int] NULL,
+ CONSTRAINT [PK_Engineers] PRIMARY KEY CLUSTERED 
+(
+	[EngineerID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Exchange]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Exchange](
+	[ExchangeID] [int] IDENTITY(1,1) NOT NULL,
+	[PO] [nvarchar](10) NULL,
+	[PoDate] [nvarchar](10) NULL,
+	[CustomerID] [int] NULL,
+	[TotalAmount] [decimal](18, 2) NULL,
+	[PayableAmount] [decimal](18, 2) NULL,
+	[IsPaid] [int] NULL,
+	[CreationDate] [datetime] NULL,
+	[CreatedBy] [int] NULL,
+	[IsDeleted] [int] NULL,
+ CONSTRAINT [PK_Exchange] PRIMARY KEY CLUSTERED 
+(
+	[ExchangeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ExchangeDetails]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ExchangeDetails](
+	[ExchangeDetailID] [int] IDENTITY(1,1) NOT NULL,
+	[ExchangeID] [int] NULL,
+	[CategoryID] [int] NULL,
+	[ProductID] [int] NULL,
+	[BrandID] [int] NULL,
+	[ModelID] [int] NULL,
+	[Generation] [int] NULL,
+	[HardDiskID] [int] NULL,
+	[HDDAvailable] [int] NULL,
+	[RamID] [int] NULL,
+	[RamAvailable] [int] NULL,
+	[ProcessorID] [int] NULL,
+	[Screen] [nvarchar](50) NULL,
+	[ScreenAvailable] [int] NULL,
+	[Keboard] [nvarchar](50) NULL,
+	[KeyboardAvailable] [int] NULL,
+	[Charger] [nvarchar](50) NULL,
+	[ChargerAvailable] [int] NULL,
+	[Board] [nvarchar](50) NULL,
+	[BoardAvailable] [int] NULL,
+ CONSTRAINT [PK_ExchangeDetails] PRIMARY KEY CLUSTERED 
+(
+	[ExchangeDetailID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Expenses]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Expenses](
+	[ExpensesID] [int] IDENTITY(1,1) NOT NULL,
+	[BranchID] [int] NULL,
+	[ExpensesTypeID] [int] NULL,
+	[ExpensesDate] [varchar](10) NULL,
+	[Remarks] [nvarchar](max) NULL,
+	[ExpensesByID] [int] NULL,
+	[CreationDate] [datetime] NULL,
+	[CreatedByUserID] [int] NULL,
+	[IsDeleted] [int] NULL,
+	[ExpensesAmount] [decimal](18, 2) NULL,
+ CONSTRAINT [PK_Expenses] PRIMARY KEY CLUSTERED 
+(
+	[ExpensesID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ExpensesTypes]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ExpensesTypes](
+	[ExpensesTypeID] [int] IDENTITY(1,1) NOT NULL,
+	[ExpensesTypeName] [nchar](10) NULL,
+	[IsDeleted] [nchar](10) NULL,
+ CONSTRAINT [PK_ExpensesTypes] PRIMARY KEY CLUSTERED 
+(
+	[ExpensesTypeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Generations]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Generations](
+	[GenerationID] [int] IDENTITY(1,1) NOT NULL,
+	[GenerationName] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Generations] PRIMARY KEY CLUSTERED 
+(
+	[GenerationID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[HardDisk]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[HardDisk](
+	[HardDiskID] [int] IDENTITY(1,1) NOT NULL,
+	[HardDiskName] [nvarchar](50) NULL,
+ CONSTRAINT [PK_HardDisk] PRIMARY KEY CLUSTERED 
+(
+	[HardDiskID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Models]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Models](
+	[ModelID] [int] IDENTITY(1,1) NOT NULL,
+	[ModelName] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Models] PRIMARY KEY CLUSTERED 
+(
+	[ModelID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PaymentMethod]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PaymentMethod](
+	[PaymentMethodID] [int] IDENTITY(1,1) NOT NULL,
+	[PaymentMethodName] [varchar](50) NULL,
+ CONSTRAINT [PK_PaymentMethod] PRIMARY KEY CLUSTERED 
+(
+	[PaymentMethodID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PaymentMode]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PaymentMode](
+	[PaymentModeID] [int] IDENTITY(1,1) NOT NULL,
+	[PaymentModeName] [varchar](50) NULL,
+ CONSTRAINT [PK_PaymentMode] PRIMARY KEY CLUSTERED 
+(
+	[PaymentModeID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PaymentVoucherCustomers]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PaymentVoucherCustomers](
+	[PaymentVoucherCustomersID] [int] IDENTITY(1,1) NOT NULL,
+	[BranchID] [int] NULL,
+	[CustomerID] [int] NULL,
+	[SalesID] [int] NULL,
+	[PaymetMethodID] [int] NULL,
+	[BankID] [int] NULL,
+	[ChequeNumber] [varchar](50) NULL,
+	[PayOrderNumber] [varchar](50) NULL,
+	[IsPDC] [int] NULL,
+	[PDCDate] [varchar](10) NULL,
+	[IsPdcClear] [int] NULL,
+	[Debit] [decimal](18, 2) NULL,
+	[Credit] [decimal](18, 2) NULL,
+	[Balance] [decimal](18, 2) NULL,
+	[Condition] [int] NULL,
+	[CreationDate] [datetime] NULL,
+	[CreatedByUserID] [int] NULL,
+	[TransactionTypeID] [int] NULL,
+	[IsDeleted] [int] NULL,
+ CONSTRAINT [PK_PaymentVoucherCustomers] PRIMARY KEY CLUSTERED 
+(
+	[PaymentVoucherCustomersID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PaymentVoucherSupplier]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PaymentVoucherSupplier](
+	[PaymentVoucherSupplierID] [int] IDENTITY(1,1) NOT NULL,
+	[BranchID] [int] NULL,
+	[SupplierID] [int] NULL,
+	[PurchaseID] [int] NULL,
+	[PaymetMethodID] [int] NULL,
+	[BankID] [int] NULL,
+	[ChequeNumber] [nvarchar](50) NULL,
+	[PayOrderNumber] [nvarchar](50) NULL,
+	[IsPDC] [int] NULL,
+	[PDCDate] [varchar](10) NULL,
+	[IsPdcClear] [int] NULL,
+	[Debit] [decimal](18, 2) NULL,
+	[Credit] [decimal](18, 2) NULL,
+	[Balance] [decimal](18, 2) NULL,
+	[Condition] [int] NULL,
+	[CreationDate] [datetime] NULL,
+	[CreatedByUserID] [int] NULL,
+	[IsDeleted] [int] NULL,
+ CONSTRAINT [PK_PaymentVoucherSupplier] PRIMARY KEY CLUSTERED 
+(
+	[PaymentVoucherSupplierID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Processor]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Processor](
+	[ProcessorID] [int] IDENTITY(1,1) NOT NULL,
+	[ProcessorName] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Processor] PRIMARY KEY CLUSTERED 
+(
+	[ProcessorID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ProductCategory]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ProductCategory](
+	[ProductCategoryID] [int] IDENTITY(1,1) NOT NULL,
+	[BranchID] [int] NULL,
+	[CategoryName] [nvarchar](50) NULL,
+	[CreationDate] [datetime] NULL,
+	[IsDeleted] [int] NULL,
+ CONSTRAINT [PK_ProductCategory] PRIMARY KEY CLUSTERED 
+(
+	[ProductCategoryID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Products]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Products](
+	[ProductID] [int] IDENTITY(1,1) NOT NULL,
+	[BranchID] [int] NULL,
+	[ProdcutCategoryID] [int] NOT NULL,
+	[ProductName] [nvarchar](50) NULL,
+	[BrandNameID] [nvarchar](50) NULL,
+	[ModelID] [nvarchar](50) NULL,
+	[GenerationID] [nvarchar](50) NULL,
+	[RamID] [nvarchar](50) NULL,
+	[HardDiskID] [nvarchar](50) NULL,
+	[ProcessorID] [nvarchar](50) NULL,
+	[ProductImage] [nvarchar](50) NULL,
+	[CreationDate] [datetime] NULL,
+	[IsDeleted] [int] NULL,
+	[BarCode] [varchar](1) NULL,
+ CONSTRAINT [PK_Products] PRIMARY KEY CLUSTERED 
+(
+	[ProductID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[ProfitAndLoss]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[ProfitAndLoss](
+	[ProfitAndLossID] [int] IDENTITY(1,1) NOT NULL,
+	[BranchID] [int] NULL,
+	[PurchaseDetailID] [int] NULL,
+	[SalesID] [int] NULL,
+	[ProductID] [int] NULL,
+	[Quantity] [int] NULL,
+	[PurchasePrice] [decimal](18, 2) NULL,
+	[PurchaseAmount] [decimal](18, 2) NULL,
+	[SalesPrice] [decimal](18, 2) NULL,
+	[SalesAmount] [decimal](18, 2) NULL,
+	[Profit] [decimal](18, 2) NULL,
+	[CreationDate] [datetime] NULL,
+	[CreatedByUserID] [int] NULL,
+	[IsDeleted] [int] NULL,
+ CONSTRAINT [PK_ProfitAndLoss] PRIMARY KEY CLUSTERED 
+(
+	[ProfitAndLossID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Purchase]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Purchase](
+	[PurchaseID] [int] IDENTITY(1,1) NOT NULL,
+	[BranchID] [int] NULL,
+	[IsTransferFromBranch] [int] NULL,
+	[TransferFromBranchID] [int] NULL,
+	[PoNumber] [nvarchar](50) NULL,
+	[PoDate] [varchar](10) NULL,
+	[PoReference] [varchar](10) NULL,
+	[SupplierID] [int] NULL,
+	[PaymentMode] [int] NULL,
+	[TotalAmount] [decimal](18, 2) NULL,
+	[TaxPer] [int] NULL,
+	[TaxAmount] [decimal](18, 2) NULL,
+	[PayableAmount] [decimal](18, 2) NULL,
+	[isPaid] [int] NULL,
+	[CreationDate] [datetime] NULL,
+	[CreatedBy] [int] NULL,
+	[IsDeleted] [int] NULL,
+	[Balance] [decimal](18, 2) NULL,
+ CONSTRAINT [PK_Purchase] PRIMARY KEY CLUSTERED 
+(
+	[PurchaseID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[PurchaseDetails]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[PurchaseDetails](
+	[PurchaseDetailID] [int] IDENTITY(1,1) NOT NULL,
+	[PurchaseID] [int] NULL,
+	[ProdcutCategoryID] [int] NULL,
+	[ProductID] [int] NULL,
+	[Quantity] [int] NULL,
+	[UnitPrice] [decimal](18, 2) NULL,
+	[Amount] [decimal](18, 2) NULL,
+	[StockQuantity] [int] NULL,
+ CONSTRAINT [PK_PurchaseDetails] PRIMARY KEY CLUSTERED 
+(
+	[PurchaseDetailID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Rams]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Rams](
+	[RamID] [int] IDENTITY(1,1) NOT NULL,
+	[RamName] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Rams] PRIMARY KEY CLUSTERED 
+(
+	[RamID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Repairing]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Repairing](
+	[RepairingID] [int] IDENTITY(1,1) NOT NULL,
+	[BranchID] [int] NULL,
+	[EngineerID] [int] NULL,
+	[AssignDate] [varchar](10) NULL,
+	[ProductID] [int] NULL,
+	[ItemDescription] [nvarchar](max) NULL,
+	[DefectDescription] [nvarchar](max) NULL,
+	[AmountToBeCharge] [decimal](18, 2) NULL,
+	[ReturnDate] [varchar](10) NULL,
+	[CreationDate] [datetime] NULL,
+	[CreatedByUserID] [int] NULL,
+	[IsReturn] [int] NULL,
+ CONSTRAINT [PK_Repairing] PRIMARY KEY CLUSTERED 
+(
+	[RepairingID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Roles]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Roles](
+	[RoleID] [int] IDENTITY(1,1) NOT NULL,
+	[Role_Tittle] [varchar](50) NULL,
+	[UserId] [int] NULL,
+PRIMARY KEY CLUSTERED 
+(
+	[RoleID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Salary]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Salary](
+	[SalaryID] [int] NOT NULL,
+	[BranchID] [int] NULL,
+	[EmployeeID] [int] NULL,
+	[BasicSalary] [decimal](18, 2) NULL,
+	[CommissionAmount] [decimal](18, 2) NULL,
+	[AdvanceAmount] [decimal](18, 2) NULL,
+	[LoanAmount] [decimal](18, 2) NULL,
+	[NetSalary] [decimal](18, 2) NULL,
+	[SalaryMonth] [varchar](10) NULL,
+	[CreationDate] [datetime] NULL,
+	[CreatedByUserID] [int] NULL,
+	[IsDeleted] [int] NULL,
+ CONSTRAINT [PK_Salary] PRIMARY KEY CLUSTERED 
+(
+	[SalaryID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Sales]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Sales](
+	[SalesID] [int] IDENTITY(1,1) NOT NULL,
+	[BranchID] [int] NULL,
+	[InvoiceNumber] [varchar](50) NULL,
+	[InvoiceDate] [varchar](10) NULL,
+	[CustomerID] [int] NULL,
+	[PaymentMode] [int] NULL,
+	[TotalAmount] [decimal](18, 2) NULL,
+	[TaxPer] [int] NULL,
+	[TaxAmount] [decimal](18, 2) NULL,
+	[PayableAmount] [decimal](18, 2) NULL,
+	[isPaid] [int] NULL,
+	[CreationDate] [datetime] NULL,
+	[CreatedBy] [int] NULL,
+	[IsReturn] [int] NULL,
+	[IsDeleted] [int] NULL,
+	[Balance] [decimal](18, 2) NULL,
+ CONSTRAINT [PK_Sales] PRIMARY KEY CLUSTERED 
+(
+	[SalesID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[SalesDetails]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[SalesDetails](
+	[SalesDetailID] [int] IDENTITY(1,1) NOT NULL,
+	[SalesID] [int] NULL,
+	[ProdcutCategoryID] [int] NULL,
+	[ProductID] [int] NULL,
+	[Quantity] [int] NULL,
+	[UnitPrice] [decimal](18, 2) NULL,
+	[Amount] [decimal](18, 2) NULL,
+	[IsReturn] [int] NULL,
+ CONSTRAINT [PK_SalesDetails] PRIMARY KEY CLUSTERED 
+(
+	[SalesDetailID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Suppliers]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Suppliers](
+	[SupplierID] [int] IDENTITY(1,1) NOT NULL,
+	[BranchID] [int] NULL,
+	[SupplierName] [nvarchar](50) NULL,
+	[ContactPerson] [varchar](50) NULL,
+	[ContactNumber] [varchar](50) NULL,
+	[Email] [nvarchar](50) NULL,
+	[CreationDate] [datetime] NULL,
+	[IsActive] [int] NULL,
+	[IsDeleted] [int] NULL,
+ CONSTRAINT [PK_Suppliers] PRIMARY KEY CLUSTERED 
+(
+	[SupplierID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Users](
+	[UserID] [int] IDENTITY(1,1) NOT NULL,
+	[BranchID] [int] NULL,
+	[FullName] [nvarchar](50) NULL,
+	[DOB] [varchar](10) NULL,
+	[DOJ] [varchar](10) NULL,
+	[CNIC] [varchar](15) NULL,
+	[UserImage] [nvarchar](max) NULL,
+	[ContactNumber] [varchar](15) NULL,
+	[BasicSalary] [decimal](18, 2) NULL,
+	[CommissionAmount] [decimal](18, 2) NULL,
+	[UserName] [nvarchar](50) NULL,
+	[Password] [nvarchar](50) NULL,
+	[CreationDate] [datetime] NULL,
+	[IsActive] [int] NULL,
+	[IsDeleted] [int] NULL,
+ CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED 
+(
+	[UserID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[BankAccounts] ADD  CONSTRAINT [DF_BankAccounts_IsActive]  DEFAULT ((0)) FOR [IsActive]
+GO
+ALTER TABLE [dbo].[BankAccounts] ADD  CONSTRAINT [DF_BankAccounts_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[BankPayments] ADD  CONSTRAINT [DF_BankPayments_IsClear]  DEFAULT ((0)) FOR [IsClear]
+GO
+ALTER TABLE [dbo].[Banks] ADD  CONSTRAINT [DF_Banks_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[Branches] ADD  CONSTRAINT [DF_Branches_IsActive]  DEFAULT ((1)) FOR [IsActive]
+GO
+ALTER TABLE [dbo].[Branches] ADD  CONSTRAINT [DF_Branches_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[Commission] ADD  CONSTRAINT [DF_Commission_IsPaid]  DEFAULT ((0)) FOR [IsPaid]
+GO
+ALTER TABLE [dbo].[Customers] ADD  CONSTRAINT [DF_Customers_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+ALTER TABLE [dbo].[Customers] ADD  CONSTRAINT [DF_Customers_IsActive]  DEFAULT ((1)) FOR [IsActive]
+GO
+ALTER TABLE [dbo].[Customers] ADD  CONSTRAINT [DF_Customers_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[EmployeeAdvance] ADD  CONSTRAINT [DF_EmployeeAdvance_IsPaid]  DEFAULT ((0)) FOR [IsPaid]
+GO
+ALTER TABLE [dbo].[EmployeeAdvance] ADD  CONSTRAINT [DF_EmployeeAdvance_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[EmployeeLoan] ADD  CONSTRAINT [DF_EmployeeLoan_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+ALTER TABLE [dbo].[EmployeeLoan] ADD  CONSTRAINT [DF_EmployeeLoan_IsPaid]  DEFAULT ((0)) FOR [IsPaid]
+GO
+ALTER TABLE [dbo].[Engineers] ADD  CONSTRAINT [DF_Engineers_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+ALTER TABLE [dbo].[Engineers] ADD  CONSTRAINT [DF_Engineers_IsActive]  DEFAULT ((1)) FOR [IsActive]
+GO
+ALTER TABLE [dbo].[Engineers] ADD  CONSTRAINT [DF_Engineers_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[Exchange] ADD  CONSTRAINT [DF_Exchange_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+ALTER TABLE [dbo].[Exchange] ADD  CONSTRAINT [DF_Exchange_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[Expenses] ADD  CONSTRAINT [DF_Expenses_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+ALTER TABLE [dbo].[Expenses] ADD  CONSTRAINT [DF_Expenses_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[ExpensesTypes] ADD  CONSTRAINT [DF_ExpensesTypes_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[PaymentVoucherCustomers] ADD  CONSTRAINT [DF_PaymentVoucherCustomers_IsPdcClear]  DEFAULT ((0)) FOR [IsPdcClear]
+GO
+ALTER TABLE [dbo].[PaymentVoucherCustomers] ADD  CONSTRAINT [DF_PaymentVoucherCustomers_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+ALTER TABLE [dbo].[PaymentVoucherCustomers] ADD  CONSTRAINT [DF_PaymentVoucherCustomers_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[PaymentVoucherSupplier] ADD  CONSTRAINT [DF_PaymentVoucherSupplier_IsPdcClear]  DEFAULT ((0)) FOR [IsPdcClear]
+GO
+ALTER TABLE [dbo].[PaymentVoucherSupplier] ADD  CONSTRAINT [DF_PaymentVoucherSupplier_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+ALTER TABLE [dbo].[PaymentVoucherSupplier] ADD  CONSTRAINT [DF_PaymentVoucherSupplier_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[ProductCategory] ADD  CONSTRAINT [DF_ProductCategory_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+ALTER TABLE [dbo].[ProductCategory] ADD  CONSTRAINT [DF_ProductCategory_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[Products] ADD  CONSTRAINT [DF_Products_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+ALTER TABLE [dbo].[Products] ADD  CONSTRAINT [DF_Products_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[ProfitAndLoss] ADD  CONSTRAINT [DF_ProfitAndLoss_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+ALTER TABLE [dbo].[ProfitAndLoss] ADD  CONSTRAINT [DF_ProfitAndLoss_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[Purchase] ADD  CONSTRAINT [DF_Purchase_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+ALTER TABLE [dbo].[Purchase] ADD  CONSTRAINT [DF_Purchase_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[Repairing] ADD  CONSTRAINT [DF_Repairing_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+ALTER TABLE [dbo].[Repairing] ADD  CONSTRAINT [DF_Repairing_IsReturn]  DEFAULT ((0)) FOR [IsReturn]
+GO
+ALTER TABLE [dbo].[Salary] ADD  CONSTRAINT [DF_Salary_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+ALTER TABLE [dbo].[Salary] ADD  CONSTRAINT [DF_Salary_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[Sales] ADD  CONSTRAINT [DF_Sales_isPaid]  DEFAULT ((0)) FOR [isPaid]
+GO
+ALTER TABLE [dbo].[Sales] ADD  CONSTRAINT [DF_Sales_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+ALTER TABLE [dbo].[Sales] ADD  CONSTRAINT [DF_Sales_IsReturn]  DEFAULT ((0)) FOR [IsReturn]
+GO
+ALTER TABLE [dbo].[Sales] ADD  CONSTRAINT [DF_Sales_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[SalesDetails] ADD  CONSTRAINT [DF_SalesDetails_IsReturn]  DEFAULT ((0)) FOR [IsReturn]
+GO
+ALTER TABLE [dbo].[Suppliers] ADD  CONSTRAINT [DF_Suppliers_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+ALTER TABLE [dbo].[Suppliers] ADD  CONSTRAINT [DF_Suppliers_IsActive]  DEFAULT ((1)) FOR [IsActive]
+GO
+ALTER TABLE [dbo].[Suppliers] ADD  CONSTRAINT [DF_Suppliers_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_CreationDate]  DEFAULT (getdate()) FOR [CreationDate]
+GO
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_IsActive]  DEFAULT ((1)) FOR [IsActive]
+GO
+ALTER TABLE [dbo].[Users] ADD  CONSTRAINT [DF_Users_IsDeleted]  DEFAULT ((0)) FOR [IsDeleted]
+GO
+/****** Object:  StoredProcedure [dbo].[GetPurchaseReport]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[GetPurchaseReport]
+    @PoNumber INT,
+    @startDate DATE,
+    @endDate DATE,
+    @supID INT
+AS
+BEGIN
+    SELECT
+        pr.PurchaseID,
+        pr.PoNumber,
+        pr.PoReference,
+        pr.PoDate,
+        sp.SupplierName,
+        pm.PaymentMethodName,
+        pr.TotalAmount,
+        pr.TaxAmount,
+        pr.TotalAmount + pr.TaxAmount AS GrandTotal,
+        pr.PayableAmount,
+        pr.Balance
+    FROM
+        Purchase pr
+        INNER JOIN Suppliers sp ON pr.SupplierID = sp.SupplierID
+        INNER JOIN PaymentMethod pm ON pr.PaymentMode = pm.PaymentMethodID
+    WHERE
+        pr.PurchaseID = @PoNumber
+        OR pr.PoDate BETWEEN @endDate AND @startDate
+        OR pr.SupplierID = @supID
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetPurchaseReportDetails]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[GetPurchaseReportDetails]
+    @PoNumber INT
+AS
+BEGIN
+SELECT pr.PoNumber, pro.ProductName, pd.Quantity, pd.UnitPrice, pd.Amount,
+       pr.PoDate, pr.PoReference, sp.SupplierName, pm.PaymentMethodName, pr.CreationDate
+FROM Purchase AS pr
+INNER JOIN PurchaseDetails pd ON pr.PurchaseID = pd.PurchaseID
+INNER JOIN Products pro ON pd.ProductID = pro.ProductID
+INNER JOIN Suppliers sp ON pr.SupplierID = sp.SupplierID
+INNER JOIN PaymentMethod pm ON pr.PaymentMode = pm.PaymentMethodID
+WHERE pr.PoNumber = @PoNumber
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetPurchaseReportDetailsTotalAmounts]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[GetPurchaseReportDetailsTotalAmounts]
+    @PoNumber INT
+AS
+BEGIN
+SELECT sum(pd.Quantity) as TotalQuntity, sum(pd.Amount)as TotalAmount,
+sum(pr.TaxAmount)as TaxAmount
+,sum(pr.TaxAmount) + sum(pr.TotalAmount) as GrandTotal,sum(pr.PayableAmount)as PayableAmount
+,sum(pr.Balance)as TotalBance
+FROM Purchase AS pr
+INNER JOIN PurchaseDetails pd ON pr.PurchaseID = pd.PurchaseID
+INNER JOIN Products pro ON pd.ProductID = pro.ProductID
+INNER JOIN Suppliers sp ON pr.SupplierID = sp.SupplierID
+INNER JOIN PaymentMethod pm ON pr.PaymentMode = pm.PaymentMethodID
+WHERE pr.PoNumber = @PoNumber
+
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetSalesReport]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[GetSalesReport]  
+    @Invoice INT,  
+    @startDate DATE,  
+    @endDate DATE,  
+    @CustomerId INT  
+AS  
+BEGIN  
+    SELECT  
+        SR.SalesID,  
+        SR.InvoiceNumber,    
+        sr.InvoiceDate,  
+        cs.CustomerName,  
+        pm.PaymentMethodName,  
+        sr.TotalAmount,  
+        sr.TaxAmount,  
+        sr.TotalAmount + sr.TaxAmount AS GrandTotal,  
+        sr.PayableAmount,  
+        sr.Balance  
+    FROM  
+        Sales sr  
+        INNER JOIN Customers cs ON sr.CustomerID = cs.CustomerID  
+        INNER JOIN PaymentMethod pm ON sr.PaymentMode = pm.PaymentMethodID  
+    WHERE  
+        sr.SalesID = @Invoice  
+        OR sr.InvoiceDate BETWEEN @endDate AND @startDate  
+        OR sr.CustomerID = @CustomerId  
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetSalesReportDetails]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[GetSalesReportDetails]  
+    @Invoice INT  
+AS  
+BEGIN  
+SELECT sr.InvoiceNumber, pro.ProductName, sd.Quantity, sd.UnitPrice, sd.Amount,  
+       sr.InvoiceDate, cs.CustomerName, pm.PaymentMethodName  
+FROM Sales AS sr  
+INNER JOIN SalesDetails sd ON sr.SalesID = sd.SalesID  
+INNER JOIN Products pro ON sd.ProductID = pro.ProductID  
+INNER JOIN Customers cs ON cs.CustomerID = sr.CustomerID  
+INNER JOIN PaymentMethod pm ON sr.PaymentMode = pm.PaymentMethodID  
+WHERE sr.InvoiceNumber = @Invoice  
+  
+END
+GO
+/****** Object:  StoredProcedure [dbo].[ps_purchase]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE proc [dbo].[ps_purchase]    
+  @PoNumber int,
+  @PoReference int
+  as  
+ SELECT Products.ProductName,PurchaseDetails.Quantity,PurchaseDetails.UnitPrice,PurchaseDetails.Quantity,
+ PurchaseDetails.Amount,PurchaseDetails.PurchaseDetailID
+  FROM PurchaseDetails inner join Purchase on Purchase.PurchaseID = PurchaseDetails.PurchaseID   
+  inner join Products on Products.ProductID = PurchaseDetails.ProductID
+ where Purchase.PoNumber = @PoNumber or Purchase.PoReference = @PoReference   
+  
+GO
+/****** Object:  StoredProcedure [dbo].[ps_sales]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+ create proc [dbo].[ps_sales]  
+  @salesid int
+  as
+	SELECT SalesDetails.SalesID,Products.ProductName,SalesDetails.Quantity,SalesDetails.UnitPrice,SalesDetails.Amount
+  FROM Sales inner join SalesDetails on SalesDetails.SalesDetailID = sales.SalesID 
+  inner join Products on Products.ProductID = SalesDetails.ProductID where SalesDetails.SalesID = @salesid
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_BankAccounts]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_Add_BankAccounts]
+(
+	@BrancID int,
+	@BankName varchar(50),
+	@AccountTitle varchar(50),
+	@AccountNumber varchar(50),
+	@IBANNumber varchar(50),
+	@BankBranch varchar(50)
+)
+
+as
+
+set nocount on
+
+insert into [BankAccounts]
+(
+	[BrancID],
+	[BankName],
+	[AccountTitle],
+	[AccountNumber],
+	[IBANNumber],
+	[BankBranch]
+)
+values
+(
+	@BrancID,
+	@BankName,
+	@AccountTitle,
+	@AccountNumber,
+	@IBANNumber,
+	@BankBranch
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_BankPayments]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_Add_BankPayments]
+(
+	@BranchID int,
+	@BankAccountID int,
+	@CustomerID int,
+	@SalesID int,
+	@BankID int,
+	@CheqNumber varchar(50),
+	@PdcDate varchar(10)
+)
+
+as
+
+set nocount on
+
+insert into [BankPayments]
+(
+	[BranchID],
+	[BankAccountID],
+	[CustomerID],
+	[SalesID],
+	[BankID],
+	[CheqNumber],
+	[PdcDate]
+)
+values
+(
+	@BranchID,
+	@BankAccountID,
+	@CustomerID,
+	@SalesID,
+	@BankID,
+	@CheqNumber,
+	@PdcDate
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_Banks]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_Add_Banks]
+(
+	@BankName varchar(50),
+	@IsDeleted int
+)
+
+as
+
+set nocount on
+
+insert into [Banks]
+(
+	[BankName],
+	[IsDeleted]
+)
+values
+(
+	@BankName,
+	@IsDeleted
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_Branches]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_Add_Branches]
+(
+	@BranchName nvarchar(50),
+	@IsActive int,
+	@IsDeleted int
+)
+
+as
+
+set nocount on
+
+insert into [Branches]
+(
+	[BranchName],
+	[IsActive],
+	[IsDeleted]
+)
+values
+(
+	@BranchName,
+	@IsActive,
+	@IsDeleted
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_Brands]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_Add_Brands]
+(
+	@BrandName nvarchar(50)
+)
+
+as
+
+set nocount on
+
+insert into [Brands]
+(
+	[BrandName]
+)
+values
+(
+	@BrandName
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_Commission]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_Add_Commission]
+(
+	@BranchID int,
+	@EmployeeID int,
+	@SalesID int,
+	@SalesDate varchar(10),
+	@CommissionAmount decimal(18, 2)
+)
+
+as
+
+set nocount on
+
+insert into [Commission]
+(
+	[BranchID],
+	[EmployeeID],
+	[SalesID],
+	[SalesDate],
+	[CommissionAmount]
+)
+values
+(
+	@BranchID,
+	@EmployeeID,
+	@SalesID,
+	@SalesDate,
+	@CommissionAmount
+	
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_Customers]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_Add_Customers]
+(
+	@BranchID int,
+	@CustomerName nvarchar(50),
+	@ContactNumber varchar(15),
+	@CustomerReference varchar(15),
+	@Address nvarchar(max)
+)
+
+as
+
+set nocount on
+
+insert into [Customers]
+(
+	[BranchID],
+	[CustomerName],
+	[ContactNumber],
+	[CustomerReference],
+	[Address]
+)
+values
+(
+	@BranchID,
+	@CustomerName,
+	@ContactNumber,
+	@CustomerReference,
+	@Address
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_EmployeeAdvance]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_Add_EmployeeAdvance]
+(
+	@BranchID int,
+	@EmployeeID int,
+	@AdvanceDate varchar(10),
+	@AdvanceAmount decimal(18, 2)
+)
+
+as
+
+set nocount on
+
+insert into [EmployeeAdvance]
+(
+	[BranchID],
+	[EmployeeID],
+	[AdvanceDate],
+	[AdvanceAmount]
+)
+values
+(
+	@BranchID,
+	@EmployeeID,
+	@AdvanceDate,
+	@AdvanceAmount
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_EmployeeLoan]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_Add_EmployeeLoan]
+(
+	@BranchID int,
+	@EmployeeID int,
+	@LoanDate varchar(10),
+	@LoanAmount decimal(18, 2),
+	@InstallmentAmount decimal(18, 2),
+	@PaidInstallment int,
+	@numberOfInstallment int
+)
+
+as
+
+set nocount on
+
+insert into [EmployeeLoan]
+(
+	[BranchID],
+	[EmployeeID],
+	[LoanDate],
+	[LoanAmount],
+	[InstallmentAmount],
+	[PaidInstallment],
+	[numberOfInstallment]
+)
+values
+(
+	@BranchID,
+	@EmployeeID,
+	@LoanDate,
+	@LoanAmount,
+	@InstallmentAmount,
+	@PaidInstallment,
+	@numberOfInstallment
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_Engineers]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_Add_Engineers]
+(
+	@BranchID int,
+	@EngineerName nvarchar(50),
+	@ContactPerson varchar(50),
+	@ContactNumber varchar(15),
+	@Address nvarchar(max)
+)
+
+as
+
+set nocount on
+
+insert into [Engineers]
+(
+	[BranchID],
+	[EngineerName],
+	[ContactPerson],
+	[ContactNumber],
+	[Address]
+)
+values
+(
+	@BranchID,
+	@EngineerName,
+	@ContactPerson,
+	@ContactNumber,
+	@Address
+	)
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_Exchange]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_Add_Exchange]
+(
+	@PO nvarchar(10),
+	@PoDate nvarchar(10),
+	@CustomerID int,
+	@TotalAmount decimal(18, 2),
+	@PayableAmount decimal(18, 2),
+	@IsPaid int,
+	@CreationDate datetime,
+	@CreatedBy int,
+	@IsDeleted int
+)
+
+as
+
+set nocount on
+
+insert into [Exchange]
+(
+	[PO],
+	[PoDate],
+	[CustomerID],
+	[TotalAmount],
+	[PayableAmount],
+	[IsPaid],
+	[CreationDate],
+	[CreatedBy],
+	[IsDeleted]
+)
+values
+(
+	@PO,
+	@PoDate,
+	@CustomerID,
+	@TotalAmount,
+	@PayableAmount,
+	@IsPaid,
+	@CreationDate,
+	@CreatedBy,
+	@IsDeleted
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_ExchangeDetails]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_Add_ExchangeDetails]
+(
+	@ExchangeID int,
+	@CategoryID int,
+	@ProductID int,
+	@BrandID int,
+	@ModelID int,
+	@Generation int,
+	@HardDiskID int,
+	@HDDAvailable int,
+	@RamID int,
+	@RamAvailable int,
+	@ProcessorID int,
+	@Screen nvarchar(50),
+	@ScreenAvailable int,
+	@Keboard nvarchar(50),
+	@KeyboardAvailable int,
+	@Charger nvarchar(50),
+	@ChargerAvailable int,
+	@Board nvarchar(50),
+	@BoardAvailable int
+)
+
+as
+
+set nocount on
+
+insert into [ExchangeDetails]
+(
+	[ExchangeID],
+	[CategoryID],
+	[ProductID],
+	[BrandID],
+	[ModelID],
+	[Generation],
+	[HardDiskID],
+	[HDDAvailable],
+	[RamID],
+	[RamAvailable],
+	[ProcessorID],
+	[Screen],
+	[ScreenAvailable],
+	[Keboard],
+	[KeyboardAvailable],
+	[Charger],
+	[ChargerAvailable],
+	[Board],
+	[BoardAvailable]
+)
+values
+(
+	@ExchangeID,
+	@CategoryID,
+	@ProductID,
+	@BrandID,
+	@ModelID,
+	@Generation,
+	@HardDiskID,
+	@HDDAvailable,
+	@RamID,
+	@RamAvailable,
+	@ProcessorID,
+	@Screen,
+	@ScreenAvailable,
+	@Keboard,
+	@KeyboardAvailable,
+	@Charger,
+	@ChargerAvailable,
+	@Board,
+	@BoardAvailable
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_Expenses]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_Add_Expenses]
+(
+	@BranchID int,
+	@ExpensesTypeID int,
+	@ExpensesDate varchar(10),
+	@Remarks nvarchar(max),
+	@ExpensesByID int,
+	@CreatedByUserID int
+)
+
+as
+
+set nocount on
+
+insert into [Expenses]
+(
+	[BranchID],
+	[ExpensesTypeID],
+	[ExpensesDate],
+	[Remarks],
+	[ExpensesByID],
+	[CreatedByUserID]
+)
+values
+(
+	@BranchID,
+	@ExpensesTypeID,
+	@ExpensesDate,
+	@Remarks,
+	@ExpensesByID,
+
+	@CreatedByUserID
+	
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_ExpensesTypes]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_Add_ExpensesTypes]
+(
+	@ExpensesTypeName nchar(10)
+
+)
+
+as
+
+set nocount on
+
+insert into [ExpensesTypes]
+(
+	[ExpensesTypeName]
+
+)
+values
+(
+	@ExpensesTypeName
+	
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_Generations]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_Add_Generations]
+(
+	@GenerationName nvarchar(50)
+)
+
+as
+
+set nocount on
+
+insert into [Generations]
+(
+	[GenerationName]
+)
+values
+(
+	@GenerationName
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_HardDisk]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_Add_HardDisk]
+(
+	@HardDiskName nvarchar(50)
+)
+
+as
+
+set nocount on
+
+insert into [HardDisk]
+(
+	[HardDiskName]
+)
+values
+(
+	@HardDiskName
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_Models]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_Add_Models]
+(
+	@ModelName nvarchar(50)
+)
+
+as
+
+set nocount on
+
+insert into [Models]
+(
+	[ModelName]
+)
+values
+(
+	@ModelName
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_PaymentMethod]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_Add_PaymentMethod]
+(
+	@PaymentMethodName varchar(50)
+)
+
+as
+
+set nocount on
+
+insert into [PaymentMethod]
+(
+	[PaymentMethodName]
+)
+values
+(
+	@PaymentMethodName
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_PaymentMode]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_Add_PaymentMode]
+(
+	@PaymentModeName varchar(50)
+)
+
+as
+
+set nocount on
+
+insert into [PaymentMode]
+(
+	[PaymentModeName]
+)
+values
+(
+	@PaymentModeName
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_PaymentVoucherCustomers]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_Add_PaymentVoucherCustomers]
+(
+	@BranchID int,
+	@CustomerID int,
+	@SalesID int,
+	@PaymetMethodID int,
+	@BankID int,
+	@ChequeNumber varchar(50),
+	@PayOrderNumber varchar(50),
+	@IsPDC int,
+	@PDCDate varchar(10),
+	@IsPdcClear int,
+	@Debit decimal(18, 2),
+	@Credit decimal(18, 2),
+	@Balance decimal(18, 2),
+	@Condition int,
+	@CreatedByUserID int,
+	@TransactionTypeID int
+)
+
+as
+
+set nocount on
+
+insert into [PaymentVoucherCustomers]
+(
+	[BranchID],
+	[CustomerID],
+	[SalesID],
+	[PaymetMethodID],
+	[BankID],
+	[ChequeNumber],
+	[PayOrderNumber],
+	[IsPDC],
+	[PDCDate],
+	[IsPdcClear],
+	[Debit],
+	[Credit],
+	[Balance],
+	[Condition],
+	[CreatedByUserID],
+	[TransactionTypeID]
+)
+values
+(
+	@BranchID,
+	@CustomerID,
+	@SalesID,
+	@PaymetMethodID,
+	@BankID,
+	@ChequeNumber,
+	@PayOrderNumber,
+	@IsPDC,
+	@PDCDate,
+	@IsPdcClear,
+	@Debit,
+	@Credit,
+	@Balance,
+	@Condition,
+	@CreatedByUserID,
+	@TransactionTypeID
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_PaymentVoucherSupplier]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_Add_PaymentVoucherSupplier]
+(
+	@BranchID int,
+	@SupplierID int,
+	@PurchaseID int,
+	@PaymetMethodID int,
+	@BankID int,
+	@ChequeNumber nvarchar(50),
+	@PayOrderNumber nvarchar(50),
+	@IsPDC int,
+	@PDCDate varchar(10),
+	@IsPdcClear int,
+	@Debit decimal(18, 2),
+	@Credit decimal(18, 2),
+	@Balance decimal(18, 2),
+	@Condition int,
+	@CreatedByUserID int
+)
+
+as
+
+set nocount on
+
+insert into [PaymentVoucherSupplier]
+(
+	[BranchID],
+	[SupplierID],
+	[PurchaseID],
+	[PaymetMethodID],
+	[BankID],
+	[ChequeNumber],
+	[PayOrderNumber],
+	[IsPDC],
+	[PDCDate],
+	[IsPdcClear],
+	[Debit],
+	[Credit],
+	[Balance],
+	[Condition],
+	
+	[CreatedByUserID]
+)
+values
+(
+	@BranchID,
+	@SupplierID,
+	@PurchaseID,
+	@PaymetMethodID,
+	@BankID,
+	@ChequeNumber,
+	@PayOrderNumber,
+	@IsPDC,
+	@PDCDate,
+	@IsPdcClear,
+	@Debit,
+	@Credit,
+	@Balance,
+	@Condition,
+	@CreatedByUserID
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_Processor]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_Add_Processor]
+(
+	@ProcessorName nvarchar(50)
+)
+
+as
+
+set nocount on
+
+insert into [Processor]
+(
+	[ProcessorName]
+)
+values
+(
+	@ProcessorName
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_ProductCategory]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_Add_ProductCategory]
+(
+	@BranchID int,
+	@CategoryName nvarchar(50)
+)
+
+as
+
+set nocount on
+
+insert into [ProductCategory]
+(
+	[BranchID],
+	[CategoryName]
+)
+values
+(
+	@BranchID,
+	@CategoryName
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_Products]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_Add_Products]
+(
+	@BranchID int,
+	@ProdcutCategoryID int,
+	@ProductName nvarchar(50),
+	@BrandNameID nvarchar(50),
+	@ModelID nvarchar(50),
+	@GenerationID nvarchar(50),
+	@RamID nvarchar(50),
+	@HardDiskID nvarchar(50),
+	@ProcessorID nvarchar(50),
+	@ProductImage nvarchar(50)
+)
+
+as
+
+set nocount on
+
+insert into [Products]
+(
+	[BranchID],
+	[ProdcutCategoryID],
+	[ProductName],
+	[BrandNameID],
+	[ModelID],
+	[GenerationID],
+	[RamID],
+	[HardDiskID],
+	[ProcessorID],
+	[ProductImage]
+)
+values
+(
+	@BranchID,
+	@ProdcutCategoryID,
+	@ProductName,
+	@BrandNameID,
+	@ModelID,
+	@GenerationID,
+	@RamID,
+	@HardDiskID,
+	@ProcessorID,
+	@ProductImage
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_ProfitAndLoss]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_Add_ProfitAndLoss]
+(
+	@BranchID int,
+	@PurchaseDetailID int,
+	@SalesID int,
+	@ProductID int,
+	@Quantity int,
+	@PurchasePrice decimal(18, 2),
+	@PurchaseAmount decimal(18, 2),
+	@SalesPrice decimal(18, 2),
+	@SalesAmount decimal(18, 2),
+	@Profit decimal(18, 2),
+	@CreationDate datetime,
+	@CreatedByUserID int,
+	@IsDeleted int
+)
+
+as
+
+set nocount on
+
+insert into [ProfitAndLoss]
+(
+	[BranchID],
+	[PurchaseDetailID],
+	[SalesID],
+	[ProductID],
+	[Quantity],
+	[PurchasePrice],
+	[PurchaseAmount],
+	[SalesPrice],
+	[SalesAmount],
+	[Profit],
+	[CreationDate],
+	[CreatedByUserID],
+	[IsDeleted]
+)
+values
+(
+	@BranchID,
+	@PurchaseDetailID,
+	@SalesID,
+	@ProductID,
+	@Quantity,
+	@PurchasePrice,
+	@PurchaseAmount,
+	@SalesPrice,
+	@SalesAmount,
+	@Profit,
+	@CreationDate,
+	@CreatedByUserID,
+	@IsDeleted
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_Purchase]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_Add_Purchase]  
+(  
+ @BranchID int,  
+ @IsTransferFromBranch int,  
+ @TransferFromBranchID int,  
+ @PoNumber nvarchar(50),  
+ @PoDate varchar(10),  
+ @PoReference varchar(10),  
+ @SupplierID int,  
+ @PaymentMode int,  
+ @TotalAmount decimal(18, 2),  
+ @TaxPer int,  
+ @TaxAmount decimal(18, 2),  
+ @PayableAmount decimal(18, 2),
+ @Balance decimal(18, 2),
+ @CreatedBy int  
+  
+)  
+  
+as  set nocount on  insert into [Purchase] (  [BranchID],  [IsTransferFromBranch],  [TransferFromBranchID],  [PoNumber],  [PoDate],  [PoReference],  [SupplierID],  [PaymentMode],  [TotalAmount],  [TaxPer],  [TaxAmount],  [PayableAmount],    [CreatedBy], [Balance]  )
+ values (  @BranchID,  @IsTransferFromBranch,  @TransferFromBranchID,  @PoNumber,  @PoDate,  @PoReference,  @SupplierID,  @PaymentMode,  @TotalAmount,  @TaxPer,  @TaxAmount,  @PayableAmount,  @CreatedBy, @Balance  )  select scope_identity()  
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_PurchaseDetails]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_Add_PurchaseDetails]
+(
+	@PurchaseID int,
+	@ProdcutCategoryID int,
+	@ProductID int,
+	@Quantity int,
+	@UnitPrice decimal(18, 2),
+	@Amount decimal(18, 2),
+	@StockQuantity int
+)
+
+as
+
+set nocount on
+
+insert into [PurchaseDetails]
+(
+	[PurchaseID],
+	[ProdcutCategoryID],
+	[ProductID],
+	[Quantity],
+	[UnitPrice],
+	[Amount],
+	[StockQuantity]
+)
+values
+(
+	@PurchaseID,
+	@ProdcutCategoryID,
+	@ProductID,
+	@Quantity,
+	@UnitPrice,
+	@Amount,
+	@StockQuantity
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_Rams]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_Add_Rams]
+(
+	@RamName nvarchar(50)
+)
+
+as
+
+set nocount on
+
+insert into [Rams]
+(
+	[RamName]
+)
+values
+(
+	@RamName
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_Repairing]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_Add_Repairing]
+(
+	@BranchID int,
+	@EngineerID int,
+	@AssignDate varchar(10),
+	@ProductID int,
+	@ItemDescription nvarchar(max),
+	@DefectDescription nvarchar(max),
+	@AmountToBeCharge decimal(18, 2),
+	@ReturnDate varchar(10),
+	@CreationDate datetime,
+	@CreatedByUserID int,
+	@IsReturn int
+)
+
+as
+
+set nocount on
+
+insert into [Repairing]
+(
+	[BranchID],
+	[EngineerID],
+	[AssignDate],
+	[ProductID],
+	[ItemDescription],
+	[DefectDescription],
+	[AmountToBeCharge],
+	[ReturnDate],
+	[CreationDate],
+	[CreatedByUserID],
+	[IsReturn]
+)
+values
+(
+	@BranchID,
+	@EngineerID,
+	@AssignDate,
+	@ProductID,
+	@ItemDescription,
+	@DefectDescription,
+	@AmountToBeCharge,
+	@ReturnDate,
+	@CreationDate,
+	@CreatedByUserID,
+	@IsReturn
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_Salary]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_Add_Salary]
+(
+
+	@BranchID int,
+	@EmployeeID int,
+	@BasicSalary decimal(18, 2),
+	@CommissionAmount decimal(18, 2),
+	@AdvanceAmount decimal(18, 2),
+	@LoanAmount decimal(18, 2),
+	@NetSalary decimal(18, 2),
+	@SalaryMonth varchar(10),
+	@CreatedByUserID int
+)
+
+as
+
+set nocount on
+
+insert into [Salary]
+(
+	[BranchID],
+	[EmployeeID],
+	[BasicSalary],
+	[CommissionAmount],
+	[AdvanceAmount],
+	[LoanAmount],
+	[NetSalary],
+	[SalaryMonth],
+	[CreatedByUserID]
+)
+values
+(
+
+	@BranchID,
+	@EmployeeID,
+	@BasicSalary,
+	@CommissionAmount,
+	@AdvanceAmount,
+	@LoanAmount,
+	@NetSalary,
+	@SalaryMonth,
+	@CreatedByUserID
+)
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_Sales]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_Add_Sales]  
+(  
+ @BranchID int,  
+ @InvoiceNumber varchar(50),  
+ @InvoiceDate varchar(10),  
+ @CustomerID int,  
+ @PaymentMode int,  
+ @TotalAmount decimal(18, 2),  
+ @TaxPer int,  
+ @TaxAmount decimal(18, 2),  
+ @PayableAmount decimal(18, 2),  
+ @Balance decimal(18, 2),
+ @CreatedBy int  
+   
+)  
+  
+as  set nocount on  insert into [Sales] (  [BranchID],  [InvoiceNumber],  [InvoiceDate],  [CustomerID],  [PaymentMode],  [TotalAmount],  [TaxPer],  [TaxAmount],  [PayableAmount],   [CreatedBy], [Balance]  ) values (  @BranchID,  @InvoiceNumber,  @InvoiceDate,  @CustomerID,
+@PaymentMode,  @TotalAmount,  @TaxPer,  @TaxAmount,  @PayableAmount,   @CreatedBy, @Balance )  select scope_identity()  
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_SalesDetails]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_Add_SalesDetails]
+(
+	@SalesID int,
+	@ProdcutCategoryID int,
+	@ProductID int,
+	@Quantity int,
+	@UnitPrice decimal(18, 2),
+	@Amount decimal(18, 2)
+)
+
+as
+
+set nocount on
+
+insert into [SalesDetails]
+(
+	[SalesID],
+	[ProdcutCategoryID],
+	[ProductID],
+	[Quantity],
+	[UnitPrice],
+	[Amount]
+)
+values
+(
+	@SalesID,
+	@ProdcutCategoryID,
+	@ProductID,
+	@Quantity,
+	@UnitPrice,
+	@Amount
+
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_Suppliers]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_Add_Suppliers]
+(
+	@BranchID int,
+	@SupplierName nvarchar(50),
+	@ContactPerson varchar(50),
+	@ContactNumber varchar(50),
+	@Email nvarchar(50)
+	
+)
+
+as
+
+set nocount on
+
+insert into [Suppliers]
+(
+	[BranchID],
+	[SupplierName],
+	[ContactPerson],
+	[ContactNumber],
+	[Email]
+)
+values
+(
+	@BranchID,
+	@SupplierName,
+	@ContactPerson,
+	@ContactNumber,
+	@Email
+	)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_Add_Users]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_Add_Users]
+(
+	@BranchID int,
+	@FullName nvarchar(50),
+	@DOB varchar(10),
+	@DOJ varchar(10),
+	@CNIC varchar(15),
+	@ContactNumber varchar(15),
+	@BasicSalary decimal(18, 2),
+	@CommissionAmount decimal(18, 2),
+	@UserName nvarchar(50),
+	@Password nvarchar(50)
+)
+
+as
+
+set nocount on
+
+insert into [Users]
+(
+	[BranchID],
+	[FullName],
+	[DOB],
+	[DOJ],
+	[CNIC],
+	[ContactNumber],
+	[BasicSalary],
+	[CommissionAmount],
+	[UserName],
+	[Password]
+)
+values
+(
+	@BranchID,
+	@FullName,
+	@DOB,
+	@DOJ,
+	@CNIC,
+	@ContactNumber,
+	@BasicSalary,
+	@CommissionAmount,
+	@UserName,
+	@Password
+)
+
+select scope_identity()
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_BankAccounts]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_BankAccounts]
+(
+	@BankAccountID int
+)
+
+as
+
+set nocount on
+
+delete from [BankAccounts]
+where [BankAccountID] = @BankAccountID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_BankPayments]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_BankPayments]
+(
+	@BankPaymentID int
+)
+
+as
+
+set nocount on
+
+delete from [BankPayments]
+where [BankPaymentID] = @BankPaymentID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_Banks]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_Banks]
+(
+	@BankID int
+)
+
+as
+
+set nocount on
+
+delete from [Banks]
+where [BankID] = @BankID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_Branches]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_Branches]
+(
+	@BranchID int
+)
+
+as
+
+set nocount on
+
+delete from [Branches]
+where [BranchID] = @BranchID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_Brands]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_Brands]
+(
+	@BrandID int
+)
+
+as
+
+set nocount on
+
+delete from [Brands]
+where [BrandID] = @BrandID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_Commission]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_Commission]
+(
+	@CommissionID int
+)
+
+as
+
+set nocount on
+
+delete from [Commission]
+where [CommissionID] = @CommissionID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_Customers]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_Customers]
+(
+	@CustomerID int
+)
+
+as
+
+set nocount on
+
+delete from [Customers]
+where [CustomerID] = @CustomerID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_EmployeeAdvance]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_EmployeeAdvance]
+(
+	@EmployeeAdvanceID int
+)
+
+as
+
+set nocount on
+
+delete from [EmployeeAdvance]
+where [EmployeeAdvanceID] = @EmployeeAdvanceID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_EmployeeLoan]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_EmployeeLoan]
+(
+	@EmployeeLoanID int
+)
+
+as
+
+set nocount on
+
+delete from [EmployeeLoan]
+where [EmployeeLoanID] = @EmployeeLoanID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_Engineers]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_Engineers]
+(
+	@EngineerID int
+)
+
+as
+
+set nocount on
+
+delete from [Engineers]
+where [EngineerID] = @EngineerID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_Exchange]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_Exchange]
+(
+	@ExchangeID int
+)
+
+as
+
+set nocount on
+
+delete from [Exchange]
+where [ExchangeID] = @ExchangeID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_ExchangeDetails]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_ExchangeDetails]
+(
+	@ExchangeDetailID int
+)
+
+as
+
+set nocount on
+
+delete from [ExchangeDetails]
+where [ExchangeDetailID] = @ExchangeDetailID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_Expenses]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_Expenses]
+(
+	@ExpensesID int
+)
+
+as
+
+set nocount on
+
+delete from [Expenses]
+where [ExpensesID] = @ExpensesID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_ExpensesTypes]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_ExpensesTypes]
+(
+	@ExpensesTypeID int
+)
+
+as
+
+set nocount on
+
+delete from [ExpensesTypes]
+where [ExpensesTypeID] = @ExpensesTypeID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_Generations]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_Generations]
+(
+	@GenerationID int
+)
+
+as
+
+set nocount on
+
+delete from [Generations]
+where [GenerationID] = @GenerationID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_HardDisk]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_HardDisk]
+(
+	@HardDiskID int
+)
+
+as
+
+set nocount on
+
+delete from [HardDisk]
+where [HardDiskID] = @HardDiskID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_Models]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_Models]
+(
+	@ModelID int
+)
+
+as
+
+set nocount on
+
+delete from [Models]
+where [ModelID] = @ModelID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_PaymentMethod]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_PaymentMethod]
+(
+	@PaymentMethodID int
+)
+
+as
+
+set nocount on
+
+delete from [PaymentMethod]
+where [PaymentMethodID] = @PaymentMethodID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_PaymentMode]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_PaymentMode]
+(
+	@PaymentModeID int
+)
+
+as
+
+set nocount on
+
+delete from [PaymentMode]
+where [PaymentModeID] = @PaymentModeID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_PaymentVoucherCustomers]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_PaymentVoucherCustomers]
+(
+	@PaymentVoucherCustomersID int
+)
+
+as
+
+set nocount on
+
+delete from [PaymentVoucherCustomers]
+where [PaymentVoucherCustomersID] = @PaymentVoucherCustomersID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_PaymentVoucherSupplier]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_PaymentVoucherSupplier]
+(
+	@PaymentVoucherSupplierID int
+)
+
+as
+
+set nocount on
+
+delete from [PaymentVoucherSupplier]
+where [PaymentVoucherSupplierID] = @PaymentVoucherSupplierID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_Processor]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_Processor]
+(
+	@ProcessorID int
+)
+
+as
+
+set nocount on
+
+delete from [Processor]
+where [ProcessorID] = @ProcessorID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_ProductCategory]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_ProductCategory]
+(
+	@ProductCategoryID int
+)
+
+as
+
+set nocount on
+
+delete from [ProductCategory]
+where [ProductCategoryID] = @ProductCategoryID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_Products]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_Products]
+(
+	@ProductID int
+)
+
+as
+
+set nocount on
+
+delete from [Products]
+where [ProductID] = @ProductID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_ProfitAndLoss]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_ProfitAndLoss]
+(
+	@ProfitAndLossID int
+)
+
+as
+
+set nocount on
+
+delete from [ProfitAndLoss]
+where [ProfitAndLossID] = @ProfitAndLossID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_Purchase]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_Purchase]
+(
+	@PurchaseID int
+)
+
+as
+
+set nocount on
+
+delete from [Purchase]
+where [PurchaseID] = @PurchaseID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_PurchaseDetails]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_PurchaseDetails]
+(
+	@PurchaseDetailID int
+)
+
+as
+
+set nocount on
+
+delete from [PurchaseDetails]
+where [PurchaseDetailID] = @PurchaseDetailID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_Rams]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_Rams]
+(
+	@RamID int
+)
+
+as
+
+set nocount on
+
+delete from [Rams]
+where [RamID] = @RamID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_Repairing]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_Repairing]
+(
+	@RepairingID int
+)
+
+as
+
+set nocount on
+
+delete from [Repairing]
+where [RepairingID] = @RepairingID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_Salary]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_Salary]
+(
+	@SalaryID int
+)
+
+as
+
+set nocount on
+
+delete from [Salary]
+where [SalaryID] = @SalaryID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_Sales]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_Sales]
+(
+	@SalesID int
+)
+
+as
+
+set nocount on
+
+delete from [Sales]
+where [SalesID] = @SalesID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_SalesDetails]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_SalesDetails]
+(
+	@SalesDetailID int
+)
+
+as
+
+set nocount on
+
+delete from [SalesDetails]
+where [SalesDetailID] = @SalesDetailID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_Suppliers]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_Suppliers]
+(
+	@SupplierID int
+)
+
+as
+
+set nocount on
+
+delete from [Suppliers]
+where [SupplierID] = @SupplierID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_delete_Users]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_delete_Users]
+(
+	@UserID int
+)
+
+as
+
+set nocount on
+
+delete from [Users]
+where [UserID] = @UserID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_BankAccounts]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_update_BankAccounts]
+(
+	@BankAccountID int,
+	@BrancID int,
+	@BankName varchar(50),
+	@AccountTitle varchar(50),
+	@AccountNumber varchar(50),
+	@IBANNumber varchar(50),
+	@BankBranch varchar(50)
+)
+
+as
+
+set nocount on
+
+update [BankAccounts]
+set [BrancID] = @BrancID,
+	[BankName] = @BankName,
+	[AccountTitle] = @AccountTitle,
+	[AccountNumber] = @AccountNumber,
+	[IBANNumber] = @IBANNumber,
+	[BankBranch] = @BankBranch
+where [BankAccountID] = @BankAccountID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_BankPayments]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_BankPayments]
+(
+	@BankPaymentID int,
+	@BranchID int,
+	@BankAccountID int,
+	@CustomerID int,
+	@SalesID int,
+	@BankID int,
+	@CheqNumber varchar(50),
+	@PdcDate varchar(10),
+	@IsClear nchar(10)
+)
+
+as
+
+set nocount on
+
+update [BankPayments]
+set [BranchID] = @BranchID,
+	[BankAccountID] = @BankAccountID,
+	[CustomerID] = @CustomerID,
+	[SalesID] = @SalesID,
+	[BankID] = @BankID,
+	[CheqNumber] = @CheqNumber,
+	[PdcDate] = @PdcDate,
+	[IsClear] = @IsClear
+where [BankPaymentID] = @BankPaymentID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_Banks]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_Banks]
+(
+	@BankID int,
+	@BankName varchar(50),
+	@IsDeleted int
+)
+
+as
+
+set nocount on
+
+update [Banks]
+set [BankName] = @BankName,
+	[IsDeleted] = @IsDeleted
+where [BankID] = @BankID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_Branches]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_Branches]
+(
+	@BranchID int,
+	@BranchName nvarchar(50),
+	@IsActive int,
+	@IsDeleted int
+)
+
+as
+
+set nocount on
+
+update [Branches]
+set [BranchName] = @BranchName,
+	[IsActive] = @IsActive,
+	[IsDeleted] = @IsDeleted
+where [BranchID] = @BranchID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_Brands]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_Brands]
+(
+	@BrandID int,
+	@BrandName nvarchar(50)
+)
+
+as
+
+set nocount on
+
+update [Brands]
+set [BrandName] = @BrandName
+where [BrandID] = @BrandID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_Commission]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_update_Commission]
+(
+	@CommissionID int,
+	@BranchID int,
+	@EmployeeID int,
+	@SalesID int,
+	@SalesDate varchar(10),
+	@CommissionAmount decimal(18, 2)
+
+)
+
+as
+
+set nocount on
+
+update [Commission]
+set [BranchID] = @BranchID,
+	[EmployeeID] = @EmployeeID,
+	[SalesID] = @SalesID,
+	[SalesDate] = @SalesDate,
+	[CommissionAmount] = @CommissionAmount
+
+where [CommissionID] = @CommissionID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_Customers]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_update_Customers]
+(
+	@CustomerID int,
+	@BranchID int,
+	@CustomerName nvarchar(50),
+	@ContactNumber varchar(15),
+	@CustomerReference varchar(15),
+	@Address nvarchar(max)
+)
+
+as
+
+set nocount on
+
+update [Customers]
+set [BranchID] = @BranchID,
+	[CustomerName] = @CustomerName,
+	[ContactNumber] = @ContactNumber,
+	[CustomerReference] = @CustomerReference,
+	[Address] = @Address
+where [CustomerID] = @CustomerID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_EmployeeAdvance]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_update_EmployeeAdvance]
+(
+	@EmployeeAdvanceID int,
+	@BranchID int,
+	@EmployeeID int,
+	@AdvanceDate varchar(10),
+	@AdvanceAmount decimal(18, 2)
+)
+
+as
+
+set nocount on
+
+update [EmployeeAdvance]
+set [BranchID] = @BranchID,
+	[EmployeeID] = @EmployeeID,
+	[AdvanceDate] = @AdvanceDate,
+	[AdvanceAmount] = @AdvanceAmount
+where [EmployeeAdvanceID] = @EmployeeAdvanceID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_EmployeeLoan]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_update_EmployeeLoan]
+(
+	@EmployeeLoanID int,
+	@BranchID int,
+	@EmployeeID int,
+	@LoanDate varchar(10),
+	@LoanAmount decimal(18, 2),
+	@InstallmentAmount decimal(18, 2),
+	@PaidInstallment int,
+	@numberOfInstallment int
+)
+
+as
+
+set nocount on
+
+update [EmployeeLoan]
+set [BranchID] = @BranchID,
+	[EmployeeID] = @EmployeeID,
+	[LoanDate] = @LoanDate,
+	[LoanAmount] = @LoanAmount,
+	[InstallmentAmount] = @InstallmentAmount,
+	[PaidInstallment] = @PaidInstallment,
+	[numberOfInstallment] = @numberOfInstallment
+where [EmployeeLoanID] = @EmployeeLoanID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_Engineers]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_update_Engineers]
+(
+	@EngineerID int,
+	@BranchID int,
+	@EngineerName nvarchar(50),
+	@ContactPerson varchar(50),
+	@ContactNumber varchar(15),
+	@Address nvarchar(max)
+)
+
+as
+
+set nocount on
+
+update [Engineers]
+set [BranchID] = @BranchID,
+	[EngineerName] = @EngineerName,
+	[ContactPerson] = @ContactPerson,
+	[ContactNumber] = @ContactNumber,
+	[Address] = @Address
+where [EngineerID] = @EngineerID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_Exchange]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_Exchange]
+(
+	@ExchangeID int,
+	@PO nvarchar(10),
+	@PoDate nvarchar(10),
+	@CustomerID int,
+	@TotalAmount decimal(18, 2),
+	@PayableAmount decimal(18, 2),
+	@IsPaid int,
+	@CreationDate datetime,
+	@CreatedBy int,
+	@IsDeleted int
+)
+
+as
+
+set nocount on
+
+update [Exchange]
+set [PO] = @PO,
+	[PoDate] = @PoDate,
+	[CustomerID] = @CustomerID,
+	[TotalAmount] = @TotalAmount,
+	[PayableAmount] = @PayableAmount,
+	[IsPaid] = @IsPaid,
+	[CreationDate] = @CreationDate,
+	[CreatedBy] = @CreatedBy,
+	[IsDeleted] = @IsDeleted
+where [ExchangeID] = @ExchangeID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_ExchangeDetails]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_ExchangeDetails]
+(
+	@ExchangeDetailID int,
+	@ExchangeID int,
+	@CategoryID int,
+	@ProductID int,
+	@BrandID int,
+	@ModelID int,
+	@Generation int,
+	@HardDiskID int,
+	@HDDAvailable int,
+	@RamID int,
+	@RamAvailable int,
+	@ProcessorID int,
+	@Screen nvarchar(50),
+	@ScreenAvailable int,
+	@Keboard nvarchar(50),
+	@KeyboardAvailable int,
+	@Charger nvarchar(50),
+	@ChargerAvailable int,
+	@Board nvarchar(50),
+	@BoardAvailable int
+)
+
+as
+
+set nocount on
+
+update [ExchangeDetails]
+set [ExchangeID] = @ExchangeID,
+	[CategoryID] = @CategoryID,
+	[ProductID] = @ProductID,
+	[BrandID] = @BrandID,
+	[ModelID] = @ModelID,
+	[Generation] = @Generation,
+	[HardDiskID] = @HardDiskID,
+	[HDDAvailable] = @HDDAvailable,
+	[RamID] = @RamID,
+	[RamAvailable] = @RamAvailable,
+	[ProcessorID] = @ProcessorID,
+	[Screen] = @Screen,
+	[ScreenAvailable] = @ScreenAvailable,
+	[Keboard] = @Keboard,
+	[KeyboardAvailable] = @KeyboardAvailable,
+	[Charger] = @Charger,
+	[ChargerAvailable] = @ChargerAvailable,
+	[Board] = @Board,
+	[BoardAvailable] = @BoardAvailable
+where [ExchangeDetailID] = @ExchangeDetailID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_Expenses]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_Expenses]
+(
+	@ExpensesID int,
+	@BranchID int,
+	@ExpensesTypeID int,
+	@ExpensesDate varchar(10),
+	@Remarks nvarchar(max),
+	@ExpensesByID int,
+	@CreationDate datetime,
+	@CreatedByUserID int,
+	@IsDeleted int
+)
+
+as
+
+set nocount on
+
+update [Expenses]
+set [BranchID] = @BranchID,
+	[ExpensesTypeID] = @ExpensesTypeID,
+	[ExpensesDate] = @ExpensesDate,
+	[Remarks] = @Remarks,
+	[ExpensesByID] = @ExpensesByID,
+	[CreationDate] = @CreationDate,
+	[CreatedByUserID] = @CreatedByUserID,
+	[IsDeleted] = @IsDeleted
+where [ExpensesID] = @ExpensesID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_ExpensesTypes]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_update_ExpensesTypes]
+(
+	@ExpensesTypeID int,
+	@ExpensesTypeName nchar(10)
+)
+
+as
+
+set nocount on
+
+update [ExpensesTypes]
+set [ExpensesTypeName] = @ExpensesTypeName
+where [ExpensesTypeID] = @ExpensesTypeID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_Generations]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_Generations]
+(
+	@GenerationID int,
+	@GenerationName nvarchar(50)
+)
+
+as
+
+set nocount on
+
+update [Generations]
+set [GenerationName] = @GenerationName
+where [GenerationID] = @GenerationID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_HardDisk]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_HardDisk]
+(
+	@HardDiskID int,
+	@HardDiskName nvarchar(50)
+)
+
+as
+
+set nocount on
+
+update [HardDisk]
+set [HardDiskName] = @HardDiskName
+where [HardDiskID] = @HardDiskID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_Models]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_Models]
+(
+	@ModelID int,
+	@ModelName nvarchar(50)
+)
+
+as
+
+set nocount on
+
+update [Models]
+set [ModelName] = @ModelName
+where [ModelID] = @ModelID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_PaymentMethod]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_PaymentMethod]
+(
+	@PaymentMethodID int,
+	@PaymentMethodName varchar(50)
+)
+
+as
+
+set nocount on
+
+update [PaymentMethod]
+set [PaymentMethodName] = @PaymentMethodName
+where [PaymentMethodID] = @PaymentMethodID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_PaymentMode]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_PaymentMode]
+(
+	@PaymentModeID int,
+	@PaymentModeName varchar(50)
+)
+
+as
+
+set nocount on
+
+update [PaymentMode]
+set [PaymentModeName] = @PaymentModeName
+where [PaymentModeID] = @PaymentModeID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_PaymentVoucherCustomers]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_PaymentVoucherCustomers]
+(
+	@PaymentVoucherCustomersID int,
+	@BranchID int,
+	@CustomerID int,
+	@SalesID int,
+	@PaymetMethodID int,
+	@BankID int,
+	@ChequeNumber varchar(50),
+	@PayOrderNumber varchar(50),
+	@IsPDC int,
+	@PDCDate varchar(10),
+	@IsPdcClear int,
+	@Debit decimal(18, 2),
+	@Credit decimal(18, 2),
+	@Balance decimal(18, 2),
+	@Condition int,
+	@CreationDate datetime,
+	@CreatedByUserID int,
+	@TransactionTypeID int,
+	@IsDeleted int
+)
+
+as
+
+set nocount on
+
+update [PaymentVoucherCustomers]
+set [BranchID] = @BranchID,
+	[CustomerID] = @CustomerID,
+	[SalesID] = @SalesID,
+	[PaymetMethodID] = @PaymetMethodID,
+	[BankID] = @BankID,
+	[ChequeNumber] = @ChequeNumber,
+	[PayOrderNumber] = @PayOrderNumber,
+	[IsPDC] = @IsPDC,
+	[PDCDate] = @PDCDate,
+	[IsPdcClear] = @IsPdcClear,
+	[Debit] = @Debit,
+	[Credit] = @Credit,
+	[Balance] = @Balance,
+	[Condition] = @Condition,
+	[CreationDate] = @CreationDate,
+	[CreatedByUserID] = @CreatedByUserID,
+	[TransactionTypeID] = @TransactionTypeID,
+	[IsDeleted] = @IsDeleted
+where [PaymentVoucherCustomersID] = @PaymentVoucherCustomersID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_PaymentVoucherSupplier]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_PaymentVoucherSupplier]
+(
+	@PaymentVoucherSupplierID int,
+	@BranchID int,
+	@SupplierID int,
+	@PurchaseID int,
+	@PaymetMethodID int,
+	@BankID int,
+	@ChequeNumber nvarchar(50),
+	@PayOrderNumber nvarchar(50),
+	@IsPDC int,
+	@PDCDate varchar(10),
+	@IsPdcClear int,
+	@Debit decimal(18, 2),
+	@Credit decimal(18, 2),
+	@Balance decimal(18, 2),
+	@Condition int,
+	@CreationDate datetime,
+	@CreatedByUserID int,
+	@IsDeleted int
+)
+
+as
+
+set nocount on
+
+update [PaymentVoucherSupplier]
+set [BranchID] = @BranchID,
+	[SupplierID] = @SupplierID,
+	[PurchaseID] = @PurchaseID,
+	[PaymetMethodID] = @PaymetMethodID,
+	[BankID] = @BankID,
+	[ChequeNumber] = @ChequeNumber,
+	[PayOrderNumber] = @PayOrderNumber,
+	[IsPDC] = @IsPDC,
+	[PDCDate] = @PDCDate,
+	[IsPdcClear] = @IsPdcClear,
+	[Debit] = @Debit,
+	[Credit] = @Credit,
+	[Balance] = @Balance,
+	[Condition] = @Condition,
+	[CreationDate] = @CreationDate,
+	[CreatedByUserID] = @CreatedByUserID,
+	[IsDeleted] = @IsDeleted
+where [PaymentVoucherSupplierID] = @PaymentVoucherSupplierID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_Processor]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_Processor]
+(
+	@ProcessorID int,
+	@ProcessorName nvarchar(50)
+)
+
+as
+
+set nocount on
+
+update [Processor]
+set [ProcessorName] = @ProcessorName
+where [ProcessorID] = @ProcessorID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_ProductCategory]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_update_ProductCategory]
+(
+	@ProductCategoryID int,
+	@BranchID int,
+	@CategoryName nvarchar(50)
+)
+
+as
+
+set nocount on
+
+update [ProductCategory]
+set [BranchID] = @BranchID,
+	[CategoryName] = @CategoryName
+where [ProductCategoryID] = @ProductCategoryID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_Products]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_update_Products]
+(
+	@ProductID int,
+	@BranchID int,
+	@ProdcutCategoryID int,
+	@ProductName nvarchar(50),
+	@BrandNameID nvarchar(50),
+	@ModelID nvarchar(50),
+	@GenerationID nvarchar(50),
+	@RamID nvarchar(50),
+	@HardDiskID nvarchar(50),
+	@ProcessorID nvarchar(50),
+	@ProductImage nvarchar(50)
+)
+
+as
+
+set nocount on
+
+update [Products]
+set [BranchID] = @BranchID,
+	[ProdcutCategoryID] = @ProdcutCategoryID,
+	[ProductName] = @ProductName,
+	[BrandNameID] = @BrandNameID,
+	[ModelID] = @ModelID,
+	[GenerationID] = @GenerationID,
+	[RamID] = @RamID,
+	[HardDiskID] = @HardDiskID,
+	[ProcessorID] = @ProcessorID,
+	[ProductImage] = @ProductImage
+where [ProductID] = @ProductID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_ProfitAndLoss]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_ProfitAndLoss]
+(
+	@ProfitAndLossID int,
+	@BranchID int,
+	@PurchaseDetailID int,
+	@SalesID int,
+	@ProductID int,
+	@Quantity int,
+	@PurchasePrice decimal(18, 2),
+	@PurchaseAmount decimal(18, 2),
+	@SalesPrice decimal(18, 2),
+	@SalesAmount decimal(18, 2),
+	@Profit decimal(18, 2),
+	@CreationDate datetime,
+	@CreatedByUserID int,
+	@IsDeleted int
+)
+
+as
+
+set nocount on
+
+update [ProfitAndLoss]
+set [BranchID] = @BranchID,
+	[PurchaseDetailID] = @PurchaseDetailID,
+	[SalesID] = @SalesID,
+	[ProductID] = @ProductID,
+	[Quantity] = @Quantity,
+	[PurchasePrice] = @PurchasePrice,
+	[PurchaseAmount] = @PurchaseAmount,
+	[SalesPrice] = @SalesPrice,
+	[SalesAmount] = @SalesAmount,
+	[Profit] = @Profit,
+	[CreationDate] = @CreationDate,
+	[CreatedByUserID] = @CreatedByUserID,
+	[IsDeleted] = @IsDeleted
+where [ProfitAndLossID] = @ProfitAndLossID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_Purchase]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_Purchase]
+(
+	@PurchaseID int,
+	@BranchID int,
+	@IsTransferFromBranch int,
+	@TransferFromBranchID int,
+	@PoNumber nvarchar(50),
+	@PoDate varchar(10),
+	@PoReference varchar(10),
+	@SupplierID int,
+	@PaymentMode int,
+	@TotalAmount decimal(18, 2),
+	@TaxPer int,
+	@TaxAmount decimal(18, 2),
+	@PayableAmount decimal(18, 2),
+	@isPaid int,
+	@CreationDate datetime,
+	@CreatedBy int,
+	@IsDeleted int
+)
+
+as
+
+set nocount on
+
+update [Purchase]
+set [BranchID] = @BranchID,
+	[IsTransferFromBranch] = @IsTransferFromBranch,
+	[TransferFromBranchID] = @TransferFromBranchID,
+	[PoNumber] = @PoNumber,
+	[PoDate] = @PoDate,
+	[PoReference] = @PoReference,
+	[SupplierID] = @SupplierID,
+	[PaymentMode] = @PaymentMode,
+	[TotalAmount] = @TotalAmount,
+	[TaxPer] = @TaxPer,
+	[TaxAmount] = @TaxAmount,
+	[PayableAmount] = @PayableAmount,
+	[isPaid] = @isPaid,
+	[CreationDate] = @CreationDate,
+	[CreatedBy] = @CreatedBy,
+	[IsDeleted] = @IsDeleted
+where [PurchaseID] = @PurchaseID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_PurchaseDetails]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_PurchaseDetails]
+(
+	@PurchaseDetailID int,
+	@PurchaseID int,
+	@ProdcutCategoryID int,
+	@ProductID int,
+	@Quantity int,
+	@UnitPrice decimal(18, 2),
+	@Amount decimal(18, 2),
+	@StockQuantity int
+)
+
+as
+
+set nocount on
+
+update [PurchaseDetails]
+set [PurchaseID] = @PurchaseID,
+	[ProdcutCategoryID] = @ProdcutCategoryID,
+	[ProductID] = @ProductID,
+	[Quantity] = @Quantity,
+	[UnitPrice] = @UnitPrice,
+	[Amount] = @Amount,
+	[StockQuantity] = @StockQuantity
+where [PurchaseDetailID] = @PurchaseDetailID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_Rams]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_Rams]
+(
+	@RamID int,
+	@RamName nvarchar(50)
+)
+
+as
+
+set nocount on
+
+update [Rams]
+set [RamName] = @RamName
+where [RamID] = @RamID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_Repairing]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_Repairing]
+(
+	@RepairingID int,
+	@BranchID int,
+	@EngineerID int,
+	@AssignDate varchar(10),
+	@ProductID int,
+	@ItemDescription nvarchar(max),
+	@DefectDescription nvarchar(max),
+	@AmountToBeCharge decimal(18, 2),
+	@ReturnDate varchar(10),
+	@CreationDate datetime,
+	@CreatedByUserID int,
+	@IsReturn int
+)
+
+as
+
+set nocount on
+
+update [Repairing]
+set [BranchID] = @BranchID,
+	[EngineerID] = @EngineerID,
+	[AssignDate] = @AssignDate,
+	[ProductID] = @ProductID,
+	[ItemDescription] = @ItemDescription,
+	[DefectDescription] = @DefectDescription,
+	[AmountToBeCharge] = @AmountToBeCharge,
+	[ReturnDate] = @ReturnDate,
+	[CreationDate] = @CreationDate,
+	[CreatedByUserID] = @CreatedByUserID,
+	[IsReturn] = @IsReturn
+where [RepairingID] = @RepairingID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_Salary]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_Salary]
+(
+	@SalaryID int,
+	@BranchID int,
+	@EmployeeID int,
+	@BasicSalary decimal(18, 2),
+	@CommissionAmount decimal(18, 2),
+	@AdvanceAmount decimal(18, 2),
+	@LoanAmount decimal(18, 2),
+	@NetSalary decimal(18, 2),
+	@SalaryMonth varchar(10),
+	@CreationDate datetime,
+	@CreatedByUserID int,
+	@IsDeleted int
+)
+
+as
+
+set nocount on
+
+update [Salary]
+set [BranchID] = @BranchID,
+	[EmployeeID] = @EmployeeID,
+	[BasicSalary] = @BasicSalary,
+	[CommissionAmount] = @CommissionAmount,
+	[AdvanceAmount] = @AdvanceAmount,
+	[LoanAmount] = @LoanAmount,
+	[NetSalary] = @NetSalary,
+	[SalaryMonth] = @SalaryMonth,
+	[CreationDate] = @CreationDate,
+	[CreatedByUserID] = @CreatedByUserID,
+	[IsDeleted] = @IsDeleted
+where [SalaryID] = @SalaryID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_Sales]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_Sales]
+(
+	@SalesID int,
+	@BranchID int,
+	@InvoiceNumber varchar(50),
+	@InvoiceDate varchar(10),
+	@CustomerID int,
+	@PaymentMode int,
+	@TotalAmount decimal(18, 2),
+	@TaxPer int,
+	@TaxAmount decimal(18, 2),
+	@PayableAmount decimal(18, 2),
+	@isPaid int,
+	@CreationDate datetime,
+	@CreatedBy int,
+	@IsReturn int,
+	@IsDeleted int
+)
+
+as
+
+set nocount on
+
+update [Sales]
+set [BranchID] = @BranchID,
+	[InvoiceNumber] = @InvoiceNumber,
+	[InvoiceDate] = @InvoiceDate,
+	[CustomerID] = @CustomerID,
+	[PaymentMode] = @PaymentMode,
+	[TotalAmount] = @TotalAmount,
+	[TaxPer] = @TaxPer,
+	[TaxAmount] = @TaxAmount,
+	[PayableAmount] = @PayableAmount,
+	[isPaid] = @isPaid,
+	[CreationDate] = @CreationDate,
+	[CreatedBy] = @CreatedBy,
+	[IsReturn] = @IsReturn,
+	[IsDeleted] = @IsDeleted
+where [SalesID] = @SalesID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_SalesDetails]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+
+create procedure [dbo].[usp_update_SalesDetails]
+(
+	@SalesDetailID int,
+	@SalesID int,
+	@ProdcutCategoryID int,
+	@ProductID int,
+	@Quantity int,
+	@UnitPrice decimal(18, 2),
+	@Amount decimal(18, 2),
+	@IsReturn int
+)
+
+as
+
+set nocount on
+
+update [SalesDetails]
+set [SalesID] = @SalesID,
+	[ProdcutCategoryID] = @ProdcutCategoryID,
+	[ProductID] = @ProductID,
+	[Quantity] = @Quantity,
+	[UnitPrice] = @UnitPrice,
+	[Amount] = @Amount,
+	[IsReturn] = @IsReturn
+where [SalesDetailID] = @SalesDetailID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_Suppliers]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_update_Suppliers]
+(
+	@SupplierID int,
+	@BranchID int,
+	@SupplierName nvarchar(50),
+	@ContactPerson varchar(50),
+	@ContactNumber varchar(50),
+	@Email nvarchar(50)
+)
+
+as
+
+set nocount on
+
+update [Suppliers]
+set [BranchID] = @BranchID,
+	[SupplierName] = @SupplierName,
+	[ContactPerson] = @ContactPerson,
+	[ContactNumber] = @ContactNumber,
+	[Email] = @Email
+where [SupplierID] = @SupplierID
+GO
+/****** Object:  StoredProcedure [dbo].[usp_update_Users]    Script Date: 6/7/2023 8:13:51 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE procedure [dbo].[usp_update_Users]
+(
+	@UserID int,
+	@BranchID int,
+	@FullName nvarchar(50),
+	@DOB varchar(10),
+	@DOJ varchar(10),
+	@CNIC varchar(15),
+	@ContactNumber varchar(15),
+	@BasicSalary decimal(18, 2),
+	@CommissionAmount decimal(18, 2),
+	@UserName nvarchar(50),
+	@Password nvarchar(50)
+)
+
+as
+
+set nocount on
+
+update [Users]
+set [BranchID] = @BranchID,
+	[FullName] = @FullName,
+	[DOB] = @DOB,
+	[DOJ] = @DOJ,
+	[CNIC] = @CNIC,
+	
+	[ContactNumber] = @ContactNumber,
+	[BasicSalary] = @BasicSalary,
+	[CommissionAmount] = @CommissionAmount,
+	[UserName] = @UserName,
+	[Password] = @Password
+
+where [UserID] = @UserID
+GO

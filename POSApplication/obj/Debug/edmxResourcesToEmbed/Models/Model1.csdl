@@ -1,0 +1,1329 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PosintofsaleModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="BankAccount">
+    <Key>
+      <PropertyRef Name="BankAccountID" />
+    </Key>
+    <Property Name="BankAccountID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BrancID" Type="Int32" />
+    <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AccountTitle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="AccountNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IBANNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="BankBranch" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsActive" Type="Int32" />
+    <Property Name="IsDeleted" Type="Int32" />
+  </EntityType>
+  <EntityType Name="BankPayment">
+    <Key>
+      <PropertyRef Name="BankPaymentID" />
+    </Key>
+    <Property Name="BankPaymentID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="BankAccountID" Type="Int32" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="SalesID" Type="Int32" />
+    <Property Name="BankID" Type="Int32" />
+    <Property Name="CheqNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PdcDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IsClear" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Bank">
+    <Key>
+      <PropertyRef Name="BankID" />
+    </Key>
+    <Property Name="BankID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BankName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsDeleted" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Branch">
+    <Key>
+      <PropertyRef Name="BranchID" />
+    </Key>
+    <Property Name="BranchID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Int32" />
+    <Property Name="IsDeleted" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Brand">
+    <Key>
+      <PropertyRef Name="BrandID" />
+    </Key>
+    <Property Name="BrandID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BrandName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Commission">
+    <Key>
+      <PropertyRef Name="CommissionID" />
+    </Key>
+    <Property Name="CommissionID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="EmployeeID" Type="Int32" />
+    <Property Name="SalesID" Type="Int32" />
+    <Property Name="SalesDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="CommissionAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IsPaid" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Customer">
+    <Key>
+      <PropertyRef Name="CustomerID" />
+    </Key>
+    <Property Name="CustomerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="CustomerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="CustomerReference" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Int32" />
+    <Property Name="IsDeleted" Type="Int32" />
+  </EntityType>
+  <EntityType Name="EmployeeAdvance">
+    <Key>
+      <PropertyRef Name="EmployeeAdvanceID" />
+    </Key>
+    <Property Name="EmployeeAdvanceID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="EmployeeID" Type="Int32" />
+    <Property Name="AdvanceDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="AdvanceAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IsPaid" Type="Int32" />
+    <Property Name="IsDeleted" Type="Int32" />
+  </EntityType>
+  <EntityType Name="EmployeeLoan">
+    <Key>
+      <PropertyRef Name="EmployeeLoanID" />
+    </Key>
+    <Property Name="EmployeeLoanID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="EmployeeID" Type="Int32" />
+    <Property Name="LoanDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="LoanAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="InstallmentAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PaidInstallment" Type="Int32" />
+    <Property Name="numberOfInstallment" Type="Int32" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="IsPaid" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Engineer">
+    <Key>
+      <PropertyRef Name="EngineerID" />
+    </Key>
+    <Property Name="EngineerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="EngineerName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ContactNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Int32" />
+    <Property Name="IsDeleted" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Exchange">
+    <Key>
+      <PropertyRef Name="ExchangeID" />
+    </Key>
+    <Property Name="ExchangeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PO" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="PoDate" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PayableAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IsPaid" Type="Int32" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="IsDeleted" Type="Int32" />
+  </EntityType>
+  <EntityType Name="ExchangeDetail">
+    <Key>
+      <PropertyRef Name="ExchangeDetailID" />
+    </Key>
+    <Property Name="ExchangeDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExchangeID" Type="Int32" />
+    <Property Name="CategoryID" Type="Int32" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="BrandID" Type="Int32" />
+    <Property Name="ModelID" Type="Int32" />
+    <Property Name="Generation" Type="Int32" />
+    <Property Name="HardDiskID" Type="Int32" />
+    <Property Name="HDDAvailable" Type="Int32" />
+    <Property Name="RamID" Type="Int32" />
+    <Property Name="RamAvailable" Type="Int32" />
+    <Property Name="ProcessorID" Type="Int32" />
+    <Property Name="Screen" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ScreenAvailable" Type="Int32" />
+    <Property Name="Keboard" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="KeyboardAvailable" Type="Int32" />
+    <Property Name="Charger" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ChargerAvailable" Type="Int32" />
+    <Property Name="Board" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BoardAvailable" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Expens">
+    <Key>
+      <PropertyRef Name="ExpensesID" />
+    </Key>
+    <Property Name="ExpensesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="ExpensesTypeID" Type="Int32" />
+    <Property Name="ExpensesDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Remarks" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ExpensesByID" Type="Int32" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedByUserID" Type="Int32" />
+    <Property Name="IsDeleted" Type="Int32" />
+    <Property Name="ExpensesAmount" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="ExpensesType">
+    <Key>
+      <PropertyRef Name="ExpensesTypeID" />
+    </Key>
+    <Property Name="ExpensesTypeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ExpensesTypeName" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="IsDeleted" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Generation">
+    <Key>
+      <PropertyRef Name="GenerationID" />
+    </Key>
+    <Property Name="GenerationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="GenerationName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="HardDisk">
+    <Key>
+      <PropertyRef Name="HardDiskID" />
+    </Key>
+    <Property Name="HardDiskID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="HardDiskName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Model">
+    <Key>
+      <PropertyRef Name="ModelID" />
+    </Key>
+    <Property Name="ModelID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ModelName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="PaymentMethod">
+    <Key>
+      <PropertyRef Name="PaymentMethodID" />
+    </Key>
+    <Property Name="PaymentMethodID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PaymentMethodName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PaymentMode">
+    <Key>
+      <PropertyRef Name="PaymentModeID" />
+    </Key>
+    <Property Name="PaymentModeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PaymentModeName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="PaymentVoucherCustomer">
+    <Key>
+      <PropertyRef Name="PaymentVoucherCustomersID" />
+    </Key>
+    <Property Name="PaymentVoucherCustomersID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="SalesID" Type="Int32" />
+    <Property Name="PaymetMethodID" Type="Int32" />
+    <Property Name="BankID" Type="Int32" />
+    <Property Name="ChequeNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="PayOrderNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="IsPDC" Type="Int32" />
+    <Property Name="PDCDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IsPdcClear" Type="Int32" />
+    <Property Name="Debit" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Credit" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Condition" Type="Int32" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedByUserID" Type="Int32" />
+    <Property Name="TransactionTypeID" Type="Int32" />
+    <Property Name="IsDeleted" Type="Int32" />
+  </EntityType>
+  <EntityType Name="PaymentVoucherSupplier">
+    <Key>
+      <PropertyRef Name="PaymentVoucherSupplierID" />
+    </Key>
+    <Property Name="PaymentVoucherSupplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="SupplierID" Type="Int32" />
+    <Property Name="PurchaseID" Type="Int32" />
+    <Property Name="PaymetMethodID" Type="Int32" />
+    <Property Name="BankID" Type="Int32" />
+    <Property Name="ChequeNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PayOrderNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="IsPDC" Type="Int32" />
+    <Property Name="PDCDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="IsPdcClear" Type="Int32" />
+    <Property Name="Debit" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Credit" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Condition" Type="Int32" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedByUserID" Type="Int32" />
+    <Property Name="IsDeleted" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Processor">
+    <Key>
+      <PropertyRef Name="ProcessorID" />
+    </Key>
+    <Property Name="ProcessorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ProcessorName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="ProductCategory">
+    <Key>
+      <PropertyRef Name="ProductCategoryID" />
+    </Key>
+    <Property Name="ProductCategoryID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="CategoryName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Product">
+    <Key>
+      <PropertyRef Name="ProductID" />
+    </Key>
+    <Property Name="ProductID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="ProdcutCategoryID" Type="Int32" Nullable="false" />
+    <Property Name="ProductName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="BrandNameID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ModelID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="GenerationID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="RamID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="HardDiskID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProcessorID" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ProductImage" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="IsDeleted" Type="Int32" />
+    <Property Name="BarCode" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="ProfitAndLoss">
+    <Key>
+      <PropertyRef Name="ProfitAndLossID" />
+    </Key>
+    <Property Name="ProfitAndLossID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="PurchaseDetailID" Type="Int32" />
+    <Property Name="SalesID" Type="Int32" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="PurchasePrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PurchaseAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SalesPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SalesAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Profit" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedByUserID" Type="Int32" />
+    <Property Name="IsDeleted" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Purchase">
+    <Key>
+      <PropertyRef Name="PurchaseID" />
+    </Key>
+    <Property Name="PurchaseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="IsTransferFromBranch" Type="Int32" />
+    <Property Name="TransferFromBranchID" Type="Int32" />
+    <Property Name="PoNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PoDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="PoReference" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="SupplierID" Type="Int32" />
+    <Property Name="PaymentMode" Type="Int32" />
+    <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TaxPer" Type="Int32" />
+    <Property Name="TaxAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PayableAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="isPaid" Type="Int32" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="IsDeleted" Type="Int32" />
+    <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="PurchaseDetail">
+    <Key>
+      <PropertyRef Name="PurchaseDetailID" />
+    </Key>
+    <Property Name="PurchaseDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="PurchaseID" Type="Int32" />
+    <Property Name="ProdcutCategoryID" Type="Int32" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="StockQuantity" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Ram">
+    <Key>
+      <PropertyRef Name="RamID" />
+    </Key>
+    <Property Name="RamID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="RamName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="Repairing">
+    <Key>
+      <PropertyRef Name="RepairingID" />
+    </Key>
+    <Property Name="RepairingID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="EngineerID" Type="Int32" />
+    <Property Name="AssignDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="ItemDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DefectDescription" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="AmountToBeCharge" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="ReturnDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedByUserID" Type="Int32" />
+    <Property Name="IsReturn" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Salary">
+    <Key>
+      <PropertyRef Name="SalaryID" />
+    </Key>
+    <Property Name="SalaryID" Type="Int32" Nullable="false" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="EmployeeID" Type="Int32" />
+    <Property Name="BasicSalary" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CommissionAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="AdvanceAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="LoanAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="NetSalary" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="SalaryMonth" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedByUserID" Type="Int32" />
+    <Property Name="IsDeleted" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Sale">
+    <Key>
+      <PropertyRef Name="SalesID" />
+    </Key>
+    <Property Name="SalesID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="InvoiceNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="InvoiceDate" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="CustomerID" Type="Int32" />
+    <Property Name="PaymentMode" Type="Int32" />
+    <Property Name="TotalAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TaxPer" Type="Int32" />
+    <Property Name="TaxAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="PayableAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="isPaid" Type="Int32" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="CreatedBy" Type="Int32" />
+    <Property Name="IsReturn" Type="Int32" />
+    <Property Name="IsDeleted" Type="Int32" />
+    <Property Name="Balance" Type="Decimal" Precision="18" Scale="2" />
+  </EntityType>
+  <EntityType Name="SalesDetail">
+    <Key>
+      <PropertyRef Name="SalesDetailID" />
+    </Key>
+    <Property Name="SalesDetailID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="SalesID" Type="Int32" />
+    <Property Name="ProdcutCategoryID" Type="Int32" />
+    <Property Name="ProductID" Type="Int32" />
+    <Property Name="Quantity" Type="Int32" />
+    <Property Name="UnitPrice" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="IsReturn" Type="Int32" />
+  </EntityType>
+  <EntityType Name="Supplier">
+    <Key>
+      <PropertyRef Name="SupplierID" />
+    </Key>
+    <Property Name="SupplierID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="SupplierName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ContactPerson" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="ContactNumber" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Email" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Int32" />
+    <Property Name="IsDeleted" Type="Int32" />
+  </EntityType>
+  <EntityType Name="User">
+    <Key>
+      <PropertyRef Name="UserID" />
+    </Key>
+    <Property Name="UserID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="BranchID" Type="Int32" />
+    <Property Name="FullName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="DOB" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="DOJ" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="CNIC" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="UserImage" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ContactNumber" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="BasicSalary" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="CommissionAmount" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="CreationDate" Type="DateTime" Precision="3" />
+    <Property Name="IsActive" Type="Int32" />
+    <Property Name="IsDeleted" Type="Int32" />
+  </EntityType>
+  <EntityContainer Name="PosintofsaleEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="BankAccounts" EntityType="Self.BankAccount" />
+    <EntitySet Name="BankPayments" EntityType="Self.BankPayment" />
+    <EntitySet Name="Banks" EntityType="Self.Bank" />
+    <EntitySet Name="Branches" EntityType="Self.Branch" />
+    <EntitySet Name="Brands" EntityType="Self.Brand" />
+    <EntitySet Name="Commissions" EntityType="Self.Commission" />
+    <EntitySet Name="Customers" EntityType="Self.Customer" />
+    <EntitySet Name="EmployeeAdvances" EntityType="Self.EmployeeAdvance" />
+    <EntitySet Name="EmployeeLoans" EntityType="Self.EmployeeLoan" />
+    <EntitySet Name="Engineers" EntityType="Self.Engineer" />
+    <EntitySet Name="Exchanges" EntityType="Self.Exchange" />
+    <EntitySet Name="ExchangeDetails" EntityType="Self.ExchangeDetail" />
+    <EntitySet Name="Expenses" EntityType="Self.Expens" />
+    <EntitySet Name="ExpensesTypes" EntityType="Self.ExpensesType" />
+    <EntitySet Name="Generations" EntityType="Self.Generation" />
+    <EntitySet Name="HardDisks" EntityType="Self.HardDisk" />
+    <EntitySet Name="Models" EntityType="Self.Model" />
+    <EntitySet Name="PaymentMethods" EntityType="Self.PaymentMethod" />
+    <EntitySet Name="PaymentModes" EntityType="Self.PaymentMode" />
+    <EntitySet Name="PaymentVoucherCustomers" EntityType="Self.PaymentVoucherCustomer" />
+    <EntitySet Name="PaymentVoucherSuppliers" EntityType="Self.PaymentVoucherSupplier" />
+    <EntitySet Name="Processors" EntityType="Self.Processor" />
+    <EntitySet Name="ProductCategories" EntityType="Self.ProductCategory" />
+    <EntitySet Name="Products" EntityType="Self.Product" />
+    <EntitySet Name="ProfitAndLosses" EntityType="Self.ProfitAndLoss" />
+    <EntitySet Name="Purchases" EntityType="Self.Purchase" />
+    <EntitySet Name="PurchaseDetails" EntityType="Self.PurchaseDetail" />
+    <EntitySet Name="Rams" EntityType="Self.Ram" />
+    <EntitySet Name="Repairings" EntityType="Self.Repairing" />
+    <EntitySet Name="Salaries" EntityType="Self.Salary" />
+    <EntitySet Name="Sales" EntityType="Self.Sale" />
+    <EntitySet Name="SalesDetails" EntityType="Self.SalesDetail" />
+    <EntitySet Name="Suppliers" EntityType="Self.Supplier" />
+    <EntitySet Name="Users" EntityType="Self.User" />
+    <FunctionImport Name="ps_purchase" ReturnType="Collection(PosintofsaleModel.ps_purchase_Result)">
+      <Parameter Name="PoNumber" Mode="In" Type="Int32" />
+      <Parameter Name="PoReference" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="ps_sales" ReturnType="Collection(PosintofsaleModel.ps_sales_Result)">
+      <Parameter Name="salesid" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_BankAccounts" ReturnType="Collection(Decimal)">
+      <Parameter Name="BrancID" Mode="In" Type="Int32" />
+      <Parameter Name="BankName" Mode="In" Type="String" />
+      <Parameter Name="AccountTitle" Mode="In" Type="String" />
+      <Parameter Name="AccountNumber" Mode="In" Type="String" />
+      <Parameter Name="IBANNumber" Mode="In" Type="String" />
+      <Parameter Name="BankBranch" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_BankPayments" ReturnType="Collection(Decimal)">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="BankAccountID" Mode="In" Type="Int32" />
+      <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+      <Parameter Name="SalesID" Mode="In" Type="Int32" />
+      <Parameter Name="BankID" Mode="In" Type="Int32" />
+      <Parameter Name="CheqNumber" Mode="In" Type="String" />
+      <Parameter Name="PdcDate" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_Banks" ReturnType="Collection(Decimal)">
+      <Parameter Name="BankName" Mode="In" Type="String" />
+      <Parameter Name="IsDeleted" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_Branches" ReturnType="Collection(Decimal)">
+      <Parameter Name="BranchName" Mode="In" Type="String" />
+      <Parameter Name="IsActive" Mode="In" Type="Int32" />
+      <Parameter Name="IsDeleted" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_Brands" ReturnType="Collection(Decimal)">
+      <Parameter Name="BrandName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_Commission" ReturnType="Collection(Decimal)">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="EmployeeID" Mode="In" Type="Int32" />
+      <Parameter Name="SalesID" Mode="In" Type="Int32" />
+      <Parameter Name="SalesDate" Mode="In" Type="String" />
+      <Parameter Name="CommissionAmount" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_Customers" ReturnType="Collection(Decimal)">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="ContactNumber" Mode="In" Type="String" />
+      <Parameter Name="CustomerReference" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_EmployeeAdvance" ReturnType="Collection(Decimal)">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="EmployeeID" Mode="In" Type="Int32" />
+      <Parameter Name="AdvanceDate" Mode="In" Type="String" />
+      <Parameter Name="AdvanceAmount" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_EmployeeLoan" ReturnType="Collection(Decimal)">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="EmployeeID" Mode="In" Type="Int32" />
+      <Parameter Name="LoanDate" Mode="In" Type="String" />
+      <Parameter Name="LoanAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="InstallmentAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="PaidInstallment" Mode="In" Type="Int32" />
+      <Parameter Name="numberOfInstallment" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_Engineers" ReturnType="Collection(Decimal)">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="EngineerName" Mode="In" Type="String" />
+      <Parameter Name="ContactPerson" Mode="In" Type="String" />
+      <Parameter Name="ContactNumber" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_Exchange" ReturnType="Collection(Decimal)">
+      <Parameter Name="PO" Mode="In" Type="String" />
+      <Parameter Name="PoDate" Mode="In" Type="String" />
+      <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+      <Parameter Name="TotalAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="PayableAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="IsPaid" Mode="In" Type="Int32" />
+      <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+      <Parameter Name="IsDeleted" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_ExchangeDetails" ReturnType="Collection(Decimal)">
+      <Parameter Name="ExchangeID" Mode="In" Type="Int32" />
+      <Parameter Name="CategoryID" Mode="In" Type="Int32" />
+      <Parameter Name="ProductID" Mode="In" Type="Int32" />
+      <Parameter Name="BrandID" Mode="In" Type="Int32" />
+      <Parameter Name="ModelID" Mode="In" Type="Int32" />
+      <Parameter Name="Generation" Mode="In" Type="Int32" />
+      <Parameter Name="HardDiskID" Mode="In" Type="Int32" />
+      <Parameter Name="HDDAvailable" Mode="In" Type="Int32" />
+      <Parameter Name="RamID" Mode="In" Type="Int32" />
+      <Parameter Name="RamAvailable" Mode="In" Type="Int32" />
+      <Parameter Name="ProcessorID" Mode="In" Type="Int32" />
+      <Parameter Name="Screen" Mode="In" Type="String" />
+      <Parameter Name="ScreenAvailable" Mode="In" Type="Int32" />
+      <Parameter Name="Keboard" Mode="In" Type="String" />
+      <Parameter Name="KeyboardAvailable" Mode="In" Type="Int32" />
+      <Parameter Name="Charger" Mode="In" Type="String" />
+      <Parameter Name="ChargerAvailable" Mode="In" Type="Int32" />
+      <Parameter Name="Board" Mode="In" Type="String" />
+      <Parameter Name="BoardAvailable" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_Expenses" ReturnType="Collection(Decimal)">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="ExpensesTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="ExpensesDate" Mode="In" Type="String" />
+      <Parameter Name="Remarks" Mode="In" Type="String" />
+      <Parameter Name="ExpensesByID" Mode="In" Type="Int32" />
+      <Parameter Name="CreatedByUserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_ExpensesTypes" ReturnType="Collection(Decimal)">
+      <Parameter Name="ExpensesTypeName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_Generations" ReturnType="Collection(Decimal)">
+      <Parameter Name="GenerationName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_HardDisk" ReturnType="Collection(Decimal)">
+      <Parameter Name="HardDiskName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_Models" ReturnType="Collection(Decimal)">
+      <Parameter Name="ModelName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_PaymentMethod" ReturnType="Collection(Decimal)">
+      <Parameter Name="PaymentMethodName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_PaymentMode" ReturnType="Collection(Decimal)">
+      <Parameter Name="PaymentModeName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_PaymentVoucherCustomers" ReturnType="Collection(Decimal)">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+      <Parameter Name="SalesID" Mode="In" Type="Int32" />
+      <Parameter Name="PaymetMethodID" Mode="In" Type="Int32" />
+      <Parameter Name="BankID" Mode="In" Type="Int32" />
+      <Parameter Name="ChequeNumber" Mode="In" Type="String" />
+      <Parameter Name="PayOrderNumber" Mode="In" Type="String" />
+      <Parameter Name="IsPDC" Mode="In" Type="Int32" />
+      <Parameter Name="PDCDate" Mode="In" Type="String" />
+      <Parameter Name="IsPdcClear" Mode="In" Type="Int32" />
+      <Parameter Name="Debit" Mode="In" Type="Decimal" />
+      <Parameter Name="Credit" Mode="In" Type="Decimal" />
+      <Parameter Name="Balance" Mode="In" Type="Decimal" />
+      <Parameter Name="Condition" Mode="In" Type="Int32" />
+      <Parameter Name="CreatedByUserID" Mode="In" Type="Int32" />
+      <Parameter Name="TransactionTypeID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_PaymentVoucherSupplier" ReturnType="Collection(Decimal)">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="SupplierID" Mode="In" Type="Int32" />
+      <Parameter Name="PurchaseID" Mode="In" Type="Int32" />
+      <Parameter Name="PaymetMethodID" Mode="In" Type="Int32" />
+      <Parameter Name="BankID" Mode="In" Type="Int32" />
+      <Parameter Name="ChequeNumber" Mode="In" Type="String" />
+      <Parameter Name="PayOrderNumber" Mode="In" Type="String" />
+      <Parameter Name="IsPDC" Mode="In" Type="Int32" />
+      <Parameter Name="PDCDate" Mode="In" Type="String" />
+      <Parameter Name="IsPdcClear" Mode="In" Type="Int32" />
+      <Parameter Name="Debit" Mode="In" Type="Decimal" />
+      <Parameter Name="Credit" Mode="In" Type="Decimal" />
+      <Parameter Name="Balance" Mode="In" Type="Decimal" />
+      <Parameter Name="Condition" Mode="In" Type="Int32" />
+      <Parameter Name="CreatedByUserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_Processor" ReturnType="Collection(Decimal)">
+      <Parameter Name="ProcessorName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_ProductCategory" ReturnType="Collection(Decimal)">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="CategoryName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_Products" ReturnType="Collection(Decimal)">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="ProdcutCategoryID" Mode="In" Type="Int32" />
+      <Parameter Name="ProductName" Mode="In" Type="String" />
+      <Parameter Name="BrandNameID" Mode="In" Type="String" />
+      <Parameter Name="ModelID" Mode="In" Type="String" />
+      <Parameter Name="GenerationID" Mode="In" Type="String" />
+      <Parameter Name="RamID" Mode="In" Type="String" />
+      <Parameter Name="HardDiskID" Mode="In" Type="String" />
+      <Parameter Name="ProcessorID" Mode="In" Type="String" />
+      <Parameter Name="ProductImage" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_ProfitAndLoss" ReturnType="Collection(Decimal)">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="PurchaseDetailID" Mode="In" Type="Int32" />
+      <Parameter Name="SalesID" Mode="In" Type="Int32" />
+      <Parameter Name="ProductID" Mode="In" Type="Int32" />
+      <Parameter Name="Quantity" Mode="In" Type="Int32" />
+      <Parameter Name="PurchasePrice" Mode="In" Type="Decimal" />
+      <Parameter Name="PurchaseAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="SalesPrice" Mode="In" Type="Decimal" />
+      <Parameter Name="SalesAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="Profit" Mode="In" Type="Decimal" />
+      <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CreatedByUserID" Mode="In" Type="Int32" />
+      <Parameter Name="IsDeleted" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_Purchase" ReturnType="Collection(Decimal)">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="IsTransferFromBranch" Mode="In" Type="Int32" />
+      <Parameter Name="TransferFromBranchID" Mode="In" Type="Int32" />
+      <Parameter Name="PoNumber" Mode="In" Type="String" />
+      <Parameter Name="PoDate" Mode="In" Type="String" />
+      <Parameter Name="PoReference" Mode="In" Type="String" />
+      <Parameter Name="SupplierID" Mode="In" Type="Int32" />
+      <Parameter Name="PaymentMode" Mode="In" Type="Int32" />
+      <Parameter Name="TotalAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="TaxPer" Mode="In" Type="Int32" />
+      <Parameter Name="TaxAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="PayableAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="Balance" Mode="In" Type="Decimal" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_PurchaseDetails" ReturnType="Collection(Decimal)">
+      <Parameter Name="PurchaseID" Mode="In" Type="Int32" />
+      <Parameter Name="ProdcutCategoryID" Mode="In" Type="Int32" />
+      <Parameter Name="ProductID" Mode="In" Type="Int32" />
+      <Parameter Name="Quantity" Mode="In" Type="Int32" />
+      <Parameter Name="UnitPrice" Mode="In" Type="Decimal" />
+      <Parameter Name="Amount" Mode="In" Type="Decimal" />
+      <Parameter Name="StockQuantity" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_Rams" ReturnType="Collection(Decimal)">
+      <Parameter Name="RamName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_Repairing" ReturnType="Collection(Decimal)">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="EngineerID" Mode="In" Type="Int32" />
+      <Parameter Name="AssignDate" Mode="In" Type="String" />
+      <Parameter Name="ProductID" Mode="In" Type="Int32" />
+      <Parameter Name="ItemDescription" Mode="In" Type="String" />
+      <Parameter Name="DefectDescription" Mode="In" Type="String" />
+      <Parameter Name="AmountToBeCharge" Mode="In" Type="Decimal" />
+      <Parameter Name="ReturnDate" Mode="In" Type="String" />
+      <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CreatedByUserID" Mode="In" Type="Int32" />
+      <Parameter Name="IsReturn" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_Salary">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="EmployeeID" Mode="In" Type="Int32" />
+      <Parameter Name="BasicSalary" Mode="In" Type="Decimal" />
+      <Parameter Name="CommissionAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="AdvanceAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="LoanAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="NetSalary" Mode="In" Type="Decimal" />
+      <Parameter Name="SalaryMonth" Mode="In" Type="String" />
+      <Parameter Name="CreatedByUserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_Sales" ReturnType="Collection(Decimal)">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="InvoiceNumber" Mode="In" Type="String" />
+      <Parameter Name="InvoiceDate" Mode="In" Type="String" />
+      <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+      <Parameter Name="PaymentMode" Mode="In" Type="Int32" />
+      <Parameter Name="TotalAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="TaxPer" Mode="In" Type="Int32" />
+      <Parameter Name="TaxAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="PayableAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="Balance" Mode="In" Type="Decimal" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_SalesDetails" ReturnType="Collection(Decimal)">
+      <Parameter Name="SalesID" Mode="In" Type="Int32" />
+      <Parameter Name="ProdcutCategoryID" Mode="In" Type="Int32" />
+      <Parameter Name="ProductID" Mode="In" Type="Int32" />
+      <Parameter Name="Quantity" Mode="In" Type="Int32" />
+      <Parameter Name="UnitPrice" Mode="In" Type="Decimal" />
+      <Parameter Name="Amount" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_Suppliers" ReturnType="Collection(Decimal)">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="SupplierName" Mode="In" Type="String" />
+      <Parameter Name="ContactPerson" Mode="In" Type="String" />
+      <Parameter Name="ContactNumber" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_Add_Users" ReturnType="Collection(Decimal)">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="FullName" Mode="In" Type="String" />
+      <Parameter Name="DOB" Mode="In" Type="String" />
+      <Parameter Name="DOJ" Mode="In" Type="String" />
+      <Parameter Name="CNIC" Mode="In" Type="String" />
+      <Parameter Name="ContactNumber" Mode="In" Type="String" />
+      <Parameter Name="BasicSalary" Mode="In" Type="Decimal" />
+      <Parameter Name="CommissionAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_BankAccounts">
+      <Parameter Name="BankAccountID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_BankPayments">
+      <Parameter Name="BankPaymentID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_Banks">
+      <Parameter Name="BankID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_Branches">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_Brands">
+      <Parameter Name="BrandID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_Commission">
+      <Parameter Name="CommissionID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_Customers">
+      <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_EmployeeAdvance">
+      <Parameter Name="EmployeeAdvanceID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_EmployeeLoan">
+      <Parameter Name="EmployeeLoanID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_Engineers">
+      <Parameter Name="EngineerID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_Exchange">
+      <Parameter Name="ExchangeID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_ExchangeDetails">
+      <Parameter Name="ExchangeDetailID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_Expenses">
+      <Parameter Name="ExpensesID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_ExpensesTypes">
+      <Parameter Name="ExpensesTypeID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_Generations">
+      <Parameter Name="GenerationID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_HardDisk">
+      <Parameter Name="HardDiskID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_Models">
+      <Parameter Name="ModelID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_PaymentMethod">
+      <Parameter Name="PaymentMethodID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_PaymentMode">
+      <Parameter Name="PaymentModeID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_PaymentVoucherCustomers">
+      <Parameter Name="PaymentVoucherCustomersID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_PaymentVoucherSupplier">
+      <Parameter Name="PaymentVoucherSupplierID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_Processor">
+      <Parameter Name="ProcessorID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_ProductCategory">
+      <Parameter Name="ProductCategoryID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_Products">
+      <Parameter Name="ProductID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_ProfitAndLoss">
+      <Parameter Name="ProfitAndLossID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_Purchase">
+      <Parameter Name="PurchaseID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_PurchaseDetails">
+      <Parameter Name="PurchaseDetailID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_Rams">
+      <Parameter Name="RamID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_Repairing">
+      <Parameter Name="RepairingID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_Salary">
+      <Parameter Name="SalaryID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_Sales">
+      <Parameter Name="SalesID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_SalesDetails">
+      <Parameter Name="SalesDetailID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_Suppliers">
+      <Parameter Name="SupplierID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_delete_Users">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_BankAccounts">
+      <Parameter Name="BankAccountID" Mode="In" Type="Int32" />
+      <Parameter Name="BrancID" Mode="In" Type="Int32" />
+      <Parameter Name="BankName" Mode="In" Type="String" />
+      <Parameter Name="AccountTitle" Mode="In" Type="String" />
+      <Parameter Name="AccountNumber" Mode="In" Type="String" />
+      <Parameter Name="IBANNumber" Mode="In" Type="String" />
+      <Parameter Name="BankBranch" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_BankPayments">
+      <Parameter Name="BankPaymentID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="BankAccountID" Mode="In" Type="Int32" />
+      <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+      <Parameter Name="SalesID" Mode="In" Type="Int32" />
+      <Parameter Name="BankID" Mode="In" Type="Int32" />
+      <Parameter Name="CheqNumber" Mode="In" Type="String" />
+      <Parameter Name="PdcDate" Mode="In" Type="String" />
+      <Parameter Name="IsClear" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_Banks">
+      <Parameter Name="BankID" Mode="In" Type="Int32" />
+      <Parameter Name="BankName" Mode="In" Type="String" />
+      <Parameter Name="IsDeleted" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_Branches">
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchName" Mode="In" Type="String" />
+      <Parameter Name="IsActive" Mode="In" Type="Int32" />
+      <Parameter Name="IsDeleted" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_Brands">
+      <Parameter Name="BrandID" Mode="In" Type="Int32" />
+      <Parameter Name="BrandName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_Commission">
+      <Parameter Name="CommissionID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="EmployeeID" Mode="In" Type="Int32" />
+      <Parameter Name="SalesID" Mode="In" Type="Int32" />
+      <Parameter Name="SalesDate" Mode="In" Type="String" />
+      <Parameter Name="CommissionAmount" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_Customers">
+      <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="CustomerName" Mode="In" Type="String" />
+      <Parameter Name="ContactNumber" Mode="In" Type="String" />
+      <Parameter Name="CustomerReference" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_EmployeeAdvance">
+      <Parameter Name="EmployeeAdvanceID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="EmployeeID" Mode="In" Type="Int32" />
+      <Parameter Name="AdvanceDate" Mode="In" Type="String" />
+      <Parameter Name="AdvanceAmount" Mode="In" Type="Decimal" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_EmployeeLoan">
+      <Parameter Name="EmployeeLoanID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="EmployeeID" Mode="In" Type="Int32" />
+      <Parameter Name="LoanDate" Mode="In" Type="String" />
+      <Parameter Name="LoanAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="InstallmentAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="PaidInstallment" Mode="In" Type="Int32" />
+      <Parameter Name="numberOfInstallment" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_Engineers">
+      <Parameter Name="EngineerID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="EngineerName" Mode="In" Type="String" />
+      <Parameter Name="ContactPerson" Mode="In" Type="String" />
+      <Parameter Name="ContactNumber" Mode="In" Type="String" />
+      <Parameter Name="Address" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_Exchange">
+      <Parameter Name="ExchangeID" Mode="In" Type="Int32" />
+      <Parameter Name="PO" Mode="In" Type="String" />
+      <Parameter Name="PoDate" Mode="In" Type="String" />
+      <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+      <Parameter Name="TotalAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="PayableAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="IsPaid" Mode="In" Type="Int32" />
+      <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+      <Parameter Name="IsDeleted" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_ExchangeDetails">
+      <Parameter Name="ExchangeDetailID" Mode="In" Type="Int32" />
+      <Parameter Name="ExchangeID" Mode="In" Type="Int32" />
+      <Parameter Name="CategoryID" Mode="In" Type="Int32" />
+      <Parameter Name="ProductID" Mode="In" Type="Int32" />
+      <Parameter Name="BrandID" Mode="In" Type="Int32" />
+      <Parameter Name="ModelID" Mode="In" Type="Int32" />
+      <Parameter Name="Generation" Mode="In" Type="Int32" />
+      <Parameter Name="HardDiskID" Mode="In" Type="Int32" />
+      <Parameter Name="HDDAvailable" Mode="In" Type="Int32" />
+      <Parameter Name="RamID" Mode="In" Type="Int32" />
+      <Parameter Name="RamAvailable" Mode="In" Type="Int32" />
+      <Parameter Name="ProcessorID" Mode="In" Type="Int32" />
+      <Parameter Name="Screen" Mode="In" Type="String" />
+      <Parameter Name="ScreenAvailable" Mode="In" Type="Int32" />
+      <Parameter Name="Keboard" Mode="In" Type="String" />
+      <Parameter Name="KeyboardAvailable" Mode="In" Type="Int32" />
+      <Parameter Name="Charger" Mode="In" Type="String" />
+      <Parameter Name="ChargerAvailable" Mode="In" Type="Int32" />
+      <Parameter Name="Board" Mode="In" Type="String" />
+      <Parameter Name="BoardAvailable" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_Expenses">
+      <Parameter Name="ExpensesID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="ExpensesTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="ExpensesDate" Mode="In" Type="String" />
+      <Parameter Name="Remarks" Mode="In" Type="String" />
+      <Parameter Name="ExpensesByID" Mode="In" Type="Int32" />
+      <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CreatedByUserID" Mode="In" Type="Int32" />
+      <Parameter Name="IsDeleted" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_ExpensesTypes">
+      <Parameter Name="ExpensesTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="ExpensesTypeName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_Generations">
+      <Parameter Name="GenerationID" Mode="In" Type="Int32" />
+      <Parameter Name="GenerationName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_HardDisk">
+      <Parameter Name="HardDiskID" Mode="In" Type="Int32" />
+      <Parameter Name="HardDiskName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_Models">
+      <Parameter Name="ModelID" Mode="In" Type="Int32" />
+      <Parameter Name="ModelName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_PaymentMethod">
+      <Parameter Name="PaymentMethodID" Mode="In" Type="Int32" />
+      <Parameter Name="PaymentMethodName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_PaymentMode">
+      <Parameter Name="PaymentModeID" Mode="In" Type="Int32" />
+      <Parameter Name="PaymentModeName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_PaymentVoucherCustomers">
+      <Parameter Name="PaymentVoucherCustomersID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+      <Parameter Name="SalesID" Mode="In" Type="Int32" />
+      <Parameter Name="PaymetMethodID" Mode="In" Type="Int32" />
+      <Parameter Name="BankID" Mode="In" Type="Int32" />
+      <Parameter Name="ChequeNumber" Mode="In" Type="String" />
+      <Parameter Name="PayOrderNumber" Mode="In" Type="String" />
+      <Parameter Name="IsPDC" Mode="In" Type="Int32" />
+      <Parameter Name="PDCDate" Mode="In" Type="String" />
+      <Parameter Name="IsPdcClear" Mode="In" Type="Int32" />
+      <Parameter Name="Debit" Mode="In" Type="Decimal" />
+      <Parameter Name="Credit" Mode="In" Type="Decimal" />
+      <Parameter Name="Balance" Mode="In" Type="Decimal" />
+      <Parameter Name="Condition" Mode="In" Type="Int32" />
+      <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CreatedByUserID" Mode="In" Type="Int32" />
+      <Parameter Name="TransactionTypeID" Mode="In" Type="Int32" />
+      <Parameter Name="IsDeleted" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_PaymentVoucherSupplier">
+      <Parameter Name="PaymentVoucherSupplierID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="SupplierID" Mode="In" Type="Int32" />
+      <Parameter Name="PurchaseID" Mode="In" Type="Int32" />
+      <Parameter Name="PaymetMethodID" Mode="In" Type="Int32" />
+      <Parameter Name="BankID" Mode="In" Type="Int32" />
+      <Parameter Name="ChequeNumber" Mode="In" Type="String" />
+      <Parameter Name="PayOrderNumber" Mode="In" Type="String" />
+      <Parameter Name="IsPDC" Mode="In" Type="Int32" />
+      <Parameter Name="PDCDate" Mode="In" Type="String" />
+      <Parameter Name="IsPdcClear" Mode="In" Type="Int32" />
+      <Parameter Name="Debit" Mode="In" Type="Decimal" />
+      <Parameter Name="Credit" Mode="In" Type="Decimal" />
+      <Parameter Name="Balance" Mode="In" Type="Decimal" />
+      <Parameter Name="Condition" Mode="In" Type="Int32" />
+      <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CreatedByUserID" Mode="In" Type="Int32" />
+      <Parameter Name="IsDeleted" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_Processor">
+      <Parameter Name="ProcessorID" Mode="In" Type="Int32" />
+      <Parameter Name="ProcessorName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_ProductCategory">
+      <Parameter Name="ProductCategoryID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="CategoryName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_Products">
+      <Parameter Name="ProductID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="ProdcutCategoryID" Mode="In" Type="Int32" />
+      <Parameter Name="ProductName" Mode="In" Type="String" />
+      <Parameter Name="BrandNameID" Mode="In" Type="String" />
+      <Parameter Name="ModelID" Mode="In" Type="String" />
+      <Parameter Name="GenerationID" Mode="In" Type="String" />
+      <Parameter Name="RamID" Mode="In" Type="String" />
+      <Parameter Name="HardDiskID" Mode="In" Type="String" />
+      <Parameter Name="ProcessorID" Mode="In" Type="String" />
+      <Parameter Name="ProductImage" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_ProfitAndLoss">
+      <Parameter Name="ProfitAndLossID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="PurchaseDetailID" Mode="In" Type="Int32" />
+      <Parameter Name="SalesID" Mode="In" Type="Int32" />
+      <Parameter Name="ProductID" Mode="In" Type="Int32" />
+      <Parameter Name="Quantity" Mode="In" Type="Int32" />
+      <Parameter Name="PurchasePrice" Mode="In" Type="Decimal" />
+      <Parameter Name="PurchaseAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="SalesPrice" Mode="In" Type="Decimal" />
+      <Parameter Name="SalesAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="Profit" Mode="In" Type="Decimal" />
+      <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CreatedByUserID" Mode="In" Type="Int32" />
+      <Parameter Name="IsDeleted" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_Purchase">
+      <Parameter Name="PurchaseID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="IsTransferFromBranch" Mode="In" Type="Int32" />
+      <Parameter Name="TransferFromBranchID" Mode="In" Type="Int32" />
+      <Parameter Name="PoNumber" Mode="In" Type="String" />
+      <Parameter Name="PoDate" Mode="In" Type="String" />
+      <Parameter Name="PoReference" Mode="In" Type="String" />
+      <Parameter Name="SupplierID" Mode="In" Type="Int32" />
+      <Parameter Name="PaymentMode" Mode="In" Type="Int32" />
+      <Parameter Name="TotalAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="TaxPer" Mode="In" Type="Int32" />
+      <Parameter Name="TaxAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="PayableAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="isPaid" Mode="In" Type="Int32" />
+      <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+      <Parameter Name="IsDeleted" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_PurchaseDetails">
+      <Parameter Name="PurchaseDetailID" Mode="In" Type="Int32" />
+      <Parameter Name="PurchaseID" Mode="In" Type="Int32" />
+      <Parameter Name="ProdcutCategoryID" Mode="In" Type="Int32" />
+      <Parameter Name="ProductID" Mode="In" Type="Int32" />
+      <Parameter Name="Quantity" Mode="In" Type="Int32" />
+      <Parameter Name="UnitPrice" Mode="In" Type="Decimal" />
+      <Parameter Name="Amount" Mode="In" Type="Decimal" />
+      <Parameter Name="StockQuantity" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_Rams">
+      <Parameter Name="RamID" Mode="In" Type="Int32" />
+      <Parameter Name="RamName" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_Repairing">
+      <Parameter Name="RepairingID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="EngineerID" Mode="In" Type="Int32" />
+      <Parameter Name="AssignDate" Mode="In" Type="String" />
+      <Parameter Name="ProductID" Mode="In" Type="Int32" />
+      <Parameter Name="ItemDescription" Mode="In" Type="String" />
+      <Parameter Name="DefectDescription" Mode="In" Type="String" />
+      <Parameter Name="AmountToBeCharge" Mode="In" Type="Decimal" />
+      <Parameter Name="ReturnDate" Mode="In" Type="String" />
+      <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CreatedByUserID" Mode="In" Type="Int32" />
+      <Parameter Name="IsReturn" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_Salary">
+      <Parameter Name="SalaryID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="EmployeeID" Mode="In" Type="Int32" />
+      <Parameter Name="BasicSalary" Mode="In" Type="Decimal" />
+      <Parameter Name="CommissionAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="AdvanceAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="LoanAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="NetSalary" Mode="In" Type="Decimal" />
+      <Parameter Name="SalaryMonth" Mode="In" Type="String" />
+      <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CreatedByUserID" Mode="In" Type="Int32" />
+      <Parameter Name="IsDeleted" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_Sales">
+      <Parameter Name="SalesID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="InvoiceNumber" Mode="In" Type="String" />
+      <Parameter Name="InvoiceDate" Mode="In" Type="String" />
+      <Parameter Name="CustomerID" Mode="In" Type="Int32" />
+      <Parameter Name="PaymentMode" Mode="In" Type="Int32" />
+      <Parameter Name="TotalAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="TaxPer" Mode="In" Type="Int32" />
+      <Parameter Name="TaxAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="PayableAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="isPaid" Mode="In" Type="Int32" />
+      <Parameter Name="CreationDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CreatedBy" Mode="In" Type="Int32" />
+      <Parameter Name="IsReturn" Mode="In" Type="Int32" />
+      <Parameter Name="IsDeleted" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_SalesDetails">
+      <Parameter Name="SalesDetailID" Mode="In" Type="Int32" />
+      <Parameter Name="SalesID" Mode="In" Type="Int32" />
+      <Parameter Name="ProdcutCategoryID" Mode="In" Type="Int32" />
+      <Parameter Name="ProductID" Mode="In" Type="Int32" />
+      <Parameter Name="Quantity" Mode="In" Type="Int32" />
+      <Parameter Name="UnitPrice" Mode="In" Type="Decimal" />
+      <Parameter Name="Amount" Mode="In" Type="Decimal" />
+      <Parameter Name="IsReturn" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_Suppliers">
+      <Parameter Name="SupplierID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="SupplierName" Mode="In" Type="String" />
+      <Parameter Name="ContactPerson" Mode="In" Type="String" />
+      <Parameter Name="ContactNumber" Mode="In" Type="String" />
+      <Parameter Name="Email" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="usp_update_Users">
+      <Parameter Name="UserID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="Int32" />
+      <Parameter Name="FullName" Mode="In" Type="String" />
+      <Parameter Name="DOB" Mode="In" Type="String" />
+      <Parameter Name="DOJ" Mode="In" Type="String" />
+      <Parameter Name="CNIC" Mode="In" Type="String" />
+      <Parameter Name="ContactNumber" Mode="In" Type="String" />
+      <Parameter Name="BasicSalary" Mode="In" Type="Decimal" />
+      <Parameter Name="CommissionAmount" Mode="In" Type="Decimal" />
+      <Parameter Name="UserName" Mode="In" Type="String" />
+      <Parameter Name="Password" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetPurchaseReport" ReturnType="Collection(PosintofsaleModel.GetPurchaseReport_Result)">
+      <Parameter Name="PoNumber" Mode="In" Type="Int32" />
+      <Parameter Name="startDate" Mode="In" Type="DateTime" />
+      <Parameter Name="endDate" Mode="In" Type="DateTime" />
+      <Parameter Name="supID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetPurchaseReportDetails" ReturnType="Collection(PosintofsaleModel.GetPurchaseReportDetails_Result)">
+      <Parameter Name="PoNumber" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetPurchaseReportDetailsTotalAmounts" ReturnType="Collection(PosintofsaleModel.GetPurchaseReportDetailsTotalAmounts_Result)">
+      <Parameter Name="PoNumber" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetSalesReport" ReturnType="Collection(PosintofsaleModel.GetSalesReport_Result)">
+      <Parameter Name="Invoice" Mode="In" Type="Int32" />
+      <Parameter Name="startDate" Mode="In" Type="DateTime" />
+      <Parameter Name="endDate" Mode="In" Type="DateTime" />
+      <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetSalesReportDetails" ReturnType="Collection(PosintofsaleModel.GetSalesReportDetails_Result)">
+      <Parameter Name="Invoice" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="Roles" EntityType="PosintofsaleModel.Role" />
+  </EntityContainer>
+  <ComplexType Name="ps_purchase_Result">
+    <Property Type="String" Name="ProductName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
+    <Property Type="Decimal" Name="UnitPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="Quantity1" Nullable="true" />
+    <Property Type="Decimal" Name="Amount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Int32" Name="PurchaseDetailID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="ps_sales_Result">
+    <Property Type="Int32" Name="SalesID" Nullable="true" />
+    <Property Type="String" Name="ProductName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
+    <Property Type="Decimal" Name="UnitPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Amount" Nullable="true" Precision="18" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="GetPurchaseReport_Result">
+    <Property Type="Int32" Name="PurchaseID" Nullable="false" />
+    <Property Type="String" Name="PoNumber" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PoReference" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="PoDate" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="SupplierName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PaymentMethodName" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="TotalAmount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="TaxAmount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="GrandTotal" Nullable="true" Precision="19" Scale="2" />
+    <Property Type="Decimal" Name="PayableAmount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Balance" Nullable="true" Precision="18" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="GetPurchaseReportDetails_Result">
+    <Property Type="String" Name="PoNumber" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ProductName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
+    <Property Type="Decimal" Name="UnitPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Amount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="PoDate" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="PoReference" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="SupplierName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PaymentMethodName" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="CreationDate" Nullable="true" Precision="23" />
+  </ComplexType>
+  <ComplexType Name="GetPurchaseReportDetailsTotalAmounts_Result">
+    <Property Type="Int32" Name="TotalQuntity" Nullable="true" />
+    <Property Type="Decimal" Name="TotalAmount" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="TaxAmount" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="GrandTotal" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="PayableAmount" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="TotalBance" Nullable="true" Precision="38" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="GetSalesReport_Result">
+    <Property Type="Int32" Name="SalesID" Nullable="false" />
+    <Property Type="String" Name="InvoiceNumber" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="InvoiceDate" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PaymentMethodName" Nullable="true" MaxLength="50" />
+    <Property Type="Decimal" Name="TotalAmount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="TaxAmount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="GrandTotal" Nullable="true" Precision="19" Scale="2" />
+    <Property Type="Decimal" Name="PayableAmount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Balance" Nullable="true" Precision="18" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="GetSalesReportDetails_Result">
+    <Property Type="String" Name="InvoiceNumber" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="ProductName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
+    <Property Type="Decimal" Name="UnitPrice" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="Decimal" Name="Amount" Nullable="true" Precision="18" Scale="2" />
+    <Property Type="String" Name="InvoiceDate" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="CustomerName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PaymentMethodName" Nullable="true" MaxLength="50" />
+  </ComplexType>
+  <EntityType Name="Role">
+    <Key>
+      <PropertyRef Name="RoleID" />
+    </Key>
+    <Property Name="RoleID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Role_Tittle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="UserId" Type="Int32" />
+  </EntityType>
+</Schema>

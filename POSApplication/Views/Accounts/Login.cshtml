@@ -1,0 +1,147 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Syed Traders</title>
+
+    <link href="~/assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+          rel="stylesheet">
+    <link href="~/assets/css/sb-admin-2.min.css" rel="stylesheet">
+    <script src="~/assets/vendor/jquery/jquery.min.js"></script>
+    <script src="~/assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="~/assets/vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="~/assets/js/sb-admin-2.min.js"></script>
+
+    <script>
+
+        $(document).ready(function () {
+
+            $.ajax({
+                url: "/Accounts/LoadBranches",
+                type: "Get",
+                success: function (logs) {
+                    var s = '<option value="-1">Please Select a Branch</option>';
+                    for (var i = 0; i < logs.length; i++) {
+                        s += '<option value="' + logs[i].BranchID + '">' + logs[i].BranchName + '</option>';
+
+                    }
+                    $("#branch").html(s);
+                },
+                error: function (request, status, error) {
+                    alert(request.responseText);
+                }
+            });
+        });
+
+        function clear() {
+            $("#login").val('');
+            $("#pass").val('');
+            $("#branch").prop('selectedIndex', 0);
+
+        }
+
+        function add() {
+            var a = $("#branch").val();
+            var b = $("#login").val();
+            var c = $("#pass").val();
+
+            if (a > 0 || b != "" || c != "") {
+
+
+                var LoginData = {
+                    branchID: a,
+                    login: b,
+                    Password: c,
+                }
+
+                $.ajax({
+                    url: "/Accounts/Login",
+                    type: "POST",
+                    data: LoginData,
+                    success: function (response) {
+                        if (response == "Login Failed") {
+                            clear();
+                            alert(response);
+                        }
+                        else {
+                            window.location = response;
+
+                        }
+                    },
+                    error: function (request, status, error) {
+                        alert(request.responseText);
+                    }
+                });
+            }
+            else {
+                alert("Incomplete Information");
+                clear();
+            }
+        }
+    </script>
+</head>
+
+<body class="bg-gradient-primary">
+    <form>
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-xl-10 col-lg-12 col-md-9">
+                    <div class="card o-hidden border-0 shadow-lg my-5">
+                        <div class="card-body p-0">
+                            <div class="row">
+                                <div class="col-lg-6 d-none d-lg-block bg-login-image"></div>
+                                <div class="col-lg-6">
+                                    <div class="p-5">
+                                        <div class="text-center">
+                                            <h1 class="h4 text-gray-900 mb-4">Welcome To Syed Traders</h1>
+                                        </div>
+                                        <div class="form-group">
+                                            <select class="form-control" id="branch"></select>
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" name="login" id="login" class="form-control" value="" />
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="pass" value="" name="pass" />
+                                        </div>
+                                        <input type="button" class="btn btn-primary btn-lg" onclick="add();" value="Login" />
+                                        <hr>
+                                        <div class="text-center">
+                                            <a class="small" href="forgot-password.html">Forgot Password?</a>
+                                        </div>
+
+                                        <br /><br /><br /><br />
+                                        <div class="copyright text-center my-auto">
+                                            <span>Copyright &copy; Syed Traders 2022 Developed By <a href="https://www.w3bcreatorz.com">W3B CREATORZ</a></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+    <form>
+    </form>
+    
+
+
+</body>
+
+</html>
+

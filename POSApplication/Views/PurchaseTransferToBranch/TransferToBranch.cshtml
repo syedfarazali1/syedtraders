@@ -1,0 +1,83 @@
+﻿
+@{
+    ViewBag.Title = "TransferToBranch";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+<div class="container">
+
+
+    <h2>TransferToBranch</h2>
+
+    <form action="" method="post">
+        <div class="row">
+            <div class="col-4">
+                <label>PoNumber</label>
+                <input type="search" class="form-control" id="PoNumber" name="PoNumber" value="" />
+
+            </div>
+            <div class="col-4">
+                <label>Po Reference</label>
+                <input type="search" class="form-control" id="PoReference" name="PoReference" value="" />
+
+            </div>
+            <div class="col-4">
+
+                <input type="button" style="margin-top:30px;" onclick="search()" class="btn btn-primary" value="Search" />
+
+            </div>
+        </div>
+
+    </form>
+</div>
+
+<table class="table">
+    <tr>
+        <th>ProdcutName</th>
+        <th>Quantity</th>
+        <th>UnitPrice</th>
+        <th>Amount</th>
+
+    </tr>
+    <tbody id="tablebody">
+    </tbody>
+
+
+</table>
+
+
+<script>
+
+    function search() {
+        var data = {
+
+            PoNumber: $("#PoNumber").val(),
+            PoReference: $("#PoReference").val(),
+        };
+        $.ajax({
+            url: "/PurchaseTransferToBranch/TransferToBranch",
+            type: "Post",
+            data: data,
+            success: function (users) {
+                
+                var total = 1.1;
+                var s = '';
+                for (var i = 0; i < users.length; i++) {
+                    s += '<tr><td>' + users[i].ProductName + '</td>'
+                        + '<td>' + users[i].Quantity + '</td>'
+                        + '<td>' + users[i].UnitPrice + '</td>'
+                        + '<td>' + users[i].Amount + '</td>'
+
+
+
+                }
+                $("#tablebody").html(s);
+                $("#total").val(total);
+
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
+            }
+        });
+
+    }
+</script>

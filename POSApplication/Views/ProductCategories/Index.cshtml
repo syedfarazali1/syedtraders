@@ -1,0 +1,53 @@
+﻿@model IEnumerable<POSApplication.Models.ProductCategory>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+
+
+
+<div class="container-fluid">
+    <div class="card shadow mb-4">
+        <div class="card-header py-3">
+            <h6 class="mt-1 font-weight-bold text-primary mt-2" style="float: left;">Category List</h6>
+            <h6 class="mt-1 font-weight-bold text-primary" style="float: right;">
+                <a class="btn btn-primary" href="~/ProductCategories/Create">Create</a> </h6>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-striped table-bordered" cellspacing="0" width="100%">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CategoryName)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.CreationDate)
+                        </th>
+                        <th>ACTION</th>
+                    </tr>
+                    <tbody id="tablebody">
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CategoryName)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.CreationDate)
+                                </td>
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { id = item.ProductCategoryID }) |
+                                    @Html.ActionLink("Delete", "Delete", new { id = item.ProductCategoryID })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+
+</div>

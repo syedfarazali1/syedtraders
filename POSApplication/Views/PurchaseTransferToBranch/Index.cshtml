@@ -1,0 +1,124 @@
+﻿@model IEnumerable<POSApplication.Models.Purchase>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.BranchID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsTransferFromBranch)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TransferFromBranchID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PoNumber)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PoDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PoReference)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.SupplierID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PaymentMode)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TotalAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxPer)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.TaxAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PayableAmount)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.isPaid)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreationDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BranchID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsTransferFromBranch)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TransferFromBranchID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PoNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PoDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PoReference)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.SupplierID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PaymentMode)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxPer)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TaxAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PayableAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.isPaid)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreationDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsDeleted)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PurchaseID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.PurchaseID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.PurchaseID })
+        </td>
+    </tr>
+}
+
+</table>

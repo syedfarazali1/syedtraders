@@ -1,0 +1,73 @@
+﻿@model POSApplication.Models.EmployeeAdvance
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>EmployeeAdvance</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.BranchID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BranchID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeID)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeID)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdvanceDate)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdvanceDate)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.AdvanceAmount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.AdvanceAmount)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsPaid)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsPaid)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsDeleted)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsDeleted)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

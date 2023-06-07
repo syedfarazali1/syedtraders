@@ -1,0 +1,531 @@
+﻿@model POSApplication.Models.Sale
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+<div class="card shadow mb-4">
+    <div class="card-header py-3">
+        <h6 class="m-0 font-weight-bold text-primary">Sales Add</h6>
+    </div>
+
+    <div class="card-body">
+        <div class="table-responsive">
+            <div id="ContentPlaceHolder1_up1">
+                <form action="" method="post">
+                    <div class="col-md-12 pull-left">
+                        <fieldset>
+                            <div class="row">
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="col-md-12">
+                                            InvoiceNum #:
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input name="InvoiceNumber" type="text" value="" id="InvoiceNumber" class="form-control" required placeholder="PO #" readonly>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="col-md-12">
+                                            Invoice Date:
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input name="InvoiceDate" type="date" value="" id="PoDate" class="form-control" required placeholder="dd/MM/yyyy">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="col-md-12">
+                                            Customers:
+                                        </label>
+                                        <div class="col-md-12">
+                                            <select name="CustomerID" id="ddlCustomer" class="form-control">
+                                                <option value="-1">---Select customer---</option>
+                                                @foreach (var item in ViewBag.customer)
+                                                {
+                                                    <option value="@item.CustomerID">@item.CustomerName</option>
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-md-12">
+                                            <hr>
+                                        </label>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="col-md-12">
+                                            Category:
+                                        </label>
+                                        <div class="col-md-12">
+                                            <select name="" onchange="LoadProduct()" id="ddlCategory" class="form-control">
+                                                <option selected="selected" value="-1">---Select Category---</option>
+                                                @if (ViewBag.category != null)
+                                                {
+                                                    foreach (var item in ViewBag.category)
+                                                    {
+                                                        <option value="@item.ProductCategoryID">@item.CategoryName</option>
+                                                    }
+                                                }
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="col-md-12">
+                                            Products:
+                                        </label>
+                                        <div class="col-md-12">
+                                            <select name="" id="ddlproduct" class="form-control">
+                                                <option selected value="-1">---Select Product---</option>
+
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="col-md-12">
+                                            Quantity:
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input name="Quantity" type="text" id="Quantity" class="form-control" required="" placeholder="Quantity" onchange="amountcalculate()">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="col-md-12">
+                                            Unit Price:
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input name="UnitPrice" onchange="amountcalculate()" type="text" id="UnitPrice" class="form-control" required="" placeholder="Unit Price">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="col-md-12">
+                                            Amount:
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input name="Amount" type="text" id="Amount" readonly class="form-control" required="" placeholder="Amount">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-2">
+                                    <div class="form-group">
+                                        <label class="col-md-12">
+                                            .
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input type="button" name="ctl00$ContentPlaceHolder1$btnAdd" value="Add More" onclick="addbtn()" id="ContentPlaceHolder1_btnAdd" class="btn btn-primary">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="card-body">
+                                    <div class="table-responsive">
+                                        <div>
+                                            <table cellspacing="0" rules="all" class="table table-striped table-bordered" border="1" style="border-collapse:collapse;">
+                                                <thead>
+                                                    <tr>
+                                                        <th>ProdcutName</th>
+                                                        <th>Quantity</th>
+                                                        <th>UnitPrice</th>
+                                                        <th>Amount</th>
+                                                        <th>Remove</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody id="tablebody">
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-md-12">
+                                            <hr>
+                                        </label>
+                                    </div>
+                                </div>
+
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="col-md-12">
+                                            Payment Mode:
+                                        </label>
+                                        <div class="col-md-12">
+                                            <select name="PaymentMode" id="ddlMode" required class="form-control">
+                                                <option selected="selected" value="">---Select Payment Mode---</option>
+                                                <option value="1">Cash</option>
+                                                <option value="2">Bank</option>
+
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <label class="col-md-12">
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="col-md-12">
+                                            Total Amount:
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input name="TotalAmount" type="text" id="TotalAmount" class="form-control" required placeholder="Total Amount" readonly>
+
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="col-md-12">
+                                            Tax %:
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input name="TaxPer" type="text" id="TaxPer" class="form-control" required placeholder="Tax %">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="col-md-12">
+                                            Tax Amount:
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input name="TaxAmount" type="text" id="TaxAmount" class="form-control" required placeholder="Tax Amount">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="col-md-12">
+                                            Payable Amount:
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input name="PayableAmount" onkeyup="calculateBalance()" type="text" value="" id="PayableAmount" class="form-control" required="" placeholder="Payable Amount">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="col-md-12">
+                                            Balance Amount:
+                                        </label>
+                                        <div class="col-md-12">
+                                            <input name="Balance" type="text" value="" id="BalanceAmount" class="form-control" readonly required="" placeholder="Balance Amount">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                    <div class="form-group">
+                                        <label class="font-weight-bold">
+                                            Print Invoice:
+                                        </label>
+                                        <input type="checkbox" style="margin-top: 43px ;" name="InvoicePrint" value="InvoicePrint" />
+
+                                    </div>
+                                </div>
+
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        <div class="col-md-12 text-right">
+
+
+                                            <input type="submit" name="ctl00$ContentPlaceHolder1$btnSubmit" value="Submit" id="ContentPlaceHolder1_btnSubmit" class="btn btn-primary">
+
+                                            <input type="submit" name="ctl00$ContentPlaceHolder1$btnCancel" value="Clear" id="ContentPlaceHolder1_btnCancel" class="btn btn-danger">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                </form>
+            </div>
+
+
+
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+
+    function LoadProduct() {
+
+        var data = {
+
+            ProdcutCategoryID: $("#ddlCategory").val()
+        }
+
+        $.ajax({
+            url: "/Sales/LoadProduct",
+            type: "POST",
+            data: data,
+            success: function (pro) {
+                var s = '<option value="-1">Please Select a Product</option>';
+                for (var i = 0; i < pro.length; i++) {
+                    s += '<option value="' + pro[i].ProductID + '">' + pro[i].ProductName + '</option>';
+
+                }
+                $("#ddlproduct").html(s);
+
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
+            }
+        });
+    };
+    function amountcalculate() {
+        var qty = $("#Quantity").val();
+        var uti = $("#UnitPrice").val();
+        var amount = qty * uti;
+        $('#Amount').val(amount);
+    }
+    function addbtn() {
+
+        if ($("#ddlCategory").val() == -1) {
+            alert("Please select Category");
+        }
+        else if ($("#ddlproduct").val() == -1) {
+            alert("Please select Product");
+        }
+        else if ($("#ddlCustomer").val() == -1) {
+            alert("Please select Customer");
+        }
+        else if ($("#Quantity").val() == 0) {
+            alert("Please add Quantity");
+        }
+        else if ($("#UnitPrice").val() == 0) {
+            alert("Please add untitprice");
+        }
+        else if ($("#Amount").val() == 0) {
+            var qty = $("#Quantity").val();
+            var uti = $("#UnitPrice").val();
+            var amount = qty * uti;
+            $('#Amount').val(amount);
+        }
+
+        else {
+            $("#ddlCustomer ").attr("readonly", true);
+            var data = {
+                ProdcutCategoryID: $("#ddlCategory").val(),
+                ProductID: $("#ddlproduct").val(),
+                Quantity: $("#Quantity").val(),
+                UnitPrice: $("#UnitPrice").val(),
+                Amount: $("#Amount").val(),
+            ddlCustomer : $("#ddlCustomer").val()
+            }
+
+            
+            $.ajax({
+                url: "/Sales/AddTOCart",
+                type: "POST",
+                data: data,
+                success: function (users) {
+                    var s = '';
+                    for (var i = 0; i < users.length; i++) {
+                        s += '<tr><td>' + users[i].ProdcutName + '</td>'
+                            + '<td>' + users[i].quantity + '</td>'
+                            + '<td>' + users[i].unitPrice + '</td>'
+                            + '<td>' + users[i].amount + '</td>'
+
+                            + '<td>' + '<i style="cursor: pointer;" class="fas fa-trash" onclick="Delete(' + users[i].productid + ')"></i>' + '</td>'
+                            + '</tr>';
+
+                    }
+                    $("#tablebody").html(s);
+                    calculatetotalamount();
+                },
+                error: function (request, status, error) {
+                    alert(request.responseText);
+                }
+            });
+
+        }
+        calculatetotalamount();
+    }
+    function Delete(id) {
+
+
+        var data = {
+
+            ProductID: id
+        }
+
+        $.ajax({
+            url: "/Sales/RemoveCart",
+            type: "POST",
+            data: data,
+            success: function (users) {
+
+                if (users != "NULL") {
+
+
+                    var s = '';
+                    for (var i = 0; i < users.length; i++) {
+                        s += '<tr><td>' + users[i].ProdcutName + '</td>'
+                            + '<td>' + users[i].quantity + '</td>'
+                            + '<td>' + users[i].unitPrice + '</td>'
+                            + '<td>' + users[i].amount + '</td>'
+
+                            + '<td>' + '<i style="cursor: pointer;" class="fas fa-trash" onclick="Delete(' + users[i].productid + ')"></i>' + '</td>'
+                            + '</tr>';
+
+                    }
+                    $("#tablebody").html(s);
+                    calculatetotalamount();
+                    $("#ddlCustomer ").attr("readonly", true);
+                }
+                else {
+                    $("#ddlCustomer ").attr("readonly", false);
+                    $("#tablebody").html("");
+                    calculatetotalamount();
+                }
+
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
+            }
+        });
+
+    }
+    $(document).ready(function () {
+      
+        $("#ddlCustomer ").attr("readonly", false);
+        
+        
+        loadcart();
+        calculatetotalamount();
+        calculateInvoiceNum();
+        Customers();
+    });
+    function loadcart() {
+
+        $.ajax({
+            url: "/Sales/onload",
+            type: "POST",
+            success: function (cart) {
+
+                if (cart != "Null") {
+
+
+                    var s = '';
+                    for (var i = 0; i < cart.length; i++) {
+                        s += '<tr><td>' + cart[i].ProdcutName + '</td>'
+                            + '<td>' + cart[i].quantity + '</td>'
+                            + '<td>' + cart[i].unitPrice + '</td>'
+                            + '<td>' + cart[i].amount + '</td>'
+
+
+                            + '<td>' + '<i style="cursor: pointer;" class="fas fa-trash" onclick="Delete(' + cart[i].productid + ')"></i>' + '</td>'
+                            + '</tr>';
+
+                    }
+                    $("#tablebody").html(s);
+                    $("#ddlCustomer ").attr("readonly", true);
+                }
+                else {
+                    $("#ddlCustomer ").attr("readonly", false);
+                }
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
+            }
+
+        });
+    }
+    function calculateInvoiceNum() {
+
+        $.ajax({
+            url: "/Sales/calculateInvoiceNum",
+            type: "Get",
+            success: function (InvoiceNumber) {
+
+                $("#InvoiceNumber").val(InvoiceNumber);
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
+            }
+
+        });
+    }
+    function Customers() {
+
+        $.ajax({
+            url: "/Sales/GetCustomerID",
+            type: "Get",
+            success: function (GetCustomer) {
+           
+                    $("#ddlCustomer").prop('value', GetCustomer);
+            
+                
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
+            }
+
+        });
+    }
+    function calculateBalance() {
+
+
+
+        var totalAmount = $("#TotalAmount").val();
+        var PayableAmount = $("#PayableAmount").val();
+        var BalanceAmount = totalAmount - PayableAmount;
+        $("#BalanceAmount").val(BalanceAmount);
+    }
+    function calculatetotalamount() {
+        $.ajax({
+            url: "/Sales/CalculateTotalAmount",
+            type: "Get",
+            success: function (amt) {
+                $("#TotalAmount").val(amt)
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
+            }
+
+        });
+
+
+    }
+
+</script>

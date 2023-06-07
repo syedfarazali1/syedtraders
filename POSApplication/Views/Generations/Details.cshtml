@@ -1,0 +1,27 @@
+﻿@model POSApplication.Models.Generation
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Generation</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.GenerationName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.GenerationName)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.GenerationID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
