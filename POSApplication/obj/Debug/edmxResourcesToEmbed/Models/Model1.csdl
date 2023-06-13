@@ -1230,6 +1230,7 @@
       <Parameter Name="startDate" Mode="In" Type="DateTime" />
       <Parameter Name="endDate" Mode="In" Type="DateTime" />
       <Parameter Name="supID" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="GetPurchaseReportDetails" ReturnType="Collection(PosintofsaleModel.GetPurchaseReportDetails_Result)">
       <Parameter Name="PoNumber" Mode="In" Type="Int32" />
@@ -1242,11 +1243,49 @@
       <Parameter Name="startDate" Mode="In" Type="DateTime" />
       <Parameter Name="endDate" Mode="In" Type="DateTime" />
       <Parameter Name="CustomerId" Mode="In" Type="Int32" />
+      <Parameter Name="BranchID" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="GetSalesReportDetails" ReturnType="Collection(PosintofsaleModel.GetSalesReportDetails_Result)">
       <Parameter Name="Invoice" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="Roles" EntityType="PosintofsaleModel.Role" />
+    <FunctionImport Name="GetSaleReportDetailsTotalAmounts" ReturnType="Collection(PosintofsaleModel.GetSaleReportDetailsTotalAmounts_Result)">
+      <Parameter Name="PoNumber" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_alterdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_creatediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="version" Mode="In" Type="Int32" />
+      <Parameter Name="definition" Mode="In" Type="Binary" />
+    </FunctionImport>
+    <FunctionImport Name="sp_dropdiagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagramdefinition" ReturnType="Collection(PosintofsaleModel.sp_helpdiagramdefinition_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_helpdiagrams" ReturnType="Collection(PosintofsaleModel.sp_helpdiagrams_Result)">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="sp_renamediagram">
+      <Parameter Name="diagramname" Mode="In" Type="String" />
+      <Parameter Name="owner_id" Mode="In" Type="Int32" />
+      <Parameter Name="new_diagramname" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="sp_upgraddiagrams" />
+    <FunctionImport Name="GetStockReportReport" ReturnType="Collection(PosintofsaleModel.GetStockReportReport_Result)">
+      <Parameter Name="ProductID" Mode="In" Type="String" />
+      <Parameter Name="branchid" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="ps_purchase_Result">
     <Property Type="String" Name="ProductName" Nullable="true" MaxLength="50" />
@@ -1326,4 +1365,28 @@
     <Property Name="Role_Tittle" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="UserId" Type="Int32" />
   </EntityType>
+  <ComplexType Name="GetSaleReportDetailsTotalAmounts_Result">
+    <Property Type="Int32" Name="TotalQuntity" Nullable="true" />
+    <Property Type="Decimal" Name="TotalAmount" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="TaxAmount" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="GrandTotal" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="PayableAmount" Nullable="true" Precision="38" Scale="2" />
+    <Property Type="Decimal" Name="TotalBance" Nullable="true" Precision="38" Scale="2" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagramdefinition_Result">
+    <Property Type="Int32" Name="version" Nullable="true" />
+    <Property Type="Binary" Name="definition" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="sp_helpdiagrams_Result">
+    <Property Type="String" Name="Database" Nullable="true" MaxLength="128" />
+    <Property Type="String" Name="Name" Nullable="false" MaxLength="128" />
+    <Property Type="Int32" Name="ID" Nullable="false" />
+    <Property Type="String" Name="Owner" Nullable="true" MaxLength="128" />
+    <Property Type="Int32" Name="OwnerID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="GetStockReportReport_Result">
+    <Property Type="String" Name="ProductName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="CategoryName" Nullable="true" MaxLength="50" />
+    <Property Type="Int32" Name="Quantity" Nullable="true" />
+  </ComplexType>
 </Schema>

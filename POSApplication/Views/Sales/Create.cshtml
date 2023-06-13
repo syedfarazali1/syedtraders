@@ -224,7 +224,7 @@
                                             Tax Amount:
                                         </label>
                                         <div class="col-md-12">
-                                            <input name="TaxAmount" type="text" id="TaxAmount" class="form-control" required placeholder="Tax Amount">
+                                            <input name="TaxAmount" onkeyup="calculateBalance()" type="text" id="TaxAmount" class="form-control" required placeholder="Tax Amount" >
                                         </div>
                                     </div>
                                 </div>
@@ -285,6 +285,7 @@
 
 
 <script>
+
 
 
     function LoadProduct() {
@@ -505,13 +506,30 @@
     }
     function calculateBalance() {
 
-
-
         var totalAmount = $("#TotalAmount").val();
         var PayableAmount = $("#PayableAmount").val();
-        var BalanceAmount = totalAmount - PayableAmount;
-        $("#BalanceAmount").val(BalanceAmount);
+        var TaxAmount = $("#TaxAmount").val();
+
+
+        if (PayableAmount < 0 || PayableAmount == null) {
+            PayableAmount = 0;
+        }
+        if (TaxAmount > 0) {
+            var floatValue1 = parseFloat(totalAmount);
+            var floatValue2 = parseFloat(TaxAmount);
+            var sum = floatValue1 + floatValue2;
+            sum = sum - PayableAmount;
+            $("#BalanceAmount").val(sum);
+        }
+        else {
+
+            var floatValue1 = parseFloat(totalAmount);
+            var sum = floatValue1 - PayableAmount;
+            $("#BalanceAmount").val(sum);
+        }
+
     }
+
     function calculatetotalamount() {
         $.ajax({
             url: "/Sales/CalculateTotalAmount",

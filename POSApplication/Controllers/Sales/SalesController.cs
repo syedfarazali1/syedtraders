@@ -47,8 +47,6 @@ namespace POSApplication.Controllers.Sales
         [HttpPost]
         public ActionResult Create(Sale s, string InvoicePrint)
         {
-
-
             int? BranchID = Convert.ToInt32(Session["BranchID"].ToString());
             int CreatedBy = Convert.ToInt32(Session["UserID"].ToString());
             string InvoiceNumber = Convert.ToString(s.InvoiceNumber);
@@ -102,7 +100,17 @@ namespace POSApplication.Controllers.Sales
                     Session["ddlCustomer"] = null;
                 }
             }
-            return RedirectToAction("Index");
+            Session["SaleTotalAmount"] = null;
+            Session["Salescart"] = null;
+            Session["sInvoiceDate"] = null;
+            Session["sInvoiceNumber"] = null;
+            Session["sBalance"] = null;
+            Session["sPayableAmount"] = null;
+            Session["SupplierId"] = null;
+            Session["sTexAmount"] = null;
+            Session["sTotalAmountwithText"] = null;
+
+            return RedirectToAction("Create");
         }
 
         [HttpGet]
@@ -128,7 +136,8 @@ namespace POSApplication.Controllers.Sales
                     ViewBag.InvoiceNumber = Session["sInvoiceNumber"];
                     ViewBag.Balance = Session["sBalance"];
                     ViewBag.PayableAmount = Session["sPayableAmount"];
-                    
+                    ViewBag.sTotalAmountwithText = Session["sTotalAmountwithText"];
+                    ViewBag.stexAmount = Session["sTexAmount"];
                     return View();
                 }
                 else
@@ -170,16 +179,31 @@ namespace POSApplication.Controllers.Sales
 
                 }
 
+
                 string PoDate = Session["sInvoiceDate"].ToString();
                 string TotalAmount = Session["SaleTotalAmount"].ToString();
                 string PoNumber = Session["sInvoiceNumber"].ToString();
-
+                int? id = Int32.Parse(PoNumber);
+                var data = db.GetSaleReportDetailsTotalAmounts(id).FirstOrDefault();
+                Decimal? GrandTotal = data.GrandTotal;
+                Decimal? PayableAmount = data.PayableAmount;
+                Decimal? TaxAmount = data.TaxAmount;
+                Decimal? TotalBalance = data.TotalBance;
+                Decimal? TotalQuntity = data.TotalQuntity;
+                Decimal? spTotal = data.TotalAmount;
 
 
                 rd.SetDataSource(dt);
-                rd.SetParameterValue("Date", PoDate);
-                rd.SetParameterValue("InvoiceNum", PoNumber);
-                rd.SetParameterValue("Total", TotalAmount);
+                rd.SetParameterValue("GrandTotal", GrandTotal.ToString());
+                rd.SetParameterValue("PayableAmount", PayableAmount.ToString());
+                rd.SetParameterValue("TaxAmount", TaxAmount.ToString());
+                rd.SetParameterValue("TotalBalance", TotalBalance.ToString());
+                rd.SetParameterValue("Date", PoDate.ToString());
+                rd.SetParameterValue("InvoiceNum", PoNumber.ToString());
+                rd.SetParameterValue("Total", TotalAmount.ToString());
+                
+
+
 
                 Response.Buffer = false;
                 Response.ClearContent();

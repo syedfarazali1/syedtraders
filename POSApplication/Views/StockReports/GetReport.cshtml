@@ -1,0 +1,67 @@
+﻿
+@{
+    ViewBag.Title = "GetReport";
+    Layout = "~/Views/Shared/Deshboard.cshtml";
+}
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <form action="GetReport" method="post">
+                <div>
+                    <label>
+                        Products
+                    </label>
+                </div>
+                <div>
+                    <select class="form-control" name="ProductID">
+                        <option selected value="-1">Select Product</option>
+                        @if (ViewBag.Product != null)
+                        {
+
+                            foreach (var item in ViewBag.Product)
+                            {
+                                <option value="@item.ProductID">@item.ProductName</option>
+                            }
+                        }
+
+                    </select>
+                </div>
+                <br />
+                <div>
+                    <input type="submit" class="btn btn-primary" value="Search" />
+                </div>
+            </form>
+        </div>
+    </div>
+    <br />
+    <div class="row">
+        <div class="col-12">
+            <div class="table-responsive">
+                <table class="table table-dark table-hover">
+                    <tr>
+                        <td>ProductName</td>
+                        <td>CategoryName</td>
+                        <td>Quantity</td>
+
+                    </tr>
+                    @if (ViewBag.list != null)
+                    {
+
+                        foreach (var item in ViewBag.list)
+                        {
+                            <tr>
+                                <td>@item.ProductName</td>
+                                <td>@item.CategoryName</td>
+                                <td>@item.Quantity</td>
+                            </tr>
+                        }
+                    }
+
+                </table>
+            </div>
+
+        </div>
+    </div>
+</div>
+

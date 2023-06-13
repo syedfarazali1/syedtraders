@@ -154,6 +154,7 @@
     <Compile Include="Controllers\Purchases\PurchaseTransferToBranchController.cs" />
     <Compile Include="Controllers\Reports\PurchaseReportsController.cs" />
     <Compile Include="Controllers\Reports\SalesReportsController.cs" />
+    <Compile Include="Controllers\Reports\StockReportsController.cs" />
     <Compile Include="Controllers\Sales\SalesController.cs" />
     <Compile Include="Controllers\Sales\SalesReturnController.cs" />
     <Compile Include="Controllers\Setting\BrandsController.cs" />
@@ -222,10 +223,16 @@
     <Compile Include="Models\GetPurchaseReport_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\GetSaleReportDetailsTotalAmounts_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\GetSalesReportDetails_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\GetSalesReport_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\GetStockReportReport_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\HardDisk.cs">
@@ -301,6 +308,12 @@
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\SalesDetail.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagramdefinition_Result.cs">
+      <DependentUpon>Model1.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\sp_helpdiagrams_Result.cs">
       <DependentUpon>Model1.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Supplier.cs">
@@ -2364,12 +2377,14 @@
     <Content Include="Views\Branches\Index.cshtml" />
     <Content Include="Views\PurchaseReports\Invoice.cshtml" />
     <Content Include="Views\PurchaseReports\InvoiceDetails.cshtml" />
+    <Content Include="Views\SalesReports\Invoice.cshtml" />
+    <Content Include="Views\SalesReports\InvoiceDetails.cshtml" />
+    <Content Include="Views\StockReports\GetReport.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="assets\img\ProductImages\" />
     <Folder Include="assets\img\UserImages\" />
-    <Folder Include="Views\SalesReports\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff2" />

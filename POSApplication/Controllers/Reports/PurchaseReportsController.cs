@@ -22,9 +22,23 @@ namespace POSApplication.Controllers.Reports
         [HttpPost]
         public ActionResult Invoice(DateTime? startDate, DateTime? endDate, int supID = 0, int PoNumber = 0)
         {
-            ViewBag.list = dbContext.GetPurchaseReport(PoNumber, startDate, endDate, supID);
-            
+            if (Session["BranchID"] != null)
+            {
+
+            string BranchID = Session["BranchID"].ToString();
+            ViewBag.list = dbContext.GetPurchaseReport(PoNumber, startDate, endDate, supID, BranchID);
+            if (PoNumber != null || PoNumber > 0)
+            {
+                ViewBag.PoNum = PoNumber;
+            }
+
             return View();
+
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
         }
         [HttpGet]
         public ActionResult InvoiceDetails(int PoNum)

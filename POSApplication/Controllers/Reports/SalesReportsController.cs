@@ -21,24 +21,40 @@ namespace POSApplication.Controllers.Reports
         [HttpPost]
         public ActionResult Invoice(DateTime? startDate, DateTime? endDate, int CustomerId = 0, int Invoice = 0)
         {
-            ViewBag.list = dbContext.GetSalesReport(Invoice, startDate, endDate, CustomerId);
+            if (Session["BranchID"] != null)
+            {
+                string BranchID = Session["BranchID"].ToString();
+                var list = dbContext.GetSalesReport(Invoice, startDate, endDate, CustomerId, BranchID);
+                if (list != null)
+                {
+                    ViewBag.list = list;
+                }
 
-            return View();
+                if (Invoice != null || Invoice > 0)
+                {
+                    ViewBag.PoNum = Invoice;
+                }
+
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "Accounts");
+            }
         }
         [HttpGet]
-        public ActionResult InvoiceDetails(int PoNum)
+        public ActionResult InvoiceDetails(int InvoiceNumber)
         {
-            //ViewBag.list = dbContext.GetPurchaseReport(PoNumber, startDate, endDate, supID);
-            int PoNums = Convert.ToInt32(PoNum);
-            ViewBag.list = dbContext.GetSalesReportDetails(PoNums);
-            var data = dbContext.GetPurchaseReportDetailsTotalAmounts(PoNums).FirstOrDefault();
+            int PoNums = Convert.ToInt32(InvoiceNumber);
+            ViewBag.list = dbContext.GetSalesReportDetails(InvoiceNumber);
+            var data = dbContext.GetSaleReportDetailsTotalAmounts(InvoiceNumber).FirstOrDefault();
             ViewBag.GrandTotal = data.GrandTotal;
             ViewBag.PayableAmount = data.PayableAmount;
             ViewBag.TaxAmount = data.TaxAmount;
             ViewBag.TotalAmount = data.TotalAmount;
             ViewBag.TotalBance = data.TotalBance;
             ViewBag.TotalQuntity = data.TotalQuntity;
-            ViewBag.PoNum = PoNum;
+            ViewBag.PoNum = InvoiceNumber;
 
             return View();
         }

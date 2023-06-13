@@ -2655,7 +2655,7 @@ namespace POSApplication.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("usp_update_Users", userIDParameter, branchIDParameter, fullNameParameter, dOBParameter, dOJParameter, cNICParameter, contactNumberParameter, basicSalaryParameter, commissionAmountParameter, userNameParameter, passwordParameter);
         }
     
-        public virtual ObjectResult<GetPurchaseReport_Result> GetPurchaseReport(Nullable<int> poNumber, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<int> supID)
+        public virtual ObjectResult<GetPurchaseReport_Result> GetPurchaseReport(Nullable<int> poNumber, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<int> supID, string branchID)
         {
             var poNumberParameter = poNumber.HasValue ?
                 new ObjectParameter("PoNumber", poNumber) :
@@ -2673,7 +2673,11 @@ namespace POSApplication.Models
                 new ObjectParameter("supID", supID) :
                 new ObjectParameter("supID", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPurchaseReport_Result>("GetPurchaseReport", poNumberParameter, startDateParameter, endDateParameter, supIDParameter);
+            var branchIDParameter = branchID != null ?
+                new ObjectParameter("BranchID", branchID) :
+                new ObjectParameter("BranchID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPurchaseReport_Result>("GetPurchaseReport", poNumberParameter, startDateParameter, endDateParameter, supIDParameter, branchIDParameter);
         }
     
         public virtual ObjectResult<GetPurchaseReportDetails_Result> GetPurchaseReportDetails(Nullable<int> poNumber)
@@ -2694,7 +2698,7 @@ namespace POSApplication.Models
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetPurchaseReportDetailsTotalAmounts_Result>("GetPurchaseReportDetailsTotalAmounts", poNumberParameter);
         }
     
-        public virtual ObjectResult<GetSalesReport_Result> GetSalesReport(Nullable<int> invoice, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<int> customerId)
+        public virtual ObjectResult<GetSalesReport_Result> GetSalesReport(Nullable<int> invoice, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<int> customerId, string branchID)
         {
             var invoiceParameter = invoice.HasValue ?
                 new ObjectParameter("Invoice", invoice) :
@@ -2712,7 +2716,11 @@ namespace POSApplication.Models
                 new ObjectParameter("CustomerId", customerId) :
                 new ObjectParameter("CustomerId", typeof(int));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSalesReport_Result>("GetSalesReport", invoiceParameter, startDateParameter, endDateParameter, customerIdParameter);
+            var branchIDParameter = branchID != null ?
+                new ObjectParameter("BranchID", branchID) :
+                new ObjectParameter("BranchID", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSalesReport_Result>("GetSalesReport", invoiceParameter, startDateParameter, endDateParameter, customerIdParameter, branchIDParameter);
         }
     
         public virtual ObjectResult<GetSalesReportDetails_Result> GetSalesReportDetails(Nullable<int> invoice)
@@ -2722,6 +2730,131 @@ namespace POSApplication.Models
                 new ObjectParameter("Invoice", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSalesReportDetails_Result>("GetSalesReportDetails", invoiceParameter);
+        }
+    
+        public virtual ObjectResult<GetSaleReportDetailsTotalAmounts_Result> GetSaleReportDetailsTotalAmounts(Nullable<int> poNumber)
+        {
+            var poNumberParameter = poNumber.HasValue ?
+                new ObjectParameter("PoNumber", poNumber) :
+                new ObjectParameter("PoNumber", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetSaleReportDetailsTotalAmounts_Result>("GetSaleReportDetailsTotalAmounts", poNumberParameter);
+        }
+    
+        public virtual int sp_alterdiagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_alterdiagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_creatediagram(string diagramname, Nullable<int> owner_id, Nullable<int> version, byte[] definition)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var versionParameter = version.HasValue ?
+                new ObjectParameter("version", version) :
+                new ObjectParameter("version", typeof(int));
+    
+            var definitionParameter = definition != null ?
+                new ObjectParameter("definition", definition) :
+                new ObjectParameter("definition", typeof(byte[]));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_creatediagram", diagramnameParameter, owner_idParameter, versionParameter, definitionParameter);
+        }
+    
+        public virtual int sp_dropdiagram(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_dropdiagram", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagramdefinition_Result> sp_helpdiagramdefinition(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagramdefinition_Result>("sp_helpdiagramdefinition", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual ObjectResult<sp_helpdiagrams_Result> sp_helpdiagrams(string diagramname, Nullable<int> owner_id)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<sp_helpdiagrams_Result>("sp_helpdiagrams", diagramnameParameter, owner_idParameter);
+        }
+    
+        public virtual int sp_renamediagram(string diagramname, Nullable<int> owner_id, string new_diagramname)
+        {
+            var diagramnameParameter = diagramname != null ?
+                new ObjectParameter("diagramname", diagramname) :
+                new ObjectParameter("diagramname", typeof(string));
+    
+            var owner_idParameter = owner_id.HasValue ?
+                new ObjectParameter("owner_id", owner_id) :
+                new ObjectParameter("owner_id", typeof(int));
+    
+            var new_diagramnameParameter = new_diagramname != null ?
+                new ObjectParameter("new_diagramname", new_diagramname) :
+                new ObjectParameter("new_diagramname", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_renamediagram", diagramnameParameter, owner_idParameter, new_diagramnameParameter);
+        }
+    
+        public virtual int sp_upgraddiagrams()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("sp_upgraddiagrams");
+        }
+    
+        public virtual ObjectResult<GetStockReportReport_Result> GetStockReportReport(string productID, string branchid)
+        {
+            var productIDParameter = productID != null ?
+                new ObjectParameter("ProductID", productID) :
+                new ObjectParameter("ProductID", typeof(string));
+    
+            var branchidParameter = branchid != null ?
+                new ObjectParameter("branchid", branchid) :
+                new ObjectParameter("branchid", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<GetStockReportReport_Result>("GetStockReportReport", productIDParameter, branchidParameter);
         }
     }
 }

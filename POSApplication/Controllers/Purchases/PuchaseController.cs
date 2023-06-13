@@ -44,8 +44,8 @@ namespace POSApplication.Controllers.Purchases
         }
         [HttpPost]
         public ActionResult Create(Purchase p, string InvoicePrint)
-        {
 
+        { 
 
             int? BranchID = Convert.ToInt32(Session["BranchID"].ToString());
             int CreatedBy = Convert.ToInt32(Session["UserID"].ToString());
@@ -98,8 +98,16 @@ namespace POSApplication.Controllers.Purchases
 
 
             }
-
-            return RedirectToAction("Index");
+            Session["TotalAmount"] = null;
+            Session["cart"] = null;
+            Session["PoDate"] = null;
+            Session["PoNumber"] = null;
+            Session["Balance"] = null;
+            Session["PayableAmount"] = null;
+            Session["SupplierId"] = null;
+            Session["TexAmount"] = null;
+            Session["TotalAmountwithText"] = null;
+            return RedirectToAction("Create");
         }
         [HttpGet]
         public ActionResult PrintPage()

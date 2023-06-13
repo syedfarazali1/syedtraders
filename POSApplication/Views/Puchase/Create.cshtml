@@ -242,7 +242,7 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label class="col-md-12">
-                                            Payable Amount:
+                                            Recievable Amount:
                                         </label>
                                         <div class="col-md-12">
                       <input name="PayableAmount" onkeyup="calculateBalance()" type="number" value="" id="PayableAmount" class="form-control" required="" placeholder="Payable Amount">
@@ -256,7 +256,7 @@
                                             Balance Amount:
                                         </label>
                                         <div class="col-md-12">
-                                            <input name="Balance" type="number" value="" id="BalanceAmount"  onkeyup="calculateBalance()" class="form-control" readonly required="" placeholder="Balance Amount">
+                                            <input name="Balance" type="number" value="" id="BalanceAmount"  class="form-control" readonly required="" placeholder="Balance Amount">
                                         </div>
                                     </div>
                                 </div>
@@ -514,12 +514,14 @@
 
     function calculateBalance() {
 
-
-
         var totalAmount = $("#TotalAmount").val();
         var PayableAmount = $("#PayableAmount").val();
         var TaxAmount = $("#TaxAmount").val();
+       
 
+        if (PayableAmount < 0 || PayableAmount == null) {
+            PayableAmount = 0;
+        }
         if (TaxAmount > 0) {
             var floatValue1 = parseFloat(totalAmount);
             var floatValue2 = parseFloat(TaxAmount);

@@ -92,6 +92,22 @@ namespace POSApplication.Controllers
 
             }
         }
+        [HttpPost]
+        public ActionResult ProductCheck(Product product)
+        {
+            var a = product.ProductName.ToLower();
+            var check = db.Products.Where(x => x.ProductName.ToLower() == a).FirstOrDefault();
+            if (check == null)
+            {
+                return Json("ok", JsonRequestBehavior.AllowGet);
+
+            }
+            else
+            {
+                return Json("exist", JsonRequestBehavior.AllowGet);
+
+            }
+        }
         // POST: Products/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.

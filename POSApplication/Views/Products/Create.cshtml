@@ -47,7 +47,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProductName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ProductName, new { htmlAttributes = new { @class = "form-control" } })
+                <input type="text" class="form-control" id="ProductName" name="ProductName" onchange="ProductCheck()" value="" />
+                <p id="text" class="text-danger">Product Are Alrady Exist</p>
                 @Html.ValidationMessageFor(model => model.ProductName, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -186,8 +187,9 @@
     </div>
 </form>
 <script>
-    
-
+    $(document).ready(function () {
+        $('#text').hide();
+    })
     function barcodeCheck() {
         var code = {
             BarCode: $('#barcode').val()
@@ -201,6 +203,30 @@
                 if (cart == "exist") {
                     $('#barcode').val("");
                     alert("Product Are Alrady Exist");
+                }
+            },
+            error: function (request, status, error) {
+                alert(request.responseText);
+            }
+
+        });
+    }
+    function ProductCheck() {
+        var ProductName = {
+            ProductName: $('#ProductName').val()
+        }
+
+        $.ajax({
+            url: "/Products/ProductCheck",
+            type: "POST",
+            data: ProductName,
+            success: function (cart) {
+                if (cart == "exist") {
+                    $('#ProductName').val('');
+                    $('#text').show();
+                }
+                else {
+                    $('#text').hide();
                 }
             },
             error: function (request, status, error) {
